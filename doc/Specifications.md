@@ -28,7 +28,7 @@ The customer's technical requirements:
   
 3. People can only ask to join public groups that are within a certain range (km) of their own town. The range should be automatically adjusted in function of the town's population density.  
 
-4. A member can only be in 5 different groups simultaneously. 
+4. A member can only be in 5 different public groups simultaneously. 
 
 5. The website should only be focused on tools. (not cars, toys, ...)
    
@@ -46,7 +46,6 @@ The customer's technical requirements:
 ## Web-application utility
 
 ## User stories
-
 
 #####  User types:
 
