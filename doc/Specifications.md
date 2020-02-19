@@ -3,7 +3,7 @@
 Customer : Matthieu Michotte
 
 ## Context
-The customer, would like to have a website where people could rent  or share various equipment or tools within a certain group such as :
+The customer, would like to have a website where people could rent  or share various equipments or tools within a certain group such as :
 * Gardening tools
 * Electrical tools
 * Mechanical tools
@@ -26,13 +26,13 @@ The customer's technical requirements:
 
 2. Only private persons can be group-creators or group-members (no company or state-controlled entities are allowed).
   
-3. People can only ask to join public groups that are within a certain range (km) of their own town. The range should be automatically adjusted in function of the town's population density.  
+3. People can only ask to join public groups that are within a certain range (km) of their own town. The range should be automatically adjusted according to the town's population density.  
 
 4. A member can only be in 5 different public groups simultaneously. 
 
 5. The website should only be focused on tools. (not cars, toys, ...)
    
-6. Paymement is not managed by the website. (maybe later)
+6. Payments is not managed by the website. (maybe later)
 
 7. A user-rating should be included (stars mandatory, comments optional)
 
@@ -42,8 +42,11 @@ The customer's technical requirements:
 
 
 ## Web-application objectives
+The objectives of the web-application are to TODO
 
 ## Web-application utility
+The web-application should facilitate contact between people who need particular tools in order to promote the sharing or rental of these tools. More people will therefore have access to tools without having to buy them. 
+The web-application is also coherent with the times we live in, where over-consumption and ecology are real problems. 
 
 ## User stories
 
@@ -55,6 +58,7 @@ The customer's technical requirements:
   * __Lender__
   * __Borrower__
 * __GroupAdmin__ : GroupMember that can manage the group. 
+> admin website
 
 #### Visitor
 1. As a visitor you can consult a list or a heat-map of all public groups to find a group in your area. 
