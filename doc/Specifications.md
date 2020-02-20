@@ -42,11 +42,18 @@ The customer's technical requirements:
 
 
 ## Web-application objectives
-The objectives of the web-application are to TODO
+The objectives pursued by our web-application are : 
+* Create a user-friendly application with an easy to use and intuitive interface.
+* Make the renting and the borrowing of tools way simpler for particulars.
+* Avoid over-consumption of materials. If my neighbor has the tools I need, why should I pay for a new one that I'll use once and then keep forever without purpose "just in case".
+* Offer a real sharing experience with my neighborhood and other communities.
+* Making contact with people in the same trade and also with DIY people of diverse horizons.
 
 ## Web-application utility
 The web-application should facilitate contact between people who need particular tools in order to promote the sharing or rental of these tools. More people will therefore have access to tools without having to buy them. 
 The web-application is also coherent with the times we live in, where over-consumption and ecology are real problems. 
+
+<div style="page-break-after: always; visibility: hidden"> \pagebreak</div> 
 
 ## User stories
 
