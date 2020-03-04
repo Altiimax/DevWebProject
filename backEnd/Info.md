@@ -1,10 +1,10 @@
 # Informations
 
-Ce document reprend les informations et commandes utiles pour les collaborateur du projet.
+Ce document reprend les informations et commandes utiles pour les collaborateurs du projet.
 
 ## Python et pip 
 
-Afin de tous travailler avec les mêmes modules python, on travaillera exclusivement dans le venv. Pour travailler dans celui il faut l'activer dans le terminal depuis lequel on souhaite exécuter les commandes pytho3 et pip3. 
+Afin de tous travailler avec les mêmes modules python, on travaillera exclusivement dans le venv. Pour travailler dans celui-ci il faut l'activer dans le terminal depuis lequel on souhaite exécuter les commandes pytho3 et pip3. 
 ```bash
 # se placer dans le dossier parent du venv 
 cd .../DevWebProject/backEnd
@@ -34,11 +34,11 @@ Pour que le projet fonctionne sur votre pc, il faut que la DB postgreSQL y soit 
 > prérequis: avoir installé postgreSQL (de préférence avec un gui pour pouvoir facilement démarrer/arrêter le serveur)
 
 1. Démarrer votre serveur postgreSQL 
-2. Ouvrez un terminal et connectez vous au serveur postgres
+2. Ouvrez un terminal et connectez vous au serveur postgresql
    ```bash
    psql postgres 
    ```
-3. Créer un nouvel utilisateur (role) avec comme nom : 'admin' et comme mdp : 'devweb2'
+3. Créer un nouvel utilisateur (rôle) avec comme nom : 'admin' et comme mdp : 'devweb2'
    ```bash
    create role admin with login password 'devweb2'; 
    ```
@@ -46,7 +46,7 @@ Pour que le projet fonctionne sur votre pc, il faut que la DB postgreSQL y soit 
    ```bash
    \du 
    ```
-5. ajouter des permissions à l'utilisateur
+5. Ajouter des permissions à l'utilisateur
    ```bash 
    alter role admin superuser;
    alter role admin createdb;
@@ -55,7 +55,7 @@ Pour que le projet fonctionne sur votre pc, il faut que la DB postgreSQL y soit 
    ```bash
    \du
    ```
-7. Quiter 
+7. Quitter 
    ```bash
    \q
    ```
@@ -76,7 +76,7 @@ Pour que le projet fonctionne sur votre pc, il faut que la DB postgreSQL y soit 
     ```bash
     \list
     ```
-12. Quiter et c'est fini !
+12. Quitter et c'est fini !
     ```bash
     \q
     ```
