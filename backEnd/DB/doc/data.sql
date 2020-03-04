@@ -1,5 +1,8 @@
 --use geotools_db   
 
+
+--inserts
+
 insert into Countries (Id_CountryCode, CountryName)
 values  ('BE', 'Belgique'),
         ('FR', 'France');
@@ -18,3 +21,12 @@ values (1,2);
 
 insert into Tools (Id_Person,ToolName,ToolDescription,ToolPrice,ToolImages)
 values (1,'Tronçonneuse','Tronçonneuse de 50cm en excellent état',10.3,'{"1_1_1"}');
+
+
+
+--delete all 
+delete from Tools;
+delete from PersonsTowns;
+delete from Persons;
+delete from Towns;
+delete from Countries;

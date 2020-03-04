@@ -24,6 +24,9 @@ python3 manage.py runserver
 
 #Créer une nouvelle web-app 
 python3 manage.py startapp 'web-app name' 
+
+# Récupérer tous les Modèles de la DB
+python3 manage.py inspectdb  
 ```
 
 ## PostgreSQL
