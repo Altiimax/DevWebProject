@@ -1,6 +1,6 @@
 --https://sqliteonline.com
 
--- USING XXXXXXX   
+--use geotools_db   
 
 create table Countries
 (
@@ -66,7 +66,7 @@ create table Tools
     ToolName varChar(50),
     ToolDescription text,
     ToolPrice numeric(8,2),
-    ToolImages integer [], //TODO a revoir
+    ToolImages text [],
     constraint pk_Tools primary key(Id_Tool),
     constraint fk_Tools_Persons foreign key(Id_Person)
         references Persons(Id_Person)
