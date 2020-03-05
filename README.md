@@ -10,7 +10,7 @@ During the whole development and before any release, the web-application must va
 - [X] Project general idea approval
 - [X] Project analysis
 - [X] Choice of technologies
-- [ ] Backend prototype
+- [X] Backend prototype
 - [ ] Frontend prototype
 - [ ] API 
 - [ ] Testing
