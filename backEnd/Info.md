@@ -65,13 +65,13 @@ Pour que le projet fonctionne sur votre pc, il faut que la DB postgreSQL y soit 
    ```
 9.  Créer la base de donnée 'geotools_db'
     ```bash
-   create database geotools_db;
-   ```
+    create database geotools_db;
+    ```
 10. Donner tous les accès à l'admin pour cette db
     ```bash
-   grant all privileges on database geotools_db to patrick;
-   \connect geotools_db
-   ```
+    grant all privileges on database geotools_db to patrick;
+    \connect geotools_db
+    ```
 11. Vérifier que la db à été crée et que l'admin y a accès.
     ```bash
     \list
