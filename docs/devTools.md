@@ -21,11 +21,12 @@
 * Bracket Pair Colorizer 2
 * Better Comments
 
-
 ## DataGrip
 Gestionnaire de base de données (multi-language), très pratique pour visualiser notre db et y exécuter des commandes SQL.
 Sous licence de chez JetBrains
 
+## Postman
+Application permettant de tester et visualiser des requêtes API.
 
 ## Drawio
 Super petite web-app ou desktop-app pour dessiner des schémas de tout type!  
@@ -42,3 +43,6 @@ Essayez au moins de maîtriser:
 
 ## Trello
 Gestionnaire des tâches.  
+
+## Clockify 
+Gestionnaire de temps. 
