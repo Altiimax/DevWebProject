@@ -5,7 +5,7 @@ class Countries(models.Model):
     countryname = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.countryname
+        return self.id_countrycode
     
     class Meta:
         managed = False
@@ -22,6 +22,9 @@ class Groups(models.Model):
     class Meta:
         managed = False
         db_table = 'groups'
+    
+    def __str__(self):
+        return self.id_groupname
 
 
 class Groupsmembers(models.Model):
@@ -33,7 +36,7 @@ class Groupsmembers(models.Model):
         managed = False
         db_table = 'groupsmembers'
         unique_together = (('id_person', 'id_groupname'),)
-
+  
 
 class Personreviews(models.Model):
     id_personreview = models.AutoField(primary_key=True)

@@ -8,13 +8,14 @@ from .models import *
 def index(request):
     users = Persons.objects.all()
     output = ' <h1>Welcome to the Tool-Box homepage</h1>'
-    #output += '<table><tr><th>LastName</th><th>FirstName</th><th>Alias</th><th>Email</th></tr>'
-    #for u in users:
-    #    output += '<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' %(u.lastname,u.firstname,u.alias,u.email)
-    #output += '</table>'
+    output += 'This is a temporary welcome page'
     return HttpResponse(output)
 
 # api
 class PersonsViewSet(viewsets.ModelViewSet):
-    queryset = Persons.objects.all().order_by('lastname')
+    """
+    Returns a list of all __registered__ accounts in the system sorted by email address.
+    """
+    queryset = Persons.objects.all().order_by('email')
     serializer_class = PersonsSerializer
+

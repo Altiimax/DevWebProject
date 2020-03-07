@@ -33,7 +33,7 @@ create table Persons
     FirstName medium_varchar not null,
     Alias small_varchar,
     BirthDate date,
-    Email mail,
+    Email mail unique,
     constraint pk_Persons primary key(Id_Person)
 );
 
