@@ -1,11 +1,16 @@
 --https://sqliteonline.com
 
---use geotools_db   
+--use toolbox_db   
+create domain mail varChar(80);
+create domain country_code varChar(5);
+create domain long_varchar varChar(50);
+create domain medium_varchar varChar(30);
+create domain small_varchar varChar(20);
 
 create table Countries
 (
     Id_CountryCode varChar(5) not null,
-    CountryName varChar(40) not null,
+    CountryName medium_varchar not null,
     constraint pk_Countries primary key (Id_CountryCode)
 );
 
@@ -13,8 +18,8 @@ create table Towns
 (
     Id_Town serial,
     PostCode integer not null,
-    TownName varChar(40) not null,
-    Id_CountryCode varChar(5) not null,
+    TownName medium_varchar not null,
+    Id_CountryCode country_code not null,
     constraint pk_Town primary key (Id_Town),
     constraint fk_Countries_Towns foreign key(Id_CountryCode) references Countries(Id_CountryCode)
     on update restrict on delete restrict
@@ -24,11 +29,11 @@ create table Towns
 create table Persons
 (
     Id_Person serial,
-    LastName varChar(50) not null,
-    FirstName varChar(30) not null,
-    Alias varChar(20),
-    BirthDate date,  
-    Email varChar(80),  
+    LastName long_varchar not null,
+    FirstName medium_varchar not null,
+    Alias small_varchar,
+    BirthDate date,
+    Email mail,
     constraint pk_Persons primary key(Id_Person)
 );
 
@@ -38,8 +43,8 @@ create table PersonsTowns
     Id_Person integer not null,
     Id_Town integer not null,
     constraint pk_PersonsTowns primary key(Id_PersonsTowns),
-    constraint fk_Persons_PersonsTowns foreign key(Id_Person) 
-        references Persons(Id_Person) 
+    constraint fk_Persons_PersonsTowns foreign key(Id_Person)
+        references Persons(Id_Person)
         on update restrict on delete restrict,
     constraint fk_Towns_PersonsTowns foreign key(Id_Town)
         references Towns(Id_Town)
@@ -60,10 +65,10 @@ create table PersonReviews
 
 
 create table Tools
-( 
+(
     Id_Tool serial,
     Id_Person integer not null,
-    ToolName varChar(50),
+    ToolName medium_varchar,
     ToolDescription text,
     ToolPrice numeric(8,2),
     ToolImages text [],
@@ -88,8 +93,8 @@ create table ToolReviews
 
 create table Groups
 (
-    Id_GroupName varChar(50) not null,
-    GroupType varChar(7) default 'Private' 
+    Id_GroupName long_varchar not null,
+    GroupType varChar(7) default 'Private'
         CHECK (GroupType in ('Public', 'Private')),
     Id_Town integer not null,
     GroupRange integer not null,
@@ -102,7 +107,7 @@ create table Groups
 create table GroupsMembers
 (
     Id_Person integer not null,
-    Id_GroupName varChar(50) not null,
+    Id_GroupName long_varchar not null,
     GroupAdmin boolean not null,
     constraint pk_GroupMembers primary key(Id_Person,Id_GroupName),
     constraint fk_GroupMembers_Persons foreign key(Id_Person)
@@ -116,7 +121,7 @@ create table GroupsMembers
 create table ToolsGroups
 (
     Id_Tool integer not null,
-    Id_GroupName varChar(50) not null,
+    Id_GroupName long_varchar not null,
     constraint pk_ToolsGroups primary key(Id_Tool, Id_GroupName),
     constraint fk_ToolsGroups_Tools foreign key(Id_Tool)
         references Tools(Id_Tool)

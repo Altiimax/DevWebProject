@@ -63,23 +63,37 @@ Pour que le projet fonctionne sur votre pc, il faut que la DB postgreSQL y soit 
    ```bash
    psql postgres -U admin;
    ```
-9. Créer la base de donnée 'geotools_db'
+9. Créer la base de donnée 'toolbox_db'
    ```bash
-   create database geotools_db;
+   create database toolbox_db;
    ```
 10. Donner tous les accès à l'admin pour cette db
     ```bash
-    grant all privileges on database geotools_db to patrick;
-    \connect geotools_db
+    grant all privileges on database toolbox_db to admin;
+    \connect toolbox_db
     ```
 11. Vérifier que la db à été crée et que l'admin y a accès.
     ```bash
     \list
     ```
-12. Quitter et c'est fini !
+12. Quitter
     ```bash
     \q
     ```
+13. Générer les tables de la db:
+    * ouvrez dataGrip
+    * File -> new -> Data Source -> PostgreSQL
+    * Remplir les champs avec les données (voir plus haut)
+    * Tester la connexion : si ok => Apply -> ok 
+    * Ouvrir "toolbox_db@localhost" -> databases -> toolbox_db
+      >(si vous avez laissé le nom de la connexion par défault)
+    * Click-droit sur toolbox_db -> jump to console
+    * coller le contenu du fichier "backend/DB/doc/tables"
+    * Sélectionner l'entièreté 
+    * RUN
+    * Fini, en principe touts vos tables ont été créées  
+  
+   Pour plus d'info sur comment gérer la db avec dataGrip -> voir Martin
 
 
 

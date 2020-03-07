@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'geotools.apps.GeotoolsConfig',
+    'toolbox_app.apps.Toolbox_appConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'geotools_db',
+        'NAME': 'toolbox_db',
         'USER': 'admin',
         'PASSWORD': 'devweb2',
         'HOST': '127.0.0.1',
