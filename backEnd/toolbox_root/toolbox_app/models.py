@@ -8,7 +8,7 @@ class Countries(models.Model):
         return self.id_countrycode
     
     class Meta:
-        managed = False
+        managed = True
         db_table = 'countries'
     
 
@@ -20,7 +20,7 @@ class Groups(models.Model):
     grouprange = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'groups'
     
     def __str__(self):
@@ -33,7 +33,7 @@ class Groupsmembers(models.Model):
     groupadmin = models.BooleanField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'groupsmembers'
         unique_together = (('id_person', 'id_groupname'),)
   
@@ -45,7 +45,7 @@ class Personreviews(models.Model):
     comment = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'personreviews'
 
 
@@ -55,10 +55,11 @@ class Persons(models.Model):
     firstname = models.CharField(max_length=30)
     alias = models.CharField(max_length=20, blank=True, null=True)
     birthdate = models.DateField(blank=True, null=True)
-    email = models.CharField(max_length=80, blank=True, null=True)
+    #email = models.CharField(max_length=80, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'persons'
 
 
@@ -68,7 +69,7 @@ class Personstowns(models.Model):
     id_town = models.ForeignKey('Towns', models.DO_NOTHING, db_column='id_town')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'personstowns'
 
 
@@ -79,7 +80,7 @@ class Toolreviews(models.Model):
     comment = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'toolreviews'
 
 
@@ -92,7 +93,7 @@ class Tools(models.Model):
     toolimages = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tools'
 
 
@@ -101,7 +102,7 @@ class Toolsgroups(models.Model):
     id_groupname = models.ForeignKey(Groups, models.DO_NOTHING, db_column='id_groupname')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'toolsgroups'
         unique_together = (('id_tool', 'id_groupname'),)
 
@@ -113,5 +114,6 @@ class Towns(models.Model):
     id_countrycode = models.ForeignKey(Countries, models.DO_NOTHING, db_column='id_countrycode')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'towns'
+
