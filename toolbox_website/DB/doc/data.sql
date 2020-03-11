@@ -1,5 +1,6 @@
 --use toolbox_db   
 
+-- fake data generated with : https://www.fakepersongenerator.com/Index/generate
 
 --inserts
 
@@ -12,9 +13,9 @@ values  (1330, 'Rixensart','BE'),
         (1000, 'Bruxelles','BE');
 
 insert into Persons (LastName, FirstName,Alias,BirthDate,Email)
-values  ('Michotte','Martin','Rotchi','1995-03-25','martin.michotte@gmail.com'),
-        ('Fontaine','Allan',Null,'1996-04-26','allan.fontaine@gmail.com'),
-        ('Vandenede','Kévin','Altimax','1994-05-27','kevin.vandened@gmail.com');
+values  ('Gordon','Harry E ','HEGy','1969-10-07','marietta.kel@hotmail.com'),
+        ('Sheridan','Dorothy',Null,'1973-01-01','garth2002@hotmail.com'),
+        ('Doak','Kristine','shDoak','1983-03-18','favian1972@yahoo.com');
 
 insert into PersonsTowns (Id_Person,Id_Town)
 values (1,2);
