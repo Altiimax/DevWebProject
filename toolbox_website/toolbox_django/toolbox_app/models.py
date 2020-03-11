@@ -54,9 +54,8 @@ class Persons(models.Model):
     lastname = models.CharField(max_length=50)
     firstname = models.CharField(max_length=30)
     alias = models.CharField(max_length=20, blank=True, null=True)
-    birthdate = models.DateField(blank=True, null=True)
-    #email = models.CharField(max_length=80, blank=True, null=True)
-    email = models.EmailField(blank=True, null=False)
+    birthdate = models.DateField()
+    email = models.EmailField()
 
     class Meta:
         managed = True
@@ -90,7 +89,6 @@ class Tools(models.Model):
     toolname = models.CharField(max_length=30, blank=True, null=True)
     tooldescription = models.TextField(blank=True, null=True)
     toolprice = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
-    #toolimages = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = True
