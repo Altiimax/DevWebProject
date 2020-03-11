@@ -10,8 +10,15 @@ Afin de tous travailler avec les mêmes modules python, on travaillera exclusive
 cd .../DevWebProject/toolbow_website
 ls
 -> DB   README.md   geotools_root   venv
+# Créer la venv (UNIQUEMENT LA PREMIERE FOIS !)
+python3 -m venv venv
 # activer le venv 
-source venv/bin/activate
+UNIX : source venv/bin/activate
+WINDOWS : venv/Scripts/activate
+
+#Télécharcher les derniers requirements:
+pip3 install -r requirements.txt
+
 ```
 
 ## Django
