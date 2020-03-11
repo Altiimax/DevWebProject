@@ -19,8 +19,8 @@ values  ('Michotte','Martin','Rotchi','1995-03-25','martin.michotte@gmail.com'),
 insert into PersonsTowns (Id_Person,Id_Town)
 values (1,2);
 
-insert into Tools (Id_Person,ToolName,ToolDescription,ToolPrice,ToolImages)
-values (1,'Tronçonneuse','Tronçonneuse de 50cm en excellent état',10.3,'{"1_1_1"}');
+insert into Tools (Id_Person,ToolName,ToolDescription,ToolPrice)
+values (1,'Tronçonneuse','Tronçonneuse de 50cm en excellent état',10.3);
 
 
 

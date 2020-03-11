@@ -33,7 +33,7 @@ create table Persons
     FirstName medium_varchar not null,
     Alias small_varchar,
     BirthDate date,
-    Email mail unique,
+    Email varchar(254) not null,
     constraint pk_Persons primary key(Id_Person)
 );
 
@@ -71,12 +71,42 @@ create table Tools
     ToolName medium_varchar,
     ToolDescription text,
     ToolPrice numeric(8,2),
-    ToolImages text [],
     constraint pk_Tools primary key(Id_Tool),
     constraint fk_Tools_Persons foreign key(Id_Person)
         references Persons(Id_Person)
         on update restrict on delete restrict
 );
+
+create table if not exists "ToolImages"
+(
+	"id_toolImage" serial not null
+		constraint "ToolImages_pkey"
+			primary key,
+	image varchar(100) not null
+);
+
+alter table "ToolImages" owner to admin;
+
+create table if not exists "ToolsToolImages"
+(
+	id_tool integer not null
+		constraint "ToolsToolImages_pkey"
+			primary key
+		constraint "ToolsToolImages_id_tool_941739e8_fk_tools_id_tool"
+			references tools
+				deferrable initially deferred,
+	"id_toolImage" integer not null
+		constraint "ToolsToolImages_id_toolImage_84d1fc2f_fk_ToolImage"
+			references "ToolImages"
+				deferrable initially deferred,
+	constraint "ToolsToolImages_id_tool_id_toolImage_6ff2c1a4_uniq"
+		unique (id_tool, "id_toolImage")
+);
+
+alter table "ToolsToolImages" owner to admin;
+
+create index if not exists "ToolsToolImages_id_toolImage_84d1fc2f"
+	on "ToolsToolImages" ("id_toolImage");
 
 create table ToolReviews
 (

@@ -56,7 +56,7 @@ class Persons(models.Model):
     alias = models.CharField(max_length=20, blank=True, null=True)
     birthdate = models.DateField(blank=True, null=True)
     #email = models.CharField(max_length=80, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=False)
 
     class Meta:
         managed = True
@@ -90,11 +90,28 @@ class Tools(models.Model):
     toolname = models.CharField(max_length=30, blank=True, null=True)
     tooldescription = models.TextField(blank=True, null=True)
     toolprice = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
-    toolimages = models.TextField(blank=True, null=True)  # This field type is a guess.
+    #toolimages = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = True
         db_table = 'tools'
+
+class ToolImages(models.Model):
+    id_toolImage = models.AutoField(primary_key=True)
+    image = models.ImageField(upload_to='tools')
+
+    class Meta:
+        managed = True
+        db_table = 'ToolImages'
+
+class ToolsToolImages(models.Model):
+    id_tool = models.OneToOneField(Tools, models.DO_NOTHING, db_column='id_tool', primary_key=True)
+    id_toolImage = models.ForeignKey(ToolImages, models.DO_NOTHING, db_column='id_toolImage')
+
+    class Meta:
+        managed = True
+        db_table = 'ToolsToolImages'
+        unique_together = (('id_tool', 'id_toolImage'),)
 
 
 class Toolsgroups(models.Model):
