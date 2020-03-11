@@ -6,3 +6,4 @@
 **.DS_*
 **/*.backup.*
 **/*.back.*
+*/venv
