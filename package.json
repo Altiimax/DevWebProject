@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "webpack --mode development ./toolbox_website/toolbox_django/toolbox_frontend/src/index.js --output ./toolbox_website/toolbox_django/toolbox_frontend/static/frontend/main.js",
+    "dev": "webpack --mode development --watch ./toolbox_website/toolbox_django/toolbox_frontend/src/index.js --output ./toolbox_website/toolbox_django/toolbox_frontend/static/frontend/main.js",
     "build": "webpack --mode production ./toolbox_website/toolbox_django/toolbox_frontend/src/index.js --output ./toolbox_website/toolbox_django/toolbox_frontend/static/frontend/main.js"
   },
   "repository": {
@@ -33,6 +33,10 @@
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   }
 }
