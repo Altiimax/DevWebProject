@@ -77,36 +77,34 @@ create table Tools
         on update restrict on delete restrict
 );
 
-create table if not exists "ToolImages"
+create table if not exists ToolImages
 (
-	"id_toolImage" serial not null
-		constraint "ToolImages_pkey"
+	id_toolImage serial not null
+		constraint ToolImages_pkey
 			primary key,
 	image varchar(100) not null
 );
 
-alter table "ToolImages" owner to admin;
 
-create table if not exists "ToolsToolImages"
+create table if not exists ToolsToolImages
 (
 	id_tool integer not null
-		constraint "ToolsToolImages_pkey"
+		constraint ToolsToolImages_pkey
 			primary key
-		constraint "ToolsToolImages_id_tool_941739e8_fk_tools_id_tool"
+		constraint ToolsToolImages_id_tool_941739e8_fk_tools_id_tool
 			references tools
 				deferrable initially deferred,
-	"id_toolImage" integer not null
-		constraint "ToolsToolImages_id_toolImage_84d1fc2f_fk_ToolImage"
-			references "ToolImages"
+	id_toolImage integer not null
+		constraint ToolsToolImages_id_toolImage_84d1fc2f_fk_ToolImage
+			references ToolImages
 				deferrable initially deferred,
-	constraint "ToolsToolImages_id_tool_id_toolImage_6ff2c1a4_uniq"
-		unique (id_tool, "id_toolImage")
+	constraint ToolsToolImages_id_tool_id_toolImage_6ff2c1a4_uniq
+		unique (id_tool, id_toolImage)
 );
 
-alter table "ToolsToolImages" owner to admin;
+create index if not exists ToolsToolImages_id_toolImage_84d1fc2f
+	on ToolsToolImages (id_toolImage);
 
-create index if not exists "ToolsToolImages_id_toolImage_84d1fc2f"
-	on "ToolsToolImages" ("id_toolImage");
 
 create table ToolReviews
 (
@@ -160,3 +158,18 @@ create table ToolsGroups
         references Groups(Id_GroupName)
         on update restrict on delete restrict
 );
+
+
+
+-- drop table ToolsGroups;
+-- drop table GroupsMembers;
+-- drop table Groups;
+-- drop table ToolReviews;
+-- drop table ToolsToolImages;
+-- drop table ToolImages;
+-- drop table Tools;
+-- drop table PersonReviews;
+-- drop table PersonsTowns;
+-- drop table Persons;
+-- drop table Towns;
+-- drop table Countries;

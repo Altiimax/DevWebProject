@@ -23,10 +23,9 @@ insert into Tools (Id_Person,ToolName,ToolDescription,ToolPrice)
 values (1,'Tronçonneuse','Tronçonneuse de 50cm en excellent état',10.3);
 
 
-
---delete all 
-delete from Tools;
-delete from PersonsTowns;
-delete from Persons;
-delete from Towns;
-delete from Countries;
+ 
+--delete from Tools;
+--delete from PersonsTowns;
+--delete from Persons;
+--delete from Towns;
+--delete from Countries;
