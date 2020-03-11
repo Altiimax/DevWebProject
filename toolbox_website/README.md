@@ -19,6 +19,9 @@ WINDOWS : venv/Scripts/activate
 #Télécharcher les derniers requirements:
 pip3 install -r requirements.txt
 
+#Mettre à jour le fichier requirements: 
+#TRES IMPORTANT SI AJOUT DE MODULES AVEC PIP3 INSTALL
+pip3 freeze > requirements.txt
 ```
 
 ## Django
