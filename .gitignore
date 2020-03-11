@@ -1,0 +1,8 @@
+**/__pycache__/
+**.log
+**.pot
+**.pyc
+**local_settings.py
+**.DS_*
+**/*.backup.*
+**/*.back.*
