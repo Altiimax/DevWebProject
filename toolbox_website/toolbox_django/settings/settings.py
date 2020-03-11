@@ -83,12 +83,20 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'toolbox_db',
+#        'USER': 'admin',
+#        'PASSWORD': 'devweb2',
+#        'HOST': '127.0.0.1',
+#       'PORT': '5432',
+#    }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'toolbox_db',
         'USER': 'admin',
         'PASSWORD': 'devweb2',
-        'HOST': '127.0.0.1',
+        'HOST': '109.128.245.26',
         'PORT': '5432',
     }
 }
