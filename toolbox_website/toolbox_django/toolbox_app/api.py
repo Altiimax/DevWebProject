@@ -8,6 +8,7 @@ class PersonsViewSet(viewsets.ModelViewSet):
     """
     queryset = Persons.objects.all().order_by('email')
     permission_classes =[
-        permissions.AllowAny #il faudra modifier ceci! 
+        #permissions.AllowAny #il faudra modifier ceci! 
+        permissions.IsAuthenticated
     ]
     serializer_class = PersonsSerializer
