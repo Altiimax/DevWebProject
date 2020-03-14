@@ -66,6 +66,9 @@ class Persons(models.Model):
 
     class Meta:
         managed = True
+        constraints = [
+            models.UniqueConstraint(fields= ['alias'],name='unique_alias'),
+        ]
         db_table = 'persons'
     
     def __str__(self):
@@ -102,7 +105,7 @@ class Toolreviews(models.Model):
 class Tools(models.Model):
     id_tool = models.AutoField(primary_key=True)
     id_person = models.ForeignKey(Persons, models.DO_NOTHING, db_column='id_person')
-    toolname = models.CharField(max_length=30, blank=True, null=True)
+    toolname = models.CharField(max_length=30)
     tooldescription = models.TextField(blank=True, null=True)
     toolprice = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
 

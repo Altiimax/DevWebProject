@@ -68,7 +68,7 @@ create table Tools
 (
     Id_Tool serial,
     Id_Person integer not null,
-    ToolName medium_varchar,
+    ToolName medium_varchar not null,
     ToolDescription text,
     ToolPrice numeric(8,2),
     constraint pk_Tools primary key(Id_Tool),
