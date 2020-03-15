@@ -119,6 +119,7 @@ class Tools(models.Model):
 
 class ToolImages(models.Model):
     id_toolImage = models.AutoField(primary_key=True)
+    id_tool = models.ForeignKey('Tools', models.DO_NOTHING, db_column='id_tool')
     image = models.ImageField(upload_to='tools')
 
     class Meta:
@@ -126,20 +127,7 @@ class ToolImages(models.Model):
         db_table = 'ToolImages'
     
     def __str__(self):
-        return f"{self.id_toolImage} : {self.image}"
-
-
-class ToolsToolImages(models.Model):
-    id_tool = models.OneToOneField(Tools, models.DO_NOTHING, db_column='id_tool', primary_key=True)
-    id_toolImage = models.ForeignKey(ToolImages, models.DO_NOTHING, db_column='id_toolImage')
-
-    class Meta:
-        managed = True
-        db_table = 'ToolsToolImages'
-        unique_together = (('id_tool', 'id_toolImage'),)
-    
-    def __str__(self):
-        return f"{self.id_tool} : {self.id_toolImage}"
+        return f"{self.id_tool} : {self.image}"
 
 
 
