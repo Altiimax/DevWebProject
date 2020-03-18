@@ -4,11 +4,14 @@ from . import views
 from . import api
 
 router = routers.DefaultRouter()
-router.register(r'persons', api.personsViewSet)
-router.register(r'aliases', api.aliasesViewSet)
-router.register(r'memberProfile', api.memberProfileViewSet,basename='memberProfile')
-router.register(r'memberTools', api.memberToolsViewSet,basename='memberTools')
-router.register(r'toolImages', api.toolImagesViewSet,basename='toolImages')
+router.register(r'person', api.personViewSet, basename='person')
+router.register(r'aliases', api.aliasesViewSet, basename='aliases')
+router.register(r'personReviews', api.personReviewViewSet, basename='personReviews')
+router.register(r'personTools', api.personToolsViewSet, basename='memberTools')
+router.register(r'toolImages', api.toolImagesViewSet, basename='toolImages')
+router.register(r'toolReviews', api.toolReviewViewSet, basename='toolReviews')
+
+
 
 
 urlpatterns = [
