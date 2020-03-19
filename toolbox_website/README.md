@@ -7,7 +7,7 @@ Ce document reprend les informations et commandes utiles pour les collaborateurs
 Afin de tous travailler avec les mêmes modules python, on travaillera exclusivement dans le venv. Pour travailler dans celui-ci il faut l'activer dans le terminal depuis lequel on souhaite exécuter les commandes python3 et pip3. 
 ```bash
 # se placer dans le dossier parent du venv 
-cd .../DevWebProject/toolbow_website
+cd .../DevWebProject/toolbox_website
 ls
 -> DB   README.md   geotools_root   venv
 # Créer la venv (UNIQUEMENT LA PREMIERE FOIS !)
