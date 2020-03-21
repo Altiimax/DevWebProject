@@ -1,6 +1,6 @@
 from idlelib import query
 
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -8,26 +8,33 @@ from .models import *
 from .serializers import *
 
 
-class personViewSet(viewsets.GenericViewSet):
-    
-    #127.0.0.1:8000/api/persons/all 
-    @action(detail=False)
-    def all(self, request, *args, **kwargs):
+class personsViewSet(viewsets.GenericViewSet):
+
+    # GET 127.0.0.1:8000/api/persons/
+    def list(self, request, *args, **kwargs):
         """" list all users """
         queryset = Persons.objects.all().order_by('lastName')
         serializer = personsSerializer(queryset, many=True)
         return Response(serializer.data)
-    
-    #127.0.0.1:8000/api/persons/aliases
-    @action(detail=False)
+
+    # POST 127.0.0.1:8000/api/persons/
+    def create(self, request, *args, **kwargs):
+        """" create a new user """
+        serializer = personsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    # GET 127.0.0.1:8000/api/persons/aliases/
+    @action(detail=False, methods=['get'])
     def aliases(self, request, *args, **kwargs):
         """" get all used aliases"""
         queryset = Persons.objects.all()
         serializer = aliasesSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    #127.0.0.1:8000/api/persons/byemail/?email=john.doe@gmail.com
-    @action(detail=False)
+    # GET 127.0.0.1:8000/api/persons/byemail/?email=john.doe@gmail.com
+    @action(detail=False, methods=['get'])
     def byemail(self, request, *args, **kwargs):
         """" get user by its email"""
         email = request.query_params.get('email')
@@ -40,9 +47,18 @@ class personViewSet(viewsets.GenericViewSet):
             serializer = personsSerializer(queryset,many=True)
             return Response(serializer.data)
 
-    #127.0.0.1:8000/api/persons/1/tools
-    @action(detail=True, methods=['get'])
+    # GET,POST 127.0.0.1:8000/api/persons/1/tools/
+    @action(detail=True, methods=['get','post'])
     def tools(self, request, pk=None, *args, **kwargs):
-        queryset = Tools.objects.filter(id_person=pk)
-        serializer = toolsSerializer(queryset, many=True)
-        return Response(serializer.data)
+        if request.method == 'GET':
+            """" get all tools belonging to a user"""
+            queryset = Tools.objects.filter(id_person=pk)
+            serializer = toolsDetailSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            """" add a new tool to the user """
+            serializer = toolsSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    

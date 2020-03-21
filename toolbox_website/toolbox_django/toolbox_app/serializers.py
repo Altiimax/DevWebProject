@@ -5,6 +5,11 @@ from .models import *
 ##################################
 ###  TOOL RELATED SERIALIZERS  ###
 
+class toolsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tools
+        fields =('id_person', 'id_tool', 'toolName', 'toolDescription', 'toolPrice')
+
 class toolImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToolImages
@@ -14,8 +19,8 @@ class toolReviewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToolReviews
         fields = ('id_toolReview', 'id_tool', 'stars','comment')
-
-class toolsSerializer(serializers.ModelSerializer):
+        
+class toolsDetailSerializer(serializers.ModelSerializer):
     toolImages = toolImagesSerializer(source='toolimages_set', many=True)
     reviews = toolReviewsSerializer(source='toolreviews_set', many=True)
 

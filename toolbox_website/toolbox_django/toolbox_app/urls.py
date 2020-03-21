@@ -4,7 +4,7 @@ from . import views
 from . import api
 
 router = routers.DefaultRouter()
-router.register(r'persons', api.personViewSet, basename='persons')
+router.register(r'persons', api.personsViewSet, basename='persons')
 
 
 
