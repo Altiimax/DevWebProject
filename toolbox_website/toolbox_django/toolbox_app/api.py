@@ -31,13 +31,12 @@ class personViewSet(viewsets.GenericViewSet):
     @action(detail=False)
     def byemail(self, request, *args, **kwargs):
         """" get user by its email"""
-        email = kwargs.get('email')
-        print(request)
-        print(kwargs)
+        email = request.query_params.get('email')
         queryset = Persons.objects.all().filter(email=email)
+        serializer = personsSerializer(queryset)
+        return Response(serializer.data)
         try:
-            serializer = personsSerializer(queryset)
-            return Response(serializer.data)
+            True
         except:
             error = "no user with this email: %s",email
             return Response({'error': error})
