@@ -9,7 +9,6 @@ from .serializers import *
 
 
 class personViewSet(viewsets.GenericViewSet):
-
     
     #127.0.0.1:8000/api/persons/all 
     @action(detail=False)
@@ -24,7 +23,7 @@ class personViewSet(viewsets.GenericViewSet):
     def aliases(self, request, *args, **kwargs):
         """" get all used aliases"""
         queryset = Persons.objects.all()
-        serializer = personsSerializer(queryset, many=True)
+        serializer = aliasesSerializer(queryset, many=True)
         return Response(serializer.data)
     
     #127.0.0.1:8000/api/persons/byemail/?email=john.doe@gmail.com
@@ -43,5 +42,7 @@ class personViewSet(viewsets.GenericViewSet):
 
     #127.0.0.1:8000/api/persons/1/tools
     @action(detail=True, methods=['get'])
-    def tools(self, request, *args, **kwargs):
-        return Response({'alias': self.alias})
+    def tools(self, request, pk=None, *args, **kwargs):
+        queryset = Tools.objects.filter(id_person=pk)
+        serializer = toolsSerializer(queryset, many=True)
+        return Response(serializer.data)
