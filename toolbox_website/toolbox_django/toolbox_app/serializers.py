@@ -3,6 +3,20 @@ from rest_framework import serializers
 from .models import *
 
 ##################################
+###  TOWNS RELATED SERIALIZERS ###
+
+class countriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Countries
+        fields = ('id_countryCode', 'countryName')
+
+class townsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Towns
+        fields = ('postCode','townName','id_countryCode')
+
+
+##################################
 ###  TOOL RELATED SERIALIZERS  ###
 
 class toolsSerializer(serializers.ModelSerializer):
@@ -28,20 +42,6 @@ class toolsDetailSerializer(serializers.ModelSerializer):
         model = Tools
         fields =('id_tool','toolName','toolDescription','toolPrice','toolImages', 'reviews')
 
-##################################
-###  GROUP RELATED SERIALIZERS ###
-
-class groupsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Groups
-        fields = ('id_groupName', 'groupType', 'groupRange')
-
-class groupsmembersSerializer(serializers.ModelSerializer):
-    group = groupsSerializer(source='groups_set', many=True)
-    class Meta:
-        model = GroupsMembers
-        fields = ('group','groupAdmin')
-
 
 ##################################
 ### PERSON RELATED SERIALIZERS ###
@@ -57,6 +57,25 @@ class personsSerializer(serializers.ModelSerializer):
         model = Persons
         fields = ('id_person', 'lastName', 'firstName', 'alias', 'birthDate', 'email')
 
+
+##################################
+###  GROUP RELATED SERIALIZERS ###
+
+class groupsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Groups
+        fields = ('id_groupName', 'groupType', 'groupRange','id_town')
+
+class groupsmembersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GroupsMembers
+        fields = ('id_person','id_groupName','groupAdmin')
+
+class groupsmembersDetailSerializer(serializers.ModelSerializer):
+    member = personsSerializer(source='id_person', read_only=True)
+    class Meta:
+        model = GroupsMembers
+        fields = ('member','groupAdmin')
 
 
 ##################################

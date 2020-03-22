@@ -5,7 +5,9 @@ from . import api
 
 router = routers.DefaultRouter()
 router.register(r'persons', api.personsViewSet, basename='persons')
-
+router.register(r'tools', api.toolsViewSet, basename='tools')
+router.register(r'groups', api.groupsViewSet, basename='groups')
+#router.register(r'towns', api.townsViewSet, basename='towns')
 
 
 urlpatterns = [
