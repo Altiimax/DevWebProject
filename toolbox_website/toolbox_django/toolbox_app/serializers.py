@@ -13,8 +13,18 @@ class countriesSerializer(serializers.ModelSerializer):
 class townsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Towns
-        fields = ('postCode','townName','id_countryCode')
+        fields = ('id_town','postCode','townName','id_countryCode')
 
+class personsTownsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonsTowns
+        fields = ('id_person','id_town')
+
+class personsTownsDetailSerializer(serializers.ModelSerializer):
+    town = townsSerializer(source='id_town',  read_only=True)
+    class Meta:
+        model = PersonsTowns
+        fields = ('id_person','town')
 
 ##################################
 ###  TOOL RELATED SERIALIZERS  ###
@@ -66,17 +76,22 @@ class groupsSerializer(serializers.ModelSerializer):
         model = Groups
         fields = ('id_groupName', 'groupType', 'groupRange','id_town')
 
-class groupsmembersSerializer(serializers.ModelSerializer):
+class groupsMembersSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupsMembers
         fields = ('id_person','id_groupName','groupAdmin')
 
-class groupsmembersDetailSerializer(serializers.ModelSerializer):
+class groupsMembersDetailSerializer(serializers.ModelSerializer):
     member = personsSerializer(source='id_person', read_only=True)
     class Meta:
         model = GroupsMembers
         fields = ('member','groupAdmin')
 
+class membersGroupsDetailSerializer(serializers.ModelSerializer):
+    group = groupsSerializer(source='id_groupName', read_only=True)
+    class Meta:
+        model = GroupsMembers
+        fields = ('group','groupAdmin')
 
 ##################################
 ###      OTHER SERIALIZERS     ###

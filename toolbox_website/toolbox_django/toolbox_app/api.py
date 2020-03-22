@@ -10,6 +10,8 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
+#######################
+###   PERSONS API   ###
 
 class personsViewSet(viewsets.GenericViewSet):
 
@@ -49,6 +51,24 @@ class personsViewSet(viewsets.GenericViewSet):
             serializer = personsSerializer(queryset,many=True)
             return Response(serializer.data)
 
+    # GET,POST 127.0.0.1:8000/api/persons/1/towns/
+    @action(detail=True, methods=['get','post'])
+    def towns(self, request, pk=None, *args, **kwargs):
+        if request.method == 'GET':
+            """" get all towns of a user"""
+            queryset = PersonsTowns.objects.filter(id_person=pk)
+            serializer = personsTownsDetailSerializer(queryset, many=True)
+            return Response(serializer.data)
+        
+        elif request.method == 'POST':
+            """" add a new town to the user """
+            data = request.data.copy()
+            data['id_person']=pk
+            serializer = personsTownsSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     # GET,POST 127.0.0.1:8000/api/persons/1/tools/
     @action(detail=True, methods=['get','post'])
     def tools(self, request, pk=None, *args, **kwargs):
@@ -85,9 +105,17 @@ class personsViewSet(viewsets.GenericViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    # GET 127.0.0.1:8000/api/persons/1/groups/
+    @action(detail=True, methods=['get'])
+    def groups(self, request, pk=None, *args, **kwargs):
+        """" get all groups in which the user is """
+        queryset = GroupsMembers.objects.filter(id_person=pk)
+        serializer = membersGroupsDetailSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
-
+######################
+###   TOOLS  API   ###
 
 class toolsViewSet(viewsets.GenericViewSet):
 
@@ -135,6 +163,9 @@ class toolsViewSet(viewsets.GenericViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+
+######################
+###   GROUPS API   ###
 
 class groupsViewSet(viewsets.GenericViewSet):
 
@@ -187,17 +218,17 @@ class groupsViewSet(viewsets.GenericViewSet):
             """" list all members of a group """
             groupName = request.query_params.get('groupName')
             queryset = GroupsMembers.objects.filter(id_groupName=groupName)
-            serializer = groupsmembersDetailSerializer(queryset, many=True)
+            serializer = groupsMembersDetailSerializer(queryset, many=True)
             return Response(serializer.data)
 
         elif request.method == 'POST':
             """" add a new member to a group """
-            serializer = groupsmembersSerializer(data=request.data)
+            serializer = groupsMembersSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # GET,POST 127.0.0.1:8000/api/groups/admins/
+    # GET 127.0.0.1:8000/api/groups/admins/
     @action(detail=False, methods=['get'])
     def admins(self, request, *args, **kwargs):
         # GET 127.0.0.1:8000/api/groups/members/?groupName=TestGroup1
@@ -205,5 +236,57 @@ class groupsViewSet(viewsets.GenericViewSet):
         groupName = request.query_params.get('groupName')
         queryset = GroupsMembers.objects.filter(id_groupName=groupName)
         queryset = GroupsMembers.objects.filter(groupAdmin=True)
-        serializer = groupsmembersDetailSerializer(queryset, many=True)
+        serializer = groupsMembersDetailSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+
+######################
+###   TOWNS  API   ###
+
+class townsViewSet(viewsets.GenericViewSet):
+
+    # GET 127.0.0.1:8000/api/towns/
+    def list(self, request, *args, **kwargs):
+        country = request.query_params.get('countryCode')
+        if country:
+            # GET 127.0.0.1:8000/api/towns/?countryCode=BE
+            """" list all towns of a country """
+            queryset = Towns.objects.filter(id_countryCode=country)
+            serializer = townsSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            """" list all towns """
+            queryset = Towns.objects.all()
+            serializer = townsSerializer(queryset, many=True)
+            return Response(serializer.data)
+    
+    # POST 127.0.0.1:8000/api/towns/
+    def create(self, request, *args, **kwargs):
+        """" add a new town """
+        serializer = townsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+
+#######################
+###  COUNTRIES API  ###
+
+class countriesViewSet(viewsets.GenericViewSet):
+
+    # GET 127.0.0.1:8000/api/countries/
+    def list(self, request, *args, **kwargs):
+        """" list all countries """
+        queryset = Countries.objects.all()
+        serializer = countriesSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    # POST 127.0.0.1:8000/api/countries/
+    def create(self, request, *args, **kwargs):
+        """" add a new country """
+        serializer = countriesSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
