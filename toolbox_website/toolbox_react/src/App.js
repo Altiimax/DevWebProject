@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Welcome from './test.js'
+import Greet from './components/Greetings';
+import SignIn from './components/SignIn';
 
 function App() {
   return (
@@ -19,6 +22,12 @@ function App() {
           Learn React
         </a>
       </header>
+      <div className='Greetings'>
+      <Greet name='Allan' />  
+      </div>
+      <div className='SignIn'>
+      <SignIn />
+      </div>
     </div>
   );
 }
