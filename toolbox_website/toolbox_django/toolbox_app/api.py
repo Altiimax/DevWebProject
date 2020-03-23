@@ -44,12 +44,12 @@ class personsViewSet(viewsets.GenericViewSet):
         """" get user by its email"""
         email = request.query_params.get('email')
         queryset = Persons.objects.filter(email=email)
-        if not queryset:
-            error = "no user with this email: %s"%(email)
-            return Response({'error': error})
-        else:
+        if queryset:
             serializer = personsSerializer(queryset,many=True)
             return Response(serializer.data)
+        else:
+            error = "no user with this email: %s"%(email)
+            return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
 
     # GET,POST 127.0.0.1:8000/api/persons/1/towns/
     @action(detail=True, methods=['get','post'])
@@ -161,6 +161,14 @@ class toolsViewSet(viewsets.GenericViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    # GET 127.0.0.1:8000/api/tools/1/groups/
+    @action(detail=True, methods=['get'])
+    def groups(self, request, pk=None, *args, **kwargs):
+        """" get all groups in which a tool is """
+        queryset = ToolsGroups.objects.filter(id_tool=pk)
+        serializer = toolsGroupsDetailSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 
@@ -176,42 +184,74 @@ class groupsViewSet(viewsets.GenericViewSet):
         serializer = groupsSerializer(queryset, many=True)
         return Response(serializer.data)
     
+    # POST 127.0.0.1:8000/api/towns/
+    def create(self, request, *args, **kwargs):
+        """" create a new group """
+        serializer = groupsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     # GET 127.0.0.1:8000/api/groups/public/
-    @action(detail=False, methods=['get','post'])
+    @action(detail=False, methods=['get'])
     def public(self, request, *args, **kwargs):
-        if request.method == 'GET':
+        country = request.query_params.get('countryCode')
+        town = request.query_params.get('id_town')
+        if country:
+            # GET 127.0.0.1:8000/api/groups/public/?countryCode=BE
+            """" list all public groups of a certain country"""
+            queryset = Groups.objects.raw( 
+                '''
+                SELECT * 
+                FROM "Groups"
+                JOIN "Towns" ON ("Groups".id_town = "Towns".id_town)
+                WHERE "Groups"."groupType" = 'public' AND "Towns"."id_countryCode" = '%s';
+                '''%(country)
+            )
+        elif town:
+            # GET 127.0.0.1:8000/api/groups/public/?id_town=1
+            """" list all public groups of a certain town"""
+            queryset = Groups.objects.filter(groupType='public',id_town=town)
+        else:
             """" list all public groups """
             queryset = Groups.objects.filter(groupType='public')
-            serializer = groupsSerializer(queryset, many=True)
-            return Response(serializer.data)
 
-        elif request.method == 'POST':
-            """" create a new public group """
-            serializer = groupsSerializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = groupsDetailSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 
     # GET 127.0.0.1:8000/api/groups/private/
-    @action(detail=False, methods=['get','post'])
+    @action(detail=False, methods=['get'])
     def private(self, request, *args, **kwargs):
-        if request.method == 'GET':
+        country = request.query_params.get('countryCode')
+        town = request.query_params.get('id_town')
+        if country:
+            # GET 127.0.0.1:8000/api/groups/private/?countryCode=BE
+            """" list all private groups of a certain country"""
+            queryset = Groups.objects.raw( 
+                '''
+                SELECT * 
+                FROM "Groups"
+                JOIN "Towns" ON ("Groups".id_town = "Towns".id_town)
+                WHERE "Groups"."groupType" = 'private' AND "Towns"."id_countryCode" = '%s';
+                '''%(country)
+            )
+        elif town:
+            # GET 127.0.0.1:8000/api/groups/private/?id_town=1
+            """" list all private groups of a certain town"""
+            queryset = Groups.objects.filter(groupType='private',id_town=town)
+        else:
             """" list all private groups """
             queryset = Groups.objects.filter(groupType='private')
-            serializer = groupsSerializer(queryset, many=True)
-            return Response(serializer.data)
 
-        elif request.method == 'POST':
-            """" create a new private group """
-            serializer = groupsSerializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = groupsDetailSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 
     # GET,POST 127.0.0.1:8000/api/groups/members/
-    @action(detail=False, methods=['get','post'])
+    @action(detail=False, methods=['get','post','delete'])
     def members(self, request, *args, **kwargs):
         if request.method == 'GET':
             # GET 127.0.0.1:8000/api/groups/members/?groupName=TestGroup1
@@ -227,19 +267,62 @@ class groupsViewSet(viewsets.GenericViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        elif request.method == 'DELETE':
+            """" delete a member from a group """
+            # GET 127.0.0.1:8000/api/groups/members/?groupName=TestGroup1&id_person=1
+            groupName = request.query_params.get('groupName')
+            id_person = request.query_params.get('id_person')
+            queryset = GroupsMembers.objects.filter(id_groupName=groupName,id_person=id_person)
+            if queryset:
+                queryset.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                error = "The member with id: %s does not exist in group: %s"%(id_person,groupName)
+                return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
+
 
     # GET 127.0.0.1:8000/api/groups/admins/
     @action(detail=False, methods=['get'])
     def admins(self, request, *args, **kwargs):
-        # GET 127.0.0.1:8000/api/groups/members/?groupName=TestGroup1
+        # GET 127.0.0.1:8000/api/groups/admin/?groupName=TestGroup1
         """" list all admins of a group """
         groupName = request.query_params.get('groupName')
-        queryset = GroupsMembers.objects.filter(id_groupName=groupName)
-        queryset = GroupsMembers.objects.filter(groupAdmin=True)
+        queryset = GroupsMembers.objects.filter(id_groupName=groupName,groupAdmin=True)
         serializer = groupsMembersDetailSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    # GET 127.0.0.1:8000/api/groups/tools/
+    @action(detail=False, methods=['get','post','delete'])
+    def tools(self, request, *args, **kwargs):
+        if request.method == 'GET':
+            # GET 127.0.0.1:8000/api/groups/tools/?groupName=TestGroup1
+            """" list all tools of a group """
+            groupName = request.query_params.get('groupName')
+            queryset = ToolsGroups.objects.filter(id_groupName=groupName)
+            serializer = groupsToolsDetailSerializer(queryset, many=True)
+            return Response(serializer.data)
 
+        elif request.method == 'POST':
+            """" add a new tool to a group """
+            serializer = groupsToolsSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        elif request.method == 'DELETE':
+            """" delete a tool from a group """
+            # GET 127.0.0.1:8000/api/groups/tools/?groupName=TestGroup1&id_tool=1
+            groupName = request.query_params.get('groupName')
+            id_tool = request.query_params.get('id_tool')
+            queryset = ToolsGroups.objects.filter(id_groupName=groupName,id_tool=id_tool)
+            if queryset:
+                queryset.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                error = "The tool with id: %s does not exist in group: %s"%(id_tool,groupName)
+                return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
+            
 
 ######################
 ###   TOWNS  API   ###
@@ -253,13 +336,12 @@ class townsViewSet(viewsets.GenericViewSet):
             # GET 127.0.0.1:8000/api/towns/?countryCode=BE
             """" list all towns of a country """
             queryset = Towns.objects.filter(id_countryCode=country)
-            serializer = townsSerializer(queryset, many=True)
-            return Response(serializer.data)
         else:
             """" list all towns """
             queryset = Towns.objects.all()
-            serializer = townsSerializer(queryset, many=True)
-            return Response(serializer.data)
+
+        serializer = townsSerializer(queryset, many=True)
+        return Response(serializer.data)
     
     # POST 127.0.0.1:8000/api/towns/
     def create(self, request, *args, **kwargs):

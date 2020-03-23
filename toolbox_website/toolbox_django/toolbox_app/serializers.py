@@ -76,6 +76,12 @@ class groupsSerializer(serializers.ModelSerializer):
         model = Groups
         fields = ('id_groupName', 'groupType', 'groupRange','id_town')
 
+class groupsDetailSerializer(serializers.ModelSerializer):
+    town = townsSerializer(source='id_town', read_only=True)
+    class Meta:
+        model = Groups
+        fields = ('id_groupName', 'groupType', 'groupRange','town')
+
 class groupsMembersSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupsMembers
@@ -87,11 +93,28 @@ class groupsMembersDetailSerializer(serializers.ModelSerializer):
         model = GroupsMembers
         fields = ('member','groupAdmin')
 
+class groupsToolsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ToolsGroups
+        fields = ('id_tool','id_groupName')
+
+class groupsToolsDetailSerializer(serializers.ModelSerializer):
+    tool = toolsDetailSerializer(source='id_tool', read_only=True)
+    class Meta:
+        model = ToolsGroups
+        fields = ('tool',)
+
 class membersGroupsDetailSerializer(serializers.ModelSerializer):
     group = groupsSerializer(source='id_groupName', read_only=True)
     class Meta:
         model = GroupsMembers
         fields = ('group','groupAdmin')
+
+class toolsGroupsDetailSerializer(serializers.ModelSerializer):
+    group = groupsSerializer(source='id_groupName', read_only=True)
+    class Meta:
+        model = ToolsGroups
+        fields = ('group',)
 
 ##################################
 ###      OTHER SERIALIZERS     ###
