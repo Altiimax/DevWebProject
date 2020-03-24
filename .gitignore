@@ -8,3 +8,4 @@
 **/*.back.*
 */venv
 */toolbox_django/tools
+node_modules
