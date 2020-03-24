@@ -65,7 +65,12 @@ class personReviewsSerializer(serializers.ModelSerializer):
 class personsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Persons
-        fields = ('id_person', 'lastName', 'firstName', 'alias', 'birthDate', 'email')
+        fields = ('id_person', 'lastName', 'firstName', 'alias', 'birthDate', 'email', 'pwd_test')
+
+class personsLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Persons
+        fields = ('id_person', 'email', 'pwd_test')
 
 
 ##################################

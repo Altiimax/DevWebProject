@@ -21,6 +21,13 @@ class personsViewSet(viewsets.GenericViewSet):
         queryset = Persons.objects.all().order_by('lastName')
         serializer = personsSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    # GET 127.0.0.1:8000/api/persons/1
+    def retrieve(self, request,pk=None, *args, **kwargs):
+        """" get a user profile by it's id """
+        queryset = Persons.objects.filter(id_person=pk)
+        serializer = personsSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     # POST 127.0.0.1:8000/api/persons/
     def create(self, request, *args, **kwargs):
@@ -38,14 +45,14 @@ class personsViewSet(viewsets.GenericViewSet):
         serializer = aliasesSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    # GET 127.0.0.1:8000/api/persons/byemail/?email=john.doe@gmail.com
+    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com
     @action(detail=False, methods=['get'])
-    def byemail(self, request, *args, **kwargs):
-        """" get user by its email"""
+    def login(self, request, *args, **kwargs):
+        """" get user login info by its email"""
         email = request.query_params.get('email')
         queryset = Persons.objects.filter(email=email)
         if queryset:
-            serializer = personsSerializer(queryset,many=True)
+            serializer = personsLoginSerializer(queryset,many=True)
             return Response(serializer.data)
         else:
             error = "no user with this email: %s"%(email)
