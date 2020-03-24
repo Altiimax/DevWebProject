@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Countries(models.Model):
     id_countryCode = models.CharField(primary_key=True, max_length=5)
-    countryname = models.CharField(max_length=30)
+    countryName = models.CharField(max_length=30)
 
     def __str__(self):
         return f"{self.id_countryCode} : {self.countryName} "
@@ -63,6 +63,7 @@ class Persons(models.Model):
     alias = models.CharField(max_length=20, blank=True, null=True)
     birthDate = models.DateField()
     email = models.EmailField()
+    pwd_test = models.CharField(max_length=50) #This field is only used for preliminary test purpose! a true auth will be implemented later. //TODO
 
     class Meta:
         managed = True
