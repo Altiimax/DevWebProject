@@ -36,9 +36,17 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-image: url('logo.svg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .FormSign{
   background-color: #282c34;
-
+  width: 30em;
+  justify-content: center;
 }
 
 .FormField_Label {
@@ -62,8 +70,12 @@
 }
 
 
+.FormField_TermsLink {
+  color : blue;
+}
+
 .okButton {
-  background-color: rgb(0, 170, 0);
+  background-color: white;
   color: rgb(0, 0, 0);
   border: none;
   outline: none;
@@ -72,8 +84,12 @@
   font-size: .8em;
   font-weight: 500;
 }
+.okButton:hover {
+  background-color: rgb(0, 170, 0);
+}
+
 .nokButton {
-  background-color: rgb(170, 0, 0);
+  background-color: white;
   color: rgb(0,0,0);
   border: none;
   outline: none;
@@ -81,4 +97,7 @@
   padding: 10px 10px;
   font-size: .8em;
   font-weight: 500;
+}
+.nokButton:hover{
+  background-color: rgb(170, 0, 0);
 }
