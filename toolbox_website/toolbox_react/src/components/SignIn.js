@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 /**
  * This component is the formular the user must fill to connect 
@@ -9,7 +10,8 @@ import React, { Component } from 'react'
 class SignIn extends Component {
     render() {
         return (
-            <form className='FormSign'>
+            <div className='FormSign'>
+            <form>
                 <div>
                     <label className='FormField_Label' htmlFor='alias'>Alias </label> 
                     <input type='text' className='FormField_Input' name ='alias' placeholder='Enter your alias'/>
@@ -21,12 +23,18 @@ class SignIn extends Component {
                 <div>
                     <label className='FormField_Label' htmlFor='password'>Password </label> 
                     <input type='password' className='FormField_Input' name ='password' placeholder='Enter your password'/>
-            </div>
-            <div>
-                <button className='nokButton'>Cancel</button>
-                <button className='okButton'>Confirm</button>
-            </div>  
+                </div>
+                <div>
+                    <button className='nokButton'>Cancel</button>
+                    <div class="divider"/>
+                    <button className='okButton'>Confirm</button>
+                </div>  
             </form>
+            <div class="divider"/>
+                <div>
+                    <button className='goBackMenuButton'><Link to='/' className='FormField_Link'>Go back to the Menu</Link></button>
+                </div>
+            </div>
         )
     }
 }
