@@ -9,7 +9,7 @@ const Greet = (props) =>{
     return(
     //ici le /n ne fonctionne pas!
     <div>
-        <h3 className='Text'>Welcome to the application {props.name}! 
+        <h3 className='Text'>Welcome to the application, {props.name}! 
         This application is on construction!
         {"\n"} What would you do?</h3>
     </div>
