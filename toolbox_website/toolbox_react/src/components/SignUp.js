@@ -16,7 +16,7 @@ class SignUp extends Component {
             email:'',
             firstname:'',
             lastname:'',
-            birthdate:'',
+            birthDate:'',
             alias:'',
             newPassword:'',
             confirmPassword:'',
@@ -62,7 +62,7 @@ class SignUp extends Component {
                     </div>
                     <div>
                         <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label>
-                        <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthdate} onChange={this.handleChange}/>
+                        <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
                     </div>
                     <div>
                         <label className='FormField_Label' htmlFor='alias'>Alias </label>
