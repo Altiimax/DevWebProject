@@ -8,6 +8,7 @@ import SignIn from "./components/SignIn";
 import Profile from "./components/Profile";
 import Menu from "./components/Menu";
 import Help from "./components/Help";
+import Header from "./components/Header";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route exact path="/">
         <div className="App">
           <header className="App-header">
+            <Header/>
             <div className="Greetings">
               <Greet name="Host" />
             </div>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-
+import './css/SignUp.css'
 /**
  * This component is used to register the information set by 
  * the user to the database. He must enter his forename, surename,
- * email address, alias, ... 
+ * email address, alias, password, ... 
  * @param
  */
 class SignUp extends Component {
@@ -34,7 +34,43 @@ class SignUp extends Component {
 
         this.setState({
           [name]: value
-        });
+        },
+            function(){
+                if (name === 'birthDate'){ //Verify if the age is correct
+                    let now = new Date();
+                    let input = new Date(value);
+                    let age = Math.floor((now-input)/ 31557600000);
+                    if (age < 18){
+                        //console.log("L'âge est : " + age);
+                        let errorMessage = "You must be 18 to register to this application!";
+                        document.getElementById('date_error').innerHTML = errorMessage;
+                    }
+                    else {
+                        document.getElementById('date_error').innerHTML = '';
+                    }
+                }
+
+                if(name ==='newPassword'){ //Verify if password has a minimum length of 8
+                    if(value!=='' && value.length < 8){
+                        let errorMessage = "The password must be 8 characters minimum!";
+                        document.getElementById('newpassword_error').innerHTML = errorMessage;
+                    }
+                    else{
+                        document.getElementById('newpassword_error').innerHTML = '';
+                    }
+                }
+
+                if(name ==='confirmPassword'){ //Verify if passwords are matching
+                    if(value!= '' && this.state.newPassword !== this.state.confirmPassword){
+                        let errorMessage = "Your passwords doesn't match!";
+                        document.getElementById('password_error').innerHTML = errorMessage;
+                    }
+                    else{
+                        document.getElementById('password_error').innerHTML = '';
+                    }
+                }
+            }
+        );
     }
 
     handleSubmit(e) {
@@ -63,6 +99,7 @@ class SignUp extends Component {
                     <div>
                         <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label>
                         <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
+                        <span className="error"><p id="date_error"></p></span>
                     </div>
                     <div>
                         <label className='FormField_Label' htmlFor='alias'>Alias </label>
@@ -71,10 +108,12 @@ class SignUp extends Component {
                     <div>
                         <label className='FormField_Label' htmlFor='newPassword'>New password </label>
                         <input type='password' className='FormField_Input' name ='newPassword' placeholder='Enter a new password' value={this.state.newPassword} onChange={this.handleChange}/>
+                        <span className="error"><p id="newpassword_error"></p></span>
                     </div>
                     <div>
                         <label className='FormField_Label' htmlFor='confirmPassword'>Password confirmation </label>
                         <input type='password' className='FormField_Input' name ='confirmPassword' placeholder='Verify your password' value={this.state.confirmPassword} onChange={this.handleChange}/>
+                        <span className="error"><p id="password_error"></p></span>
                     </div>
                     <div className='divider'/>
                     <div>
