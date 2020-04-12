@@ -1,36 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {apiRequest} from './apiRequest.js';
 
-  let req = new apiRequest();
-  req.open("GET", "http://127.0.0.1:8000/api/persons/");
-  req.addEventListener("readystatechange", function() {
-    if(this.readyState === 4) {
-      console.log("resp status :" + this.status);
-      console.log("resp text :" + this.responseText);
+
+let apiOutput;
+
+let req = new apiRequest();
+req.open("GET", "http://127.0.0.1:8000/api/persons/");
+req.addEventListener("readystatechange", function() {
+  if(this.readyState === 4) {
+    console.log("resp status :" + this.status);
+    console.log("resp text :" + this.responseText);
+    let obj = JSON.parse(this.responseText);
+    apiOutput = "<table><th> <td>id</td> <td>last name</td> <td>first name</td> <td>Alias</td> <td>email</td></th>";
+    for( let o of obj){
+      apiOutput += "<tr>";
+      for( let p in o){
+        if(p != "pwd_test"){
+          apiOutput += "<td>" + o[p] + "</td>";
+        }
+      }
+      apiOutput += "</tr>";
     }
-  });
-  
-  req.send();
+    apiOutput += "</table>";
+    document.getElementById("apiOut").innerHTML = apiOutput;
+  }
+});
+
+req.send();
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p id="apiOut"></p>
       </header>
     </div>
   );

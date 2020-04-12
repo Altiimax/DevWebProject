@@ -7,4 +7,3 @@
 **/*.backup.*
 **/*.back.*
 */venv
-*/toolbox_django/tools
