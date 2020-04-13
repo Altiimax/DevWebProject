@@ -121,7 +121,7 @@ class Tools(models.Model):
 class ToolImages(models.Model):
     id_toolImage = models.AutoField(primary_key=True)
     id_tool = models.ForeignKey(Tools, models.DO_NOTHING, db_column='id_tool')
-    image = models.ImageField(upload_to='tools')
+    image = models.ImageField(upload_to='toolsImgs')
 
     class Meta:
         managed = True

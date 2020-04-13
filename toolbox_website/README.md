@@ -32,6 +32,9 @@ pip3 freeze > requirements.txt
 #Démarrer le serveur de developement de Django 
 python3 manage.py runserver
 
+#Démarrer tous les tests 
+python3 manage.py test
+
 #Créer une nouvelle web-app 
 python3 manage.py startapp 'web-app name' 
 
