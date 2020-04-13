@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import './css/SignUp.css'
+import '../css/SignUp.css'
+//import GreenCheck from './assets/Green-Check.png'
 /**
  * This component is used to register the information set by 
  * the user to the database. He must enter his forename, surename,
@@ -41,12 +42,12 @@ class SignUp extends Component {
                     let input = new Date(value);
                     let age = Math.floor((now-input)/ 31557600000);
                     if (age < 18){
-                        //console.log("L'âge est : " + age);
-                        let errorMessage = "You must be 18 to register to this application!";
+                        let errorMessage = "You must be 18 to register to this application! But your age is : "+ age;
                         document.getElementById('date_error').innerHTML = errorMessage;
                     }
                     else {
                         document.getElementById('date_error').innerHTML = '';
+                        //document.getElementById('greencheck').innerHTML = '<img className="img-greenCheck" src='+{GreenCheck}+' alt="This field as passed the test"/>'
                     }
                 }
 
@@ -61,7 +62,7 @@ class SignUp extends Component {
                 }
 
                 if(name ==='confirmPassword'){ //Verify if passwords are matching
-                    if(value!= '' && this.state.newPassword !== this.state.confirmPassword){
+                    if(value!== '' && this.state.newPassword !== this.state.confirmPassword){
                         let errorMessage = "Your passwords doesn't match!";
                         document.getElementById('password_error').innerHTML = errorMessage;
                     }
@@ -97,7 +98,7 @@ class SignUp extends Component {
                         <input type='text' className='FormField_Input' name ='lastname' placeholder='Enter your surename' value={this.state.lastname} onChange={this.handleChange}/>
                     </div>
                     <div>
-                        <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label>
+                        <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label> <span className='check-img' id='greencheck'></span>
                         <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
                         <span className="error"><p id="date_error"></p></span>
                     </div>
