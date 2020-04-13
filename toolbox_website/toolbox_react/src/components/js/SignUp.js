@@ -128,10 +128,6 @@ class SignUp extends Component {
                         <button type='submit' className='okButton'>Complete registration</button>
                     </div>
                 </form>
-                <div className='divider'/>
-            <div>
-                <button className='goBackMenuButton'><Link to='/' className='FormField_Link'>Go back to the Menu</Link></button>
-            </div>
             </div>
         );
     }
