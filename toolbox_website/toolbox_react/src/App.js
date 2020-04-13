@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import {apiRequest} from './apiRequest.js';
-
+import {Modal} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 let apiOutput;
 
@@ -16,28 +17,62 @@ req.addEventListener("readystatechange", function() {
     for( let o of obj){
       apiOutput += "<tr>";
       for( let p in o){
-        if(p != "pwd_test"){
+        if(p !== "pwd_test"){
           apiOutput += "<td>" + o[p] + "</td>";
         }
       }
       apiOutput += "</tr>";
     }
     apiOutput += "</table>";
-    document.getElementById("apiOut").innerHTML = apiOutput;
+    //document.getElementById("apiOut").innerHTML = apiOutput;
   }
 });
 
 req.send();
 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p id="apiOut"></p>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      popupVisible:false
+    }
+  };
+
+  chngPVis(s){
+    this.setState({popupVisible:s});
+  }
+
+  render() {
+    return (
+      <div>
+        <header>
+          <p id="apiOut"></p>
+          <p>This is a first test !</p>
+        </header>
+  
+        <body>
+          <Button onClick={()=>{this.chngPVis(true)}} variant="primary" >popup test</Button>
+  
+          <Modal show={this.state.popupVisible} onHide={()=>{this.chngPVis(false)}}>
+              <Modal.Header closeButton>
+                <Modal.Title>Popup Test</Modal.Title>
+              </Modal.Header>
+  
+              <Modal.Body>
+                <p>Popup test - content</p>
+              </Modal.Body>
+  
+              <Modal.Footer>
+                <Button onClick={()=>{this.chngPVis(false)}} variant="secondary">Close</Button>
+                <Button variant="primary">Save changes</Button>
+              </Modal.Footer>
+            </Modal >
+        </body>
+  
+      </div>
+    );
+  }
 }
 
 export default App;
