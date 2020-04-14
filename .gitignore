@@ -7,3 +7,4 @@
 **/*.backup.*
 **/*.back.*
 */venv
+node_modules

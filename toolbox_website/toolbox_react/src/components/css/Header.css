@@ -1,0 +1,27 @@
+.navbar{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.459);
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+.navbar-brand{
+    color: yellow;
+    text-decoration: none;
+}
+
+.navbar-brand:hover{
+    color: orange;
+}
+
+.nav.navbar-nav a{
+    text-decoration: none;
+    color: yellow;
+}
+
+.active{
+    background-color: rgb(0, 0, 0);
+}
+
+.logo{
+    width: 85px;
+    border-radius: 50%;
+}
