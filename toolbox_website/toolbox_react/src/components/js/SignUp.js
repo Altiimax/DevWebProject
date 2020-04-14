@@ -95,18 +95,18 @@ class SignUp extends Component {
             
                 <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label> <span className='check-img' id='greencheck'></span>
                 <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
-                {/*<span className="error"><p id="date_error"></p></span>*/}
+                <span className="error"><p id="date_error"></p></span>
 
                 <label className='FormField_Label' htmlFor='alias'>Alias </label>
                 <input type='text' className='FormField_Input' name ='alias' placeholder='Enter your alias' value={this.state.alias} onChange={this.handleChange}/>
             
                 <label className='FormField_Label' htmlFor='newPassword'>New password </label>
                 <input type='password' className='FormField_Input' name ='newPassword' placeholder='Enter a new password' value={this.state.newPassword} onChange={this.handleChange}/>
-                {/*<span className="error"><p id="newpassword_error"></p></span>*/}
+                <span className="error"><p id="newpassword_error"></p></span>
             
                 <label className='FormField_Label' htmlFor='confirmPassword'>Password confirmation </label>
                 <input type='password' className='FormField_Input' name ='confirmPassword' placeholder='Enter your password' value={this.state.confirmPassword} onChange={this.handleChange}/>
-                {/*<span className="error"><p id="password_error"></p></span>*/}
+                <span className="error"><p id="password_error"></p></span>
 
                 <div></div>
                 <label className='FormField_CheckBox' htmlFor='hasagreed'></label>
