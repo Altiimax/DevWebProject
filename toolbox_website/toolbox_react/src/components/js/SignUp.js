@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import '../css/SignUp.css'
 //import GreenCheck from './assets/Green-Check.png'
 /**

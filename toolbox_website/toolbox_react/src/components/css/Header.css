@@ -1,27 +1,60 @@
-.navbar{
-    border-bottom: 2px solid rgba(0, 0, 0, 0.459);
-    background-color: rgba(0, 0, 0, 0.445);
-}
 
-.navbar-brand{
-    color: yellow;
-    text-decoration: none;
-}
-
-.navbar-brand:hover{
-    color: orange;
-}
-
-.nav.navbar-nav a{
-    text-decoration: none;
-    color: yellow;
-}
-
-.active{
-    background-color: rgb(0, 0, 0);
-}
-
-.logo{
+.navbar {
+    background-color: none;
+  }
+  
+.logo img {
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    top: 10px;
     width: 85px;
-    border-radius: 50%;
+  } 
+
+.navbar .navbar-collapse .justify-content-end .nav-item .nav-link {
+    color: rgb(247,220,9);
+    width: 6em;
+    text-align: center;
+    font-weight: bold;
+  }
+
+.navbar .navbar-collapse .justify-content-end .nav-item .nav-link:hover {
+  color: rgb(160, 158, 42);
+  }
+
+.navbar .navbar-collapse .justify-content-end .nav-item .nav-link.active {
+    color: rgba(66,66,56,1);
+    background-color: rgb(247,220,9);
+    border-radius: 2em;
+  }
+
+.navbar .navbar-collapse .justify-content-end .nav-item {
+    margin: 0em 0.2em;
+  }
+
+
+
+/* Controle de l'affichage des éléments dans la barre de navigation 
+  visible => display: initial;
+  non visible => display: none;
+*/
+
+#myGroupsNav {
+    display: initial;
+}
+
+#myToolsNav {
+    display: initial;
+}
+
+#myProfileNav {
+    display: initial;
+}
+
+#signUpNav {
+    display: initial;
+}
+
+#signInNav {
+    display: initial;
 }
