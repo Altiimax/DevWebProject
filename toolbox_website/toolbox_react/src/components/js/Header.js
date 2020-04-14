@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 //import Modal from "react-responsive-modal";
 import "../css/Header.css";
+import "../css/PopUp.css";
 import icon from "../assets/toolBox_logo.png";
 import {Modal, Button, Nav, Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -75,14 +76,14 @@ class Header extends Component {
                 <Modal.Header closeButton>
                     <Modal.Title>Sign In</Modal.Title>
                 </Modal.Header>
-""
+                
                 <Modal.Body>
                     <SignIn/>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={()=>{this.onCloseSignIn()}} variant="secondary">Close</Button>
-                    <Button variant="primary">Save changes</Button>
+                    <Button onClick={()=>{this.onCloseSignIn()}} variant="secondary">Cancel</Button>
+                    <Button variant="primary">Sign in</Button>
                 </Modal.Footer>
                 </Modal >
 
@@ -97,8 +98,8 @@ class Header extends Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={()=>{this.onCloseSignUp()}} variant="secondary">Close</Button>
-                    <Button variant="primary">Save changes</Button>
+                    <Button onClick={()=>{this.onCloseSignUp()}} variant="secondary">Cancel</Button>
+                    <Button variant="primary">Sign up</Button>
                 </Modal.Footer>
                 </Modal >
             </div>

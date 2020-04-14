@@ -82,52 +82,37 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className='FormSign'>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label className='FormField_Label' htmlFor='email'>E-mail address </label>
-                        <input type='email' className='FormField_Input' name ='email' placeholder='Enter your e-mail address' value={this.state.email} onChange={this.handleChange}/>
-                    </div>
-                    <div>
-                        <label className='FormField_Label' htmlFor='firstname'>First name </label>
-                        <input type='text' className='FormField_Input' name ='firstname' placeholder='Enter your forename' value={this.state.firstname} onChange={this.handleChange}/>
-                    </div>
-                    <div>
-                        <label className='FormField_Label' htmlFor='lastname'>Last name </label>
-                        <input type='text' className='FormField_Input' name ='lastname' placeholder='Enter your surename' value={this.state.lastname} onChange={this.handleChange}/>
-                    </div>
-                    <div>
-                        <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label> <span className='check-img' id='greencheck'></span>
-                        <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
-                        <span className="error"><p id="date_error"></p></span>
-                    </div>
-                    <div>
-                        <label className='FormField_Label' htmlFor='alias'>Alias </label>
-                        <input type='text' className='FormField_Input' name ='alias' placeholder='Enter your alias' value={this.state.alias} onChange={this.handleChange}/>
-                    </div>
-                    <div>
-                        <label className='FormField_Label' htmlFor='newPassword'>New password </label>
-                        <input type='password' className='FormField_Input' name ='newPassword' placeholder='Enter a new password' value={this.state.newPassword} onChange={this.handleChange}/>
-                        <span className="error"><p id="newpassword_error"></p></span>
-                    </div>
-                    <div>
-                        <label className='FormField_Label' htmlFor='confirmPassword'>Password confirmation </label>
-                        <input type='password' className='FormField_Input' name ='confirmPassword' placeholder='Verify your password' value={this.state.confirmPassword} onChange={this.handleChange}/>
-                        <span className="error"><p id="password_error"></p></span>
-                    </div>
-                    <div className='divider'/>
-                    <div>
-                        <label className='FormField_CheckBox' htmlFor='hasagreed'/>
-                        <input type='checkbox' className='FormField_Input_Check' name='hasagreed' value={this.state.hasagreed} onChange={this.handleChange}/> I agree with all the statements in <a href='' className='FormField_TermsLink'>terms of service.</a>
-                    </div>
-                    <div className='divider'/>
-                    <div>
-                        <button type='reset' className='nokButton'>Cancel registration</button>
-                        <div className='divider'/>
-                        <button type='submit' className='okButton'>Complete registration</button>
-                    </div>
-                </form>
-            </div>
+            <>
+            <form id="signUpForm" onSubmit={this.handleSubmit}>
+                <label className='FormField_Label' htmlFor='email'>E-mail address </label>
+                <input type='email' className='FormField_Input' name ='email' placeholder='Enter your e-mail address' value={this.state.email} onChange={this.handleChange}/>
+        
+                <label className='FormField_Label' htmlFor='firstname'>First name </label>
+                <input type='text' className='FormField_Input' name ='firstname' placeholder='Enter your forename' value={this.state.firstname} onChange={this.handleChange}/>
+            
+                <label className='FormField_Label' htmlFor='lastname'>Last name </label>
+                <input type='text' className='FormField_Input' name ='lastname' placeholder='Enter your surename' value={this.state.lastname} onChange={this.handleChange}/>
+            
+                <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label> <span className='check-img' id='greencheck'></span>
+                <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
+                {/*<span className="error"><p id="date_error"></p></span>*/}
+
+                <label className='FormField_Label' htmlFor='alias'>Alias </label>
+                <input type='text' className='FormField_Input' name ='alias' placeholder='Enter your alias' value={this.state.alias} onChange={this.handleChange}/>
+            
+                <label className='FormField_Label' htmlFor='newPassword'>New password </label>
+                <input type='password' className='FormField_Input' name ='newPassword' placeholder='Enter a new password' value={this.state.newPassword} onChange={this.handleChange}/>
+                {/*<span className="error"><p id="newpassword_error"></p></span>*/}
+            
+                <label className='FormField_Label' htmlFor='confirmPassword'>Password confirmation </label>
+                <input type='password' className='FormField_Input' name ='confirmPassword' placeholder='Enter your password' value={this.state.confirmPassword} onChange={this.handleChange}/>
+                {/*<span className="error"><p id="password_error"></p></span>*/}
+
+                <div></div>
+                <label className='FormField_CheckBox' htmlFor='hasagreed'></label>
+                <input type='checkbox' className='FormField_Input_Check' name='hasagreed' value={this.state.hasagreed} onChange={this.handleChange}/> I agree with all the statements in <a href='' className='FormField_TermsLink'>terms of service.</a>
+            </form>
+            </>
         );
     }
 }

@@ -27,12 +27,6 @@ function App() {
       <Route exact path="/">
         <div className="App">
           <header className="App-header">
-            <div className="Greetings">
-              <Greet name="Host" />
-            </div>
-            <div>
-              <Menu/>
-            </div>
             <img src={logo} className="App-logo" alt="logo" />
           </header>
         </div>
