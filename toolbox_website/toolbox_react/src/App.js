@@ -13,7 +13,7 @@ import Footer from "./components/js/Footer";
 import AboutUs from "./components/js/AboutUs"
 import Contact from "./components/js/Contact";
 
-import apiExample from "./apiExample";
+import apiExample from "./api/apiExample";
 
 function App() {
   return (
