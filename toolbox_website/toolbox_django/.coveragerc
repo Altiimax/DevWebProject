@@ -1,0 +1,2 @@
+[run]
+omit = toolbox_app/migrations/*
