@@ -11,8 +11,8 @@ During the whole development and before any release, the web-application must va
 - [X] Project analysis
 - [X] Choice of technologies
 - [X] Backend prototype
-- [ ] Frontend prototype
-- [ ] API 
+- [X] Frontend prototype
+- [X] API 
 - [ ] Testing
 - [ ] Security 
 
