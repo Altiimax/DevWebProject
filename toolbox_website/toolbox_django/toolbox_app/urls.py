@@ -12,7 +12,7 @@ router.register(r'countries', api.countriesViewSet, basename='countries')
 
 
 urlpatterns = [
-    path('',views.index,name='index'),
-    path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path(r'',views.index,name='index'),
+    path(r'api/', include(router.urls)),
+    path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
