@@ -5,14 +5,11 @@ import json
 
 from ..models import *
 
-username = 'admin'
-password = 'devweb2'
+class SetupClass(APITestCase):
 
-class TestPersonsApi(APITestCase):
-
-    def setUp(self):
-        self.username = username
-        self.password = password
+    def setUpTest(self):
+        self.username = 'admin'
+        self.password = 'devweb2'
         self.user = User.objects.create_user(username=self.username, password=self.password)
         
         #Client with basic auth credentials
@@ -22,7 +19,8 @@ class TestPersonsApi(APITestCase):
         #Client w/o basic auth credentials
         self.not_auth_client = APIClient()
 
-        #Creating dummy person object
+        #Creating dummy objects
+        ## person
         self.dummyPerson_dict = {
             "lastName": "foo",
             "firstName": "bar",
@@ -32,6 +30,27 @@ class TestPersonsApi(APITestCase):
             "pwd_test": "testpwd2"
         }
         self.dummyPerson_object = Persons.objects.create(**self.dummyPerson_dict)
+
+        ## country
+        self.dummyCountry_dict = {
+            "id_countryCode": "BE",
+            "countryName": "Belgium"
+        }
+        self.dummyCountry_object = Countries.objects.create(**self.dummyCountry_dict)
+
+        ## town
+        self.dummyTown_dict = {
+            "postCode": 1300,
+            "townName": "Wavre",
+            "id_countryCode": self.dummyCountry_object
+        }
+        self.dummyTown_object = Towns.objects.create(**self.dummyTown_dict)
+
+
+class TestPersonsApi(SetupClass):
+
+    def setUp(self):
+        self.setUpTest()
 
     def test_personsViewSet_list_GET(self):
         response = self.auth_client.get("/api/persons/", format='json')
@@ -93,40 +112,49 @@ class TestPersonsApi(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     # //TODO : POST group
 
-    #######################
-    ###    TOOLS API    ###
 
-
-    ######################
-    ###   GROUPS API   ###
-
-
-    ######################
-    ###   TOWNS  API   ###
-
-
-class TestCountriesApi(APITestCase):
+class TestToolsApi(SetupClass):
 
     def setUp(self):
-        self.username = username
-        self.password = password
-        self.user = User.objects.create_user(username=self.username, password=self.password)
-        
-        #Client with basic auth credentials
-        self.auth_client = APIClient()
-        self.auth_client.login(username=self.username, password=self.password)
-        
-        #Client w/o basic auth credentials
-        self.not_auth_client = APIClient()
+        self.setUpTest()
 
-        #Creating dummy country object 
-        self.dummyCountry_dict = {
-            "id_countryCode": "BE",
-            "countryName": "Belgium"
+
+class TestGroupsApi(SetupClass):
+
+    def setUp(self):
+        self.setUpTest()
+
+
+class TestTownsApi(SetupClass):
+
+    def setUp(self):
+        self.setUpTest()
+    
+    def test_townsViewSet_list_GET(self):
+        response = self.auth_client.get("/api/towns/", format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.auth_client.get("/api/towns/?countryCode=BE", format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(json.loads(response.content)[0].get("postCode"), self.dummyTown_dict.get("postCode"))
+        self.assertEqual(json.loads(response.content)[0].get("townName"), self.dummyTown_dict.get("townName"))
+        self.assertEqual(json.loads(response.content)[0].get("id_countryCode"), self.dummyTown_dict.get("id_countryCode").id_countryCode)
+
+    def test_townsViewSet_POST(self):
+        data = {
+            "postCode": 1300,
+            "townName": "Wavre",
+            "id_countryCode": "BE"
         }
-        self.dummyCountry_object = Countries.objects.create(**self.dummyCountry_dict)
+        response = self.auth_client.post("/api/towns/", data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
+class TestCountriesApi(SetupClass):
+
+    def setUp(self):
+        self.setUpTest()
+        
     def test_countriesViewSet_list_GET(self):
         response = self.auth_client.get("/api/countries/", format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
