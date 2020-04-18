@@ -257,7 +257,7 @@ class groupsViewSet(viewsets.GenericViewSet):
 
 
 
-    # GET,POST 127.0.0.1:8000/api/groups/members/
+    # GET,POST,DELETE 127.0.0.1:8000/api/groups/members/
     @action(detail=False, methods=['get','post','delete'])
     def members(self, request, *args, **kwargs):
         if request.method == 'GET':
@@ -292,7 +292,7 @@ class groupsViewSet(viewsets.GenericViewSet):
     # GET 127.0.0.1:8000/api/groups/admins/
     @action(detail=False, methods=['get'])
     def admins(self, request, *args, **kwargs):
-        # GET 127.0.0.1:8000/api/groups/admin/?groupName=TestGroup1
+        # GET 127.0.0.1:8000/api/groups/admins/?groupName=TestGroup1
         """" list all admins of a group """
         groupName = request.query_params.get('groupName')
         queryset = GroupsMembers.objects.filter(id_groupName=groupName,groupAdmin=True)

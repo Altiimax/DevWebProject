@@ -4,10 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Countries(models.Model):
     id_countryCode = models.CharField(primary_key=True, max_length=5)
     countryName = models.CharField(max_length=30)
-
-    def __str__(self):
-        return f"{self.id_countryCode} : {self.countryName} "
-    
+  
     class Meta:
         managed = True
         db_table = 'Countries'
@@ -24,8 +21,6 @@ class Groups(models.Model):
         managed = True
         db_table = 'Groups'
     
-    def __str__(self):
-        return f"{self.id_groupName} ({self.groupType})"
 
 
 class GroupsMembers(models.Model):
@@ -37,9 +32,7 @@ class GroupsMembers(models.Model):
         managed = True
         db_table = 'GroupsMembers'
         unique_together = (('id_person', 'id_groupName'),)
-    
-    def __str__(self):
-        return f"{self.id_groupName} : {self.id_person} isAdmin:{self.groupAdmin}"
+
   
 
 class PersonReviews(models.Model):
@@ -51,9 +44,7 @@ class PersonReviews(models.Model):
     class Meta:
         managed = True
         db_table = 'PersonReviews'
-    
-    def __str__(self):
-        return f"{self.id_person} : {self.id_personReview}"
+
 
 
 class Persons(models.Model):
@@ -71,9 +62,7 @@ class Persons(models.Model):
             models.UniqueConstraint(fields= ['alias'],name='unique_alias'),
         ]
         db_table = 'Persons'
-    
-    def __str__(self):
-        return f"{self.id_person} : {self.lastName} {self.firstName}"
+
 
 
 class PersonsTowns(models.Model):
@@ -85,8 +74,6 @@ class PersonsTowns(models.Model):
         managed = True
         db_table = 'PersonsTowns'
     
-    def __str__(self):
-        return f"{self.id_personsTowns} : {self.id_person} "
 
 
 class ToolReviews(models.Model):
@@ -98,9 +85,7 @@ class ToolReviews(models.Model):
     class Meta:
         managed = True
         db_table = 'ToolReviews'
-    
-    def __str__(self):
-        return f"{self.id_tool} : {self.id_toolReview} "
+
 
 
 class Tools(models.Model):
@@ -113,10 +98,6 @@ class Tools(models.Model):
     class Meta:
         managed = True
         db_table = 'Tools'
-    
-    def __str__(self):
-        return f"{self.id_tool} : {self.toolName} belongs to {self.id_person}"
-
 
 class ToolImages(models.Model):
     id_toolImage = models.AutoField(primary_key=True)
@@ -127,9 +108,6 @@ class ToolImages(models.Model):
         managed = True
         db_table = 'ToolImages'
     
-    def __str__(self):
-        return f"{self.id_tool} : {self.image}"
-
 
 
 class ToolsGroups(models.Model):
@@ -141,9 +119,6 @@ class ToolsGroups(models.Model):
         db_table = 'ToolsGroups'
         unique_together = (('id_tool', 'id_groupName'),)
     
-    def __str__(self):
-        return f"{self.id_tool} in group : {self.id_groupName}"
-
 
 
 class Towns(models.Model):
@@ -155,6 +130,3 @@ class Towns(models.Model):
     class Meta:
         managed = True
         db_table = 'Towns'
-
-    def __str__(self):
-        return f"{self.id_town} : {self.postCode} {self.townName} in {self.id_countryCode}"
