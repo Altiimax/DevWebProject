@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../css/SignUp.css'
+import '../css/Form.css'
 //import GreenCheck from './assets/Green-Check.png'
 /**
  * This component is used to register the information set by 
@@ -41,7 +41,7 @@ class SignUp extends Component {
                     let input = new Date(value);
                     let age = Math.floor((now-input)/ 31557600000);
                     if (age < 18){
-                        let errorMessage = "You must be 18 to register to this application! But your age is : "+ age;
+                        let errorMessage = "<p>You must be 18 to register to this application! But your age is : "+ age+" </p>";
                         document.getElementById('date_error').innerHTML = errorMessage;
                     }
                     else {
@@ -52,7 +52,7 @@ class SignUp extends Component {
 
                 if(name ==='newPassword'){ //Verify if password has a minimum length of 8
                     if(value!=='' && value.length < 8){
-                        let errorMessage = "The password must be 8 characters minimum!";
+                        let errorMessage = "<p>The password must be 8 characters minimum!</p>";
                         document.getElementById('newpassword_error').innerHTML = errorMessage;
                     }
                     else{
@@ -62,7 +62,7 @@ class SignUp extends Component {
 
                 if(name ==='confirmPassword'){ //Verify if passwords are matching
                     if(value!== '' && this.state.newPassword !== this.state.confirmPassword){
-                        let errorMessage = "Your passwords doesn't match!";
+                        let errorMessage = "<p>Your passwords doesn't match!</p>";
                         document.getElementById('password_error').innerHTML = errorMessage;
                     }
                     else{
@@ -95,18 +95,18 @@ class SignUp extends Component {
             
                 <label className='FormField_Label' htmlFor='birthDate'>Birthdate </label> <span className='check-img' id='greencheck'></span>
                 <input type='date' className='FormField_Input' name ='birthDate' value={this.state.birthDate} onChange={this.handleChange}/>
-                <span className="error"><p id="date_error"></p></span>
+                <span className="error" id="date_error"></span>
 
                 <label className='FormField_Label' htmlFor='alias'>Alias </label>
                 <input type='text' className='FormField_Input' name ='alias' placeholder='Enter your alias' value={this.state.alias} onChange={this.handleChange}/>
             
                 <label className='FormField_Label' htmlFor='newPassword'>New password </label>
                 <input type='password' className='FormField_Input' name ='newPassword' placeholder='Enter a new password' value={this.state.newPassword} onChange={this.handleChange}/>
-                <span className="error"><p id="newpassword_error"></p></span>
+                <span className="error" id="newpassword_error"></span>
             
                 <label className='FormField_Label' htmlFor='confirmPassword'>Password confirmation </label>
                 <input type='password' className='FormField_Input' name ='confirmPassword' placeholder='Enter your password' value={this.state.confirmPassword} onChange={this.handleChange}/>
-                <span className="error"><p id="password_error"></p></span>
+                <span className="error" id="password_error"></span>
 
                 <div></div>
                 <label className='FormField_CheckBox' htmlFor='hasagreed'></label>
