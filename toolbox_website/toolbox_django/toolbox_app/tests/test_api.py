@@ -174,6 +174,8 @@ class TestToolsApi(SetupClass):
         response = self.auth_client.get("/api/tools/%s/reviews/"%self.dummyTool_object_id, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    #//TODO post image
+
     def test_reviewsViewSet_images_POST(self):
         data = {
             "stars": 7,
