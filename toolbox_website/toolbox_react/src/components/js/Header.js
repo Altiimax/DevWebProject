@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import Modal from "react-responsive-modal";
 import "../css/Header.css";
 import "../css/PopUp.css";
 import icon from "../assets/toolBox_logo.png";
@@ -7,6 +6,7 @@ import { Modal, Button, Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import { LinkContainer } from "react-router-bootstrap";
 
 class Header extends Component {
   constructor(props) {

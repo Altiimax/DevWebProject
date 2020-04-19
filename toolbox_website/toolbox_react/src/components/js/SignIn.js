@@ -16,7 +16,8 @@ function loginRequest(email) {
         console.log("resp status :" + this.status);
         console.log("resp text :" + this.responseText);
         let obj = JSON.parse(this.responseText);
-        console.log(obj);
+        let idLogged = obj[0].id_person;
+        console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?)
         document.getElementById("errorSend").innerHTML = "";
       }
       if (this.status === 404) {
@@ -48,9 +49,6 @@ class SignIn extends Component {
     super();
 
     this.state = initialState;
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   validate() {
@@ -78,7 +76,7 @@ class SignIn extends Component {
     return true;
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     let target = e.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
@@ -86,9 +84,9 @@ class SignIn extends Component {
     this.setState({
       [name]: value,
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     const isValid = this.validate();
     if (isValid) {
@@ -97,7 +95,7 @@ class SignIn extends Component {
       this.setState(initialState);
       loginRequest(this.state.email);
     }
-  }
+  };
 
   render() {
     return (
@@ -146,7 +144,7 @@ class SignIn extends Component {
           <div className="error">{this.state.passwordError}</div>
           <input type="submit" value="Sign-in" />
         </form>
-        <div id="errorSend"></div>
+        <div className="error" id="errorSend"></div>
       </>
     );
   }

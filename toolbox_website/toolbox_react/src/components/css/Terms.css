@@ -1,3 +1,9 @@
 .term {
   overflow: scroll;
+  background-color: white;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  border: 5px solid black;
+  text-align: center;
 }
