@@ -17,7 +17,7 @@ function loginRequest(email) {
         console.log("resp text :" + this.responseText);
         let obj = JSON.parse(this.responseText);
         let idLogged = obj[0].id_person;
-        console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?)
+        console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?) => format standard renvoyé par l'api 
         document.getElementById("errorSend").innerHTML = "";
       }
       if (this.status === 404) {
@@ -45,9 +45,8 @@ const initialState = {
  * @return 'XML form'
  */
 class SignIn extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = initialState;
   }
 
@@ -97,6 +96,10 @@ class SignIn extends Component {
     }
   };
 
+  closePopUp = () => {
+    
+  }
+
   render() {
     return (
       <>
@@ -142,7 +145,10 @@ class SignIn extends Component {
             onChange={this.handleChange}
           />
           <div className="error">{this.state.passwordError}</div>
-          <input type="submit" value="Sign-in" />
+          <div className="FormBtns">
+            <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp} />
+            <input className="FormSubmitBtn" type="submit" value="Sign-in" />
+          </div>
         </form>
         <div className="error" id="errorSend"></div>
       </>

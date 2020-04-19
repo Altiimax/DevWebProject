@@ -12,6 +12,29 @@
   color: black;
 }
 
+.FormBtns {
+  text-align: center;
+} 
+
+.FormBtns input {
+  border-width: 1px;
+  border-color: black;
+  border-radius: 1em;
+  width: 8em;
+  margin: 0 2em 1em 2em;
+  font-weight: bold;
+  font-size: 1.2em;
+} 
+
+.FormBtns .FormCancelBtn {
+  background-color: rgb(240, 89, 89);
+}
+
+.FormBtns .FormSubmitBtn {
+  background-color: rgb(62, 194, 62);
+}
+
+
 .FormField_TermsLink {
   color: rgb(2, 174, 253);
   text-decoration: underline;

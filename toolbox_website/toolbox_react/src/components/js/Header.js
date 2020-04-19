@@ -6,7 +6,8 @@ import { Modal, Button, Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
-import { LinkContainer } from "react-router-bootstrap";
+//import { LinkContainer } from "react-router-bootstrap";
+import Testnav from "./testnav"
 
 class Header extends Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class Header extends Component {
             <Modal.Body>
               <SignIn />
             </Modal.Body>
-
+            {/*}
             <Modal.Footer>
               <Button
                 onClick={() => {
@@ -109,8 +110,13 @@ class Header extends Component {
               >
                 Cancel
               </Button>
-              <Button variant="primary">Sign in</Button>
+              <Button 
+                onClick={() => {
+                  submitSignIn();
+                }} 
+                variant="primary">Sign in</Button>
             </Modal.Footer>
+            */}
           </Modal>
 
           {/* Sign-up popup */}
@@ -128,6 +134,7 @@ class Header extends Component {
               <SignUp />
             </Modal.Body>
 
+            {/*
             <Modal.Footer>
               <Button
                 onClick={() => {
@@ -137,8 +144,13 @@ class Header extends Component {
               >
                 Cancel
               </Button>
-              <Button variant="primary">Sign up</Button>
+              <Button 
+                onClick={() => {
+                  submitSignUp();
+                }} 
+                variant="primary">Sign up</Button>
             </Modal.Footer>
+              */}
           </Modal>
         </div>
       </>

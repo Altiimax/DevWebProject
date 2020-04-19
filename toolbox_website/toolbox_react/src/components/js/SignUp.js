@@ -9,31 +9,22 @@ let port = 8000;
 let endpoint = "/api/persons/";
 
 function accountRequest(newprofile) {
-  var data = new FormData();
-  data.append("lastName", newprofile.lastName);
-  data.append("firstName", newprofile.firstName);
-  data.append("alias", newprofile.alias);
-  data.append("email", newprofile.email);
-  data.append("birthDate", newprofile.birthDate);
-  data.append("pwd_test", newprofile.newPassword);
-  console.log(newprofile.lastName);
   let req = new apiRequest();
   req.open("POST", `${uri}:${port}${endpoint}`);
   req.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       console.log("resp status :" + this.status);
       console.log("resp text :" + this.responseText);
-      let obj = JSON.parse(this.responseText);
-      console.log(obj);
+      //let obj = JSON.parse(this.responseText);
+      //console.log(obj);
     }
   });
-  console.log("here are the data" + data);
-  req.send(data);
+  req.send(newprofile);
 }
 
 /**
  * This component is used to register the information set by
- * the user to the database. He must enter his forename, surename,
+ * the user to the database. He must enter his forename, surname,
  * email address, alias, password, ...
  * @param
  */
@@ -118,16 +109,14 @@ class SignUp extends Component {
       lastName: this.state.lastname,
       firstName: this.state.firstname,
       birthDate: this.state.birthDate,
+      alias: this.state.alias,
       email: this.state.email,
       pwd_test: this.state.newPassword,
     };
-
-    console.log(request);
+    
     accountRequest(JSON.stringify(request));
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
   }
+
 
   render() {
     return (
@@ -234,7 +223,10 @@ class SignUp extends Component {
           <a href="/terms" className="FormField_TermsLink">
             terms of service.
           </a>
-          <input type="submit" value="Sign-up" />
+          <div className="FormBtns">
+            <input className="FormCancelBtn" type="button" value="Cancel" />
+            <input className="FormSubmitBtn" type="submit" value="Sign-up" />
+          </div>
         </form>
       </>
     );
