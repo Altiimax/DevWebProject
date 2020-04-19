@@ -9,29 +9,6 @@ let uri = "http://127.0.0.1";
 let port = 8000;
 let endpoint = "/api/persons/login/?email=";
 
-function loginRequest(email) {
-  let req = new apiRequest();
-  req.open("GET", `${uri}:${port}${endpoint}${email}`);
-  req.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      if (this.status === 200) {
-        console.log("resp status :" + this.status);
-        console.log("resp text :" + this.responseText);
-        let obj = JSON.parse(this.responseText);
-        let idLogged = obj[0].id_person;
-        console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?) => format standard renvoyé par l'api 
-        document.getElementById("errorSend").innerHTML = "";
-        console.log(this);
-      }
-      if (this.status === 404) {
-        let obj = JSON.parse(this.responseText);
-        document.getElementById("errorSend").innerHTML = obj.error;
-      }
-    }
-  });
-  req.send();
-}
-
 const initialState = {
   alias: "",
   email: "",
@@ -54,7 +31,35 @@ class SignIn2 extends Component {
       showPopup: false,
       initialState,
     }
+    
   }
+
+  loginRequest(email) {
+    let self = this;
+    let req = new apiRequest();
+    req.open("GET", `${uri}:${port}${endpoint}${email}`);
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          console.log("resp status :" + this.status);
+          console.log("resp text :" + this.responseText);
+          let obj = JSON.parse(this.responseText);
+          let idLogged = obj[0].id_person;
+          console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?) => format standard renvoyé par l'api 
+          document.getElementById("errorSend").innerHTML = "";
+
+          self.closePopUp(); //on ferme le popup 
+          //TODO redirection vers la page "Profile"
+        }
+        if (this.status === 404) {
+          let obj = JSON.parse(this.responseText);
+          document.getElementById("errorSend").innerHTML = obj.error;
+        }
+      }
+    });
+    req.send();
+  }
+
 
   showPopUp(s) {
     if (s){
@@ -111,7 +116,7 @@ class SignIn2 extends Component {
       console.log("The form was submitted with the following data:");
       console.log(this.state);
       this.setState(initialState);
-      loginRequest(this.state.email);
+      this.loginRequest(this.state.email);
     }
   };
 

@@ -10,19 +10,6 @@ let uri = "http://127.0.0.1";
 let port = 8000;
 let endpoint = "/api/persons/";
 
-function accountRequest(newprofile) {
-  let req = new apiRequest();
-  req.open("POST", `${uri}:${port}${endpoint}`);
-  req.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      console.log("resp status :" + this.status);
-      console.log("resp text :" + this.responseText);
-      //let obj = JSON.parse(this.responseText);
-      //console.log(obj);
-    }
-  });
-  req.send(newprofile);
-}
 
 /**
  * This component is used to register the information set by
@@ -48,6 +35,25 @@ class SignUp extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  accountRequest(newprofile) {
+    let self = this;
+    let req = new apiRequest();
+    req.open("POST", `${uri}:${port}${endpoint}`);
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        console.log("resp status :" + this.status);
+        console.log("resp text :" + this.responseText);
+        //let obj = JSON.parse(this.responseText);
+        //console.log(obj);
+        if (this.status === 201){
+          self.closePopUp(); //on ferme le popup 
+          //TODO redirection vers la page "Profile"
+        }
+      }
+    });
+    req.send(newprofile);
   }
 
   showPopUp(s) {
@@ -130,7 +136,7 @@ class SignUp extends Component {
       pwd_test: this.state.newPassword,
     };
     
-    accountRequest(JSON.stringify(request));
+    this.accountRequest(JSON.stringify(request));
   }
 
 
