@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Modal } from "react-bootstrap";
 import "../css/Form.css";
+import "../css/Header.css";
 import { apiRequest } from "../../api/apiRequest.js";
 
 /*-----Here are the URL links to the back-end-----*/
@@ -19,6 +21,7 @@ function loginRequest(email) {
         let idLogged = obj[0].id_person;
         console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?) => format standard renvoyé par l'api 
         document.getElementById("errorSend").innerHTML = "";
+        console.log(this);
       }
       if (this.status === 404) {
         let obj = JSON.parse(this.responseText);
@@ -44,10 +47,26 @@ const initialState = {
  * @param
  * @return 'XML form'
  */
-class SignIn extends Component {
+class SignIn2 extends Component {
   constructor(props) {
     super(props);
-    this.state = initialState;
+    this.state = {
+      showPopup: false,
+      initialState,
+    }
+  }
+
+  showPopUp(s) {
+    if (s){
+      this.setState({ showPopup: true });
+    }
+    else{
+      this.setState({ showPopup: false });
+    }
+  }
+
+  closePopUp = () => {
+    this.showPopUp(false);
   }
 
   validate() {
@@ -96,14 +115,24 @@ class SignIn extends Component {
     }
   };
 
-  closePopUp = () => {
-    
-  }
-
   render() {
     return (
       <>
-        <form id="signInForm" onSubmit={this.handleSubmit}>
+      <a className="Header_item" href="#" onClick={() => {this.showPopUp(true);}} variant="primary">Sign-in</a>
+      <div>
+          {/* Sign-in popup */}
+          <Modal
+            show={this.state.showPopup}
+            onHide={() => {
+              this.showPopUp(false);
+            }}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Sign In</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+            <form id="signInForm" onSubmit={this.handleSubmit}>
           <label className="FormField_Label" htmlFor="alias">
             Alias :
           </label>
@@ -151,9 +180,13 @@ class SignIn extends Component {
           </div>
         </form>
         <div className="error" id="errorSend"></div>
+            </Modal.Body>
+          </Modal>
+      </div>
       </>
     );
   }
 }
 
-export default SignIn;
+export default SignIn2;
+

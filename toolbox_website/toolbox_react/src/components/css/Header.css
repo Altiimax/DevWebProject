@@ -2,57 +2,57 @@
   background-color: none;
 }
 
-
 .logo img {
   position: absolute;
-  z-index: 1;
+  z-index: -1;
   left: 10px;
   top: 10px;
   width: 85px;
 }
 
-.navbar .navbar-collapse .justify-content-end .nav-item .nav-link {
+.Header_item {
+  background-color: transparent;
   color: rgb(247, 220, 9);
-  width: 6em;
+
   text-align: center;
+  font-family: 'Abel', sans-serif;
+  font-size: 1.1em;
   font-weight: bold;
+  
+  padding: 0.2em 1em;
+  margin: 1em 0.2em;
+  border-width: 0;
 }
 
-.navbar .navbar-collapse .justify-content-end .nav-item .nav-link:hover {
-  color: rgb(160, 158, 42);
-}
-
-.navbar .navbar-collapse .justify-content-end .nav-item .nav-link.active {
+.Header_item:hover{
   color: rgba(66, 66, 56, 1);
   background-color: rgb(247, 220, 9);
   border-radius: 2em;
-}
+} 
 
-.navbar .navbar-collapse .justify-content-end .nav-item {
-  margin: 0em 0.2em;
-}
+
 
 /* Controle de l'affichage des éléments dans la barre de navigation 
-  visible => display: initial;
+  visible => display: block;
   non visible => display: none;
 */
 
 #myGroupsNav {
-  display: initial;
+  display: none;
 }
 
 #myToolsNav {
-  display: initial;
+  display: none;
 }
 
 #myProfileNav {
-  display: initial;
+  display: none;
 }
 
 #signUpNav {
-  display: initial;
+  display: block;
 }
 
 #signInNav {
-  display: initial;
+  display: block;
 }

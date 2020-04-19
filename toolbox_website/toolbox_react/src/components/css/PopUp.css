@@ -1,3 +1,7 @@
+.modal {
+  font-family: 'Abel', sans-serif;
+}
+
 .modal .modal-header {
   background-color: rgb(247, 220, 9);
   border-bottom: 0;

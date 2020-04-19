@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import "../css/Header.css";
 import "../css/PopUp.css";
 import icon from "../assets/toolBox_logo.png";
-import { Modal, Button, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 //import { LinkContainer } from "react-router-bootstrap";
-import Testnav from "./testnav"
 
 class Header extends Component {
   constructor(props) {
@@ -47,112 +46,29 @@ class Header extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end" style={{ width: "100%" }}>
               <Nav.Item id="homeNav">
-                <Nav.Link href="/">Home</Nav.Link>
+                <a className="Header_item" href="/">Home</a>
               </Nav.Item>
               <Nav.Item id="helpNav">
-                <Nav.Link href="/help">Help</Nav.Link>
+                <a className="Header_item" href="/help">Help</a>
               </Nav.Item>
               <Nav.Item id="myGroupsNav">
-                <Nav.Link href="/myGroups">My groups</Nav.Link>
+                <a className="Header_item" href="/myGroups">My groups</a>
               </Nav.Item>
               <Nav.Item id="myToolsNav">
-                <Nav.Link href="/myTools">My tools</Nav.Link>
+                <a className="Header_item" href="/myTools">My tools</a>
               </Nav.Item>
               <Nav.Item id="myProfileNav">
-                <Nav.Link href="/profile">My profile</Nav.Link>
+                <a className="Header_item" href="/profile">My profile</a>
               </Nav.Item>
               <Nav.Item id="signInNav">
-                <Button
-                  onClick={() => {
-                    this.onOpenSignIn();
-                  }}
-                  variant="primary"
-                >
-                  Sign-in
-                </Button>
+                <SignIn />
               </Nav.Item>
               <Nav.Item id="signUpNav">
-                <Button
-                  onClick={() => {
-                    this.onOpenSignUp();
-                  }}
-                  variant="primary"
-                >
-                  Sign-up
-                </Button>
+                <SignUp />
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
-        <div>
-          {/* Sign-in popup */}
-          <Modal
-            show={this.state.signIn}
-            onHide={() => {
-              this.onCloseSignIn();
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Sign In</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-              <SignIn />
-            </Modal.Body>
-            {/*}
-            <Modal.Footer>
-              <Button
-                onClick={() => {
-                  this.onCloseSignIn();
-                }}
-                variant="secondary"
-              >
-                Cancel
-              </Button>
-              <Button 
-                onClick={() => {
-                  submitSignIn();
-                }} 
-                variant="primary">Sign in</Button>
-            </Modal.Footer>
-            */}
-          </Modal>
-
-          {/* Sign-up popup */}
-          <Modal
-            show={this.state.signUp}
-            onHide={() => {
-              this.onCloseSignUp();
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Sign Up</Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-              <SignUp />
-            </Modal.Body>
-
-            {/*
-            <Modal.Footer>
-              <Button
-                onClick={() => {
-                  this.onCloseSignUp();
-                }}
-                variant="secondary"
-              >
-                Cancel
-              </Button>
-              <Button 
-                onClick={() => {
-                  submitSignUp();
-                }} 
-                variant="primary">Sign up</Button>
-            </Modal.Footer>
-              */}
-          </Modal>
-        </div>
       </>
     );
   }

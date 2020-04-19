@@ -11,9 +11,28 @@ class Profile extends Component {
     super(props);
   }
 
+  componentDidMount = () => {
+    document.getElementById("myGroupsNav").style.display="block";
+    document.getElementById("myToolsNav").style.display="block";
+    document.getElementById("myProfileNav").style.display="block";
+    document.getElementById("myToolsNav").style.display="block";
+    document.getElementById("signUpNav").style.display="none";
+    document.getElementById("signInNav").style.display="none";
+  }
+
   render() {
     return (
-      <div className="profilPage">
+      <>
+      </>
+    );
+  }
+}
+
+export default Profile;
+
+
+/*
+<div className="profilPage">
         <div className="buttonsProfile">
           <button className="myToolsButton">
             <Link to="/" className="FormField_Link">
@@ -46,8 +65,4 @@ class Profile extends Component {
           </button>
         </div>
       </div>
-    );
-  }
-}
-
-export default Profile;
+      */
