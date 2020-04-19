@@ -10,9 +10,7 @@ function App() {
       <header>
         <Header />
       </header>
-      <body>
-        <Route />
-      </body>
+      <Route />
       <footer>
         <Footer />
       </footer>
