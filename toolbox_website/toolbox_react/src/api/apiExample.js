@@ -11,6 +11,7 @@ function requestApi(){
 
   let req = new apiRequest();
   req.open("GET", `${uri}:${port}${endpoint}`);
+  req.contentType("json");
   req.addEventListener("readystatechange", function() {
     if(this.readyState === 4) {
       console.log("resp status :" + this.status);

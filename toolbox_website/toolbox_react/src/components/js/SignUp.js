@@ -41,6 +41,7 @@ class SignUp extends Component {
     let self = this;
     let req = new apiRequest();
     req.open("POST", `${uri}:${port}${endpoint}`);
+    req.contentType("json");
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         console.log("resp status :" + this.status);
