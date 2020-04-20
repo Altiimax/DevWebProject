@@ -20,6 +20,8 @@ class Footer extends Component {
                   ToolBox
                 </a>
               </h4>
+            </div>
+            <div className="col">
               <ul className="list-unstyled">
                 <li>
                   <h5 className="footDivTitle">About us</h5>

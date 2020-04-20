@@ -13,6 +13,16 @@
   }
 }
 
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  flex: 1;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -37,7 +47,7 @@
   }
 }
 
-.Text{
+.Text {
   color: white;
 }
 
@@ -49,7 +59,7 @@
   text-align: center;
 }
 
-.helpPage{
+.helpPage {
   background-color: #282c34;
   height: 100vh; /* Magic here */
   display: flex;
@@ -57,7 +67,7 @@
   align-items: center;
 }
 
-.profilPage{
+.profilPage {
   background-color: #282c34;
   height: 100vh; /* Magic here */
   display: flex;
@@ -95,17 +105,17 @@
   text-decoration: none;
 }
 
-.goBackMenuButton{
+.goBackMenuButton {
   background-color: black;
-  color : white;
+  color: white;
   border-radius: 25px;
   border: none;
   padding: 10px;
 }
 .goBackMenuButton:hover {
   background-color: #61dafb;
-  color : black;
-  border : 2px, solid, inherit;
+  color: black;
+  border: 2px, solid, inherit;
   border-radius: 25px;
 }
 
@@ -124,7 +134,6 @@
   color: black;
 }
 
-
 .nokButton {
   background-color: black;
   color: white;
@@ -140,21 +149,19 @@
   color: black;
 }
 
-
-.menuButton{
+.menuButton {
   background-color: black;
-  color : white;
+  color: white;
   border-radius: 25px;
   border: none;
   padding: 10px;
 }
 .menuButton:hover {
   background-color: #61dafb;
-  color : black;
-  border : 2px, solid, inherit;
+  color: black;
+  border: 2px, solid, inherit;
   border-radius: 25px;
 }
-
 
 .buttonsProfile {
   float: right;
@@ -224,8 +231,8 @@
   color: black;
 }
 
-.divider{
-  width:5px;
-  height:auto;
-  display:inline-block;
+.divider {
+  width: 5px;
+  height: auto;
+  display: inline-block;
 }
