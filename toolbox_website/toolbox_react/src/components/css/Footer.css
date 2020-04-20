@@ -1,3 +1,7 @@
 .MainFooter {
   background-color: rgb(29, 29, 29);
 }
+
+.col-sm {
+  color: white;
+}

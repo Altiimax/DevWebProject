@@ -13,6 +13,12 @@ class Footer extends Component {
             <a href="/contact">Contact</a>
           </li>
         </ul>
+        <div className="row">
+          <p className="col-sm">
+            &copy;{new Date().getFullYear()} ToolBox | All right reserved |
+            {<a href="/terms"> Terms of Service </a>} | Privacy
+          </p>
+        </div>
       </div>
     );
   }

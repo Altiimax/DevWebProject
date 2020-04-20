@@ -10,7 +10,6 @@ let uri = "http://127.0.0.1";
 let port = 8000;
 let endpoint = "/api/persons/";
 
-
 /**
  * This component is used to register the information set by
  * the user to the database. He must enter his forename, surname,
@@ -47,8 +46,8 @@ class SignUp extends Component {
         console.log("resp text :" + this.responseText);
         //let obj = JSON.parse(this.responseText);
         //console.log(obj);
-        if (this.status === 201){
-          self.closePopUp(); //on ferme le popup 
+        if (this.status === 201) {
+          self.closePopUp(); //on ferme le popup
           //TODO redirection vers la page "Profile"
         }
       }
@@ -57,17 +56,16 @@ class SignUp extends Component {
   }
 
   showPopUp(s) {
-    if (s){
+    if (s) {
       this.setState({ showPopup: true });
-    }
-    else{
+    } else {
       this.setState({ showPopup: false });
     }
   }
 
   closePopUp = () => {
     this.showPopUp(false);
-  }
+  };
 
   handleChange(e) {
     let target = e.target;
@@ -135,18 +133,26 @@ class SignUp extends Component {
       email: this.state.email,
       pwd_test: this.state.newPassword,
     };
-    
+
     this.accountRequest(JSON.stringify(request));
   }
-
 
   render() {
     return (
       <>
-      <a className="Header_item" href="#" onClick={() => {this.showPopUp(true);}} variant="primary">Sign-up</a>
-      <div>
-        {/* Sign-up popup */}
-        <Modal
+        <a
+          className="Header_item"
+          href="#"
+          onClick={() => {
+            this.showPopUp(true);
+          }}
+          variant="primary"
+        >
+          Sign-up
+        </a>
+        <div>
+          {/* Sign-up popup */}
+          <Modal
             show={this.state.showPopup}
             onHide={() => {
               this.showPopUp(false);
@@ -246,7 +252,10 @@ class SignUp extends Component {
                 />
                 <span className="error" id="password_error"></span>
                 <br />
-                <label className="FormField_CheckBox" htmlFor="hasagreed"></label>
+                <label
+                  className="FormField_CheckBox"
+                  htmlFor="hasagreed"
+                ></label>
                 <input
                   required
                   type="checkbox"
@@ -260,13 +269,22 @@ class SignUp extends Component {
                   terms of service.
                 </a>
                 <div className="FormBtns">
-                  <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp} />
-                  <input className="FormSubmitBtn" type="submit" value="Sign-up" />
+                  <input
+                    className="FormCancelBtn"
+                    type="button"
+                    value="Cancel"
+                    onClick={this.closePopUp}
+                  />
+                  <input
+                    className="FormSubmitBtn"
+                    type="submit"
+                    value="Sign-up"
+                  />
                 </div>
               </form>
             </Modal.Body>
           </Modal>
-      </div>
+        </div>
       </>
     );
   }
