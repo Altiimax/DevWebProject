@@ -10,6 +10,17 @@ let uri = "http://127.0.0.1";
 let port = 8000;
 let endpoint = "/api/persons/";
 
+const initialState = {
+  email: "",
+  firstname: "",
+  lastname: "",
+  birthDate: "",
+  alias: "",
+  newPassword: "",
+  confirmPassword: "",
+  hasagreed: false,
+};
+
 /**
  * This component is used to register the information set by
  * the user to the database. He must enter his forename, surname,
@@ -22,14 +33,7 @@ class SignUp extends Component {
 
     this.state = {
       showPopup: false,
-      email: "",
-      firstname: "",
-      lastname: "",
-      birthDate: "",
-      alias: "",
-      newPassword: "",
-      confirmPassword: "",
-      hasagreed: false,
+      initialState,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -61,6 +65,7 @@ class SignUp extends Component {
       this.setState({ showPopup: true });
     } else {
       this.setState({ showPopup: false });
+      this.setState(initialState);
     }
   }
 
