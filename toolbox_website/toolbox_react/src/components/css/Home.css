@@ -1,0 +1,21 @@
+.container {
+}
+
+.baseForm {
+  background-color: white;
+}
+
+.searchButton {
+  color: white;
+  background-color: red;
+  border: none;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchButton:hover {
+  color: white;
+  background-color: red;
+  box-shadow: 5px 5px 10px black;
+}
