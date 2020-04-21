@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./components/js/Home";
 import SignUp from "./components/js/SignUp";
 import SignIn from "./components/js/SignIn";
+import SignOut from "./components/js/SignOut";
 import Profile from "./components/js/Profile";
 import MyGroups from "./components/js/MyGroups";
 import MyTools from "./components/js/MyTools";
@@ -21,6 +22,7 @@ export default function Routes() {
       <Route exact path="/" component={Home} />
       <Route exact path="/sign-up" component={SignUp} />
       <Route exact path="/sign-in" component={SignIn} />
+      <Route exact path="/sign-out" component={SignOut} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/myGroups" component={MyGroups} />
       <Route exact path="/myTools" component={MyTools} />

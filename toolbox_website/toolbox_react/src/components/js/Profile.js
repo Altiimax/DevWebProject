@@ -12,13 +12,17 @@ class Profile extends Component {
   }
 
   componentDidMount = () => {
+    document.getElementById("homeNav").style.display="none";
     document.getElementById("myGroupsNav").style.display="block";
     document.getElementById("myToolsNav").style.display="block";
     document.getElementById("myProfileNav").style.display="block";
     document.getElementById("myToolsNav").style.display="block";
     document.getElementById("signUpNav").style.display="none";
     document.getElementById("signInNav").style.display="none";
+    document.getElementById("signOutNav").style.display="block";
   }
+
+  
 
   render() {
     return (

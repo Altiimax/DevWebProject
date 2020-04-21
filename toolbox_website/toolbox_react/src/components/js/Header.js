@@ -6,6 +6,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import SignOut from "./SignOut";
 //import { LinkContainer } from "react-router-bootstrap";
 
 class Header extends Component {
@@ -65,6 +66,9 @@ class Header extends Component {
               </Nav.Item>
               <Nav.Item id="signUpNav">
                 <SignUp />
+              </Nav.Item>
+              <Nav.Item id="signOutNav">
+                <SignOut />
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>

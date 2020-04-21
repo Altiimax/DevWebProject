@@ -10,12 +10,9 @@ let port = 8000;
 let endpoint = "/api/persons/login/?email=";
 
 const initialState = {
-  alias: "",
+  id: "",
   email: "",
   password: "",
-  aliasError: "",
-  emailError: "",
-  passwordError: "",
 };
 
 /**
@@ -24,36 +21,41 @@ const initialState = {
  * @param
  * @return 'XML form'
  */
-class SignIn2 extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showPopup: false,
       initialState,
     }
-    
   }
 
   loginRequest(email) {
-    let self = this;
+    let self = this; //self will be a reference to the SignIn class object
+    this.pwd = this.state.password;
     let req = new apiRequest();
     req.open("GET", `${uri}:${port}${endpoint}${email}`);
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 200) {
-          console.log("resp status :" + this.status);
-          console.log("resp text :" + this.responseText);
-          let obj = JSON.parse(this.responseText);
-          let idLogged = obj[0].id_person;
-          console.log(idLogged); // id de la personne (pourquoi tableau alors qu'une seul personne?) => format standard renvoyé par l'api 
-          document.getElementById("errorSend").innerHTML = "";
-
-          self.closePopUp(); //on ferme le popup 
-          //TODO redirection vers la page "Profile"
+          let usr = JSON.parse(this.responseText);
+          let usr_id = usr[0].id_person;
+          let usr_pwd = usr[0].pwd_test;
+          if(usr_pwd == self.state.password){
+            document.getElementById("signInError").innerHTML = "";
+            self.closePopUp(); //Closing the sign-in popup
+            //TODO redirection vers la page "Profile" : 
+            window.location.replace("http://localhost:3000/Profile/"); //TODO PAS BIEN! A MODIFIER!
+          }
+          else{
+            //wrong password
+            document.getElementById("signInError").innerHTML = "Incorrect password";
+          }
         }
         if (this.status === 404) {
-          let obj = JSON.parse(this.responseText);
-          document.getElementById("errorSend").innerHTML = obj.error;
+          //no user with this email
+          let usr = JSON.parse(this.responseText);
+          document.getElementById("signInError").innerHTML = "No user with this email address";
         }
       }
     });
@@ -74,34 +76,9 @@ class SignIn2 extends Component {
     this.showPopUp(false);
   }
 
-  validate() {
-    let aliasError = "";
-    let emailError = "";
-    let passwordError = "";
-
-    if (!this.state.alias) {
-      aliasError = "Alias field should not be empty!";
-    }
-
-    if (!this.state.email.includes("@")) {
-      emailError = "Invalid email, should contain an @ sign!";
-    }
-
-    if (this.state.password.length < 8) {
-      passwordError =
-        "Your password is too short, it must be 8 characters length!";
-    }
-
-    if (emailError || aliasError || passwordError) {
-      this.setState({ emailError, aliasError, passwordError });
-      return false;
-    }
-    return true;
-  }
-
   handleChange = (e) => {
     let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
     this.setState({
@@ -111,13 +88,7 @@ class SignIn2 extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = this.validate();
-    if (isValid) {
-      console.log("The form was submitted with the following data:");
-      console.log(this.state);
-      this.setState(initialState);
-      this.loginRequest(this.state.email);
-    }
+    this.loginRequest(this.state.email);
   };
 
   render() {
@@ -137,55 +108,40 @@ class SignIn2 extends Component {
             </Modal.Header>
 
             <Modal.Body>
-            <form id="signInForm" onSubmit={this.handleSubmit}>
-          <label className="FormField_Label" htmlFor="alias">
-            Alias :
-          </label>
-          <input
-            required
-            type="text"
-            className="FormField_Input"
-            name="alias"
-            placeholder="Enter your alias"
-            value={this.state.alias}
-            onChange={this.handleChange}
-          />
-          <div className="error">{this.state.aliasError}</div>
-
-          <label className="FormField_Label" htmlFor="email">
-            E-mail address
-          </label>
-          <input
-            required
-            type="email"
-            className="FormField_Input"
-            name="email"
-            placeholder="Enter your e-mail address"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <div className="error">{this.state.emailError}</div>
-
-          <label className="FormField_Label" htmlFor="password">
-            Password
-          </label>
-          <input
-            required
-            type="password"
-            className="FormField_Input"
-            name="password"
-            placeholder="Enter your password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <div className="error">{this.state.passwordError}</div>
-          <div className="FormBtns">
-            <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp} />
-            <input className="FormSubmitBtn" type="submit" value="Sign-in" />
-          </div>
-        </form>
-        <div className="error" id="errorSend"></div>
+              <form id="signInForm" onSubmit={this.handleSubmit}>
+                <label className="FormField_Label" htmlFor="email">
+                  E-mail address
+                </label>
+                <input
+                  required
+                  type="email"
+                  className="FormField_Input"
+                  name="email"
+                  placeholder="Enter your e-mail address"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                
+                <label className="FormField_Label" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  required
+                  type="password"
+                  className="FormField_Input"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+                <div className="error" id="signInError" disabled="disabled"></div>
+                <div className="FormBtns">
+                  <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp} />
+                  <input className="FormSubmitBtn" type="submit" value="Sign-in" />
+                </div>
+              </form>
             </Modal.Body>
+
           </Modal>
       </div>
       </>
@@ -193,5 +149,5 @@ class SignIn2 extends Component {
   }
 }
 
-export default SignIn2;
+export default SignIn;
 

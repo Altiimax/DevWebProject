@@ -47,6 +47,10 @@
   display: none;
 }
 
+#signOutNav {
+  display: none;
+}
+
 #signUpNav {
   display: block;
 }
