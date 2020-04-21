@@ -7,7 +7,8 @@
 }
 
 .navTitle {
-  color: yellow;
+  font-family: "Abel", sans-serif;
+  color: rgb(247, 220, 9);
 }
 
 .navbar .navbar-collapse .justify-content-end .nav-item .nav-link {
@@ -37,21 +38,21 @@
 */
 
 #myGroupsNav {
-  display: initial;
+  display: none;
 }
 
 #myToolsNav {
-  display: initial;
+  display: none;
 }
 
 #myProfileNav {
-  display: initial;
+  display: none;
 }
 
 #signUpNav {
-  display: initial;
+  display: block;
 }
 
 #signInNav {
-  display: initial;
+  display: block;
 }
