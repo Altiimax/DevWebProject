@@ -54,7 +54,7 @@ class SignIn extends Component {
         }
         if (this.status === 404) {
           //no user with this email
-          let usr = JSON.parse(this.responseText);
+          //let usr = JSON.parse(this.responseText);
           document.getElementById("signInError").innerHTML = "No user with this email address";
         }
       }
@@ -69,6 +69,7 @@ class SignIn extends Component {
     }
     else{
       this.setState({ showPopup: false });
+      this.setState(initialState);
     }
   }
 
