@@ -2,12 +2,15 @@
   background-color: none;
 }
 
-.logo img {
-  position: absolute;
-  z-index: -1;
-  left: 10px;
-  top: 10px;
-  width: 85px;
+.logoHead {
+  float: left;
+  width:45px;
+  height:45px;
+}
+
+.navTitle {
+  font-family: "Abel", sans-serif;
+  color: rgb(247, 220, 9);
 }
 
 .Header_item {

@@ -18,30 +18,18 @@ class Header extends Component {
     };
   }
 
-  onOpenSignIn = () => {
-    this.setState({ signIn: true });
-  };
-
-  onCloseSignIn = () => {
-    this.setState({ signIn: false });
-  };
-
-  onOpenSignUp = () => {
-    this.setState({ signUp: true });
-  };
-
-  onCloseSignUp = () => {
-    this.setState({ signUp: false });
-  };
-
   render() {
     return (
       <>
         <Navbar expand="lg" fixed="top">
           <Navbar.Brand>
-            <a className="logo" href="/">
-              <img src={icon} alt="" data-logo-alt={icon} />
-            </a>
+          <img
+              className="logoHead"
+              src={icon}
+              alt="webApp Logo"
+              data-logo-alt={icon}
+            />
+            <h1 className="navTitle">ToolBox</h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
