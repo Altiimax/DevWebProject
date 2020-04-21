@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <div className="home">
       <div className="container">
+        <h1 className="formTitle">Find nearby tools</h1>
         <Form className="baseForm">
           <Form.Group>
             <Form.Label>Which tool?</Form.Label>
