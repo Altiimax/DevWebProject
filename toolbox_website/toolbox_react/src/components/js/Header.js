@@ -1,111 +1,156 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 //import Modal from "react-responsive-modal";
 import "../css/Header.css";
 import "../css/PopUp.css";
 import icon from "../assets/toolBox_logo.png";
-import {Modal, Button, Nav, Navbar} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button, Nav, Navbar } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
-
 class Header extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            signIn: false,
-            signUp : false
-        }
-    }
-    
+  constructor(props) {
+    super(props);
+    this.state = {
+      signIn: false,
+      signUp: false,
+    };
+  }
 
-    onOpenSignIn = () => {
-        this.setState({signIn: true})
-    }
+  onOpenSignIn = () => {
+    this.setState({ signIn: true });
+  };
 
-    onCloseSignIn = () => {
-        this.setState({signIn: false})
-    }
+  onCloseSignIn = () => {
+    this.setState({ signIn: false });
+  };
 
-    onOpenSignUp = () => {
-        this.setState({signUp: true})
-    }
+  onOpenSignUp = () => {
+    this.setState({ signUp: true });
+  };
 
-    onCloseSignUp = () => {
-        this.setState({signUp: false})
-    }
+  onCloseSignUp = () => {
+    this.setState({ signUp: false });
+  };
 
-    render(){
-        return(
-            <>
-            <Navbar expand="lg" fixed="top">
-                <Navbar.Brand href="#home">
-                    <a className="logo" href="/"><img src={icon} alt="" data-logo-alt={icon}/></a>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="justify-content-end" style={{ width: "100%" }}>
-                        <Nav.Item id="homeNav">
-                            <Nav.Link href="/">Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item id="helpNav">
-                            <Nav.Link href="/help">Help</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item id="myGroupsNav">
-                            <Nav.Link href="/profile">My groups</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item id="myToolsNav">
-                            <Nav.Link href="/profile">My tools</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item id="myProfileNav">
-                            <Nav.Link href="/profile">My profile</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item id="signInNav">
-                            <Button onClick={()=>{this.onOpenSignIn()}} variant="primary" >Sign-in</Button>
-                        </Nav.Item>
-                        <Nav.Item id="signUpNav">
-                            <Button onClick={()=>{this.onOpenSignUp()}} variant="primary" >Sign-up</Button>
-                        </Nav.Item>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>   
+  render() {
+    return (
+      <>
+        <Navbar expand="lg" fixed="top">
+          <Navbar.Brand href="/">
+            <img
+              className="logoHead"
+              width="45"
+              height="45"
+              src={icon}
+              alt="webApp Logo"
+              data-logo-alt={icon}
+            />
+            <h1 className="navTitle">ToolBox</h1>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="justify-content-end" style={{ width: "100%" }}>
+              <Nav.Item id="homeNav">
+                <Nav.Link className="active" href="/">
+                  Home
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item id="helpNav">
+                <Nav.Link href="/help">Help</Nav.Link>
+              </Nav.Item>
+              <Nav.Item id="myGroupsNav">
+                <Nav.Link href="/profile">My groups</Nav.Link>
+              </Nav.Item>
+              <Nav.Item id="myToolsNav">
+                <Nav.Link href="/profile">My tools</Nav.Link>
+              </Nav.Item>
+              <Nav.Item id="myProfileNav">
+                <Nav.Link href="/profile">My profile</Nav.Link>
+              </Nav.Item>
+              <Nav.Item id="signInNav">
+                <Button
+                  onClick={() => {
+                    this.onOpenSignIn();
+                  }}
+                  variant="primary"
+                >
+                  Sign-in
+                </Button>
+              </Nav.Item>
+              <Nav.Item id="signUpNav">
+                <Button
+                  onClick={() => {
+                    this.onOpenSignUp();
+                  }}
+                  variant="primary"
+                >
+                  Sign-up
+                </Button>
+              </Nav.Item>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 
-            <div>
-                {/* Sign-in popup */}
-                <Modal show={this.state.signIn} onHide={()=>{this.onCloseSignIn()}}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Sign In</Modal.Title>
-                </Modal.Header>
-                
-                <Modal.Body>
-                    <SignIn/>
-                </Modal.Body>
+        <div>
+          {/* Sign-in popup */}
+          <Modal
+            show={this.state.signIn}
+            onHide={() => {
+              this.onCloseSignIn();
+            }}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Sign In</Modal.Title>
+            </Modal.Header>
 
-                <Modal.Footer>
-                    <Button onClick={()=>{this.onCloseSignIn()}} variant="secondary">Cancel</Button>
-                    <Button variant="primary">Sign in</Button>
-                </Modal.Footer>
-                </Modal >
+            <Modal.Body>
+              <SignIn />
+            </Modal.Body>
 
-                {/* Sign-up popup */}
-                <Modal show={this.state.signUp} onHide={()=>{this.onCloseSignUp()}}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Sign Up</Modal.Title>
-                </Modal.Header>
+            <Modal.Footer>
+              <Button
+                onClick={() => {
+                  this.onCloseSignIn();
+                }}
+                variant="secondary"
+              >
+                Cancel
+              </Button>
+              <Button variant="primary">Sign in</Button>
+            </Modal.Footer>
+          </Modal>
 
-                <Modal.Body>
-                    <SignUp/>
-                </Modal.Body>
+          {/* Sign-up popup */}
+          <Modal
+            show={this.state.signUp}
+            onHide={() => {
+              this.onCloseSignUp();
+            }}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Sign Up</Modal.Title>
+            </Modal.Header>
 
-                <Modal.Footer>
-                    <Button onClick={()=>{this.onCloseSignUp()}} variant="secondary">Cancel</Button>
-                    <Button variant="primary">Sign up</Button>
-                </Modal.Footer>
-                </Modal >
-            </div>
-            </>
-        );
-    }
+            <Modal.Body>
+              <SignUp />
+            </Modal.Body>
 
+            <Modal.Footer>
+              <Button
+                onClick={() => {
+                  this.onCloseSignUp();
+                }}
+                variant="secondary"
+              >
+                Cancel
+              </Button>
+              <Button variant="primary">Sign up</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      </>
+    );
+  }
 }
 export default Header;

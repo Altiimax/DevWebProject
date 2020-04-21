@@ -1,37 +1,35 @@
-
 .navbar {
-    background-color: none;
-  }
-  
-.logo img {
-    position: absolute;
-    z-index: 1;
-    left: 10px;
-    top: 10px;
-    width: 85px;
-  } 
+  background-color: transparent;
+}
+
+.logoHead {
+  float: left;
+}
+
+.navTitle {
+  color: yellow;
+}
 
 .navbar .navbar-collapse .justify-content-end .nav-item .nav-link {
-    color: rgb(247,220,9);
-    width: 6em;
-    text-align: center;
-    font-weight: bold;
-  }
+  color: rgb(247, 220, 9);
+  width: 6em;
+  text-align: center;
+  font-weight: bold;
+}
 
 .navbar .navbar-collapse .justify-content-end .nav-item .nav-link:hover {
   color: rgb(160, 158, 42);
-  }
+}
 
 .navbar .navbar-collapse .justify-content-end .nav-item .nav-link.active {
-    color: rgba(66,66,56,1);
-    background-color: rgb(247,220,9);
-    border-radius: 2em;
-  }
+  color: rgba(66, 66, 56, 1);
+  background-color: rgb(247, 220, 9);
+  border-radius: 2em;
+}
 
 .navbar .navbar-collapse .justify-content-end .nav-item {
-    margin: 0em 0.2em;
-  }
-
+  margin: 0em 0.2em;
+}
 
 /* Controle de l'affichage des éléments dans la barre de navigation 
   visible => display: initial;
@@ -39,21 +37,21 @@
 */
 
 #myGroupsNav {
-    display: initial;
+  display: initial;
 }
 
 #myToolsNav {
-    display: initial;
+  display: initial;
 }
 
 #myProfileNav {
-    display: initial;
+  display: initial;
 }
 
 #signUpNav {
-    display: initial;
+  display: initial;
 }
 
 #signInNav {
-    display: initial;
+  display: initial;
 }
