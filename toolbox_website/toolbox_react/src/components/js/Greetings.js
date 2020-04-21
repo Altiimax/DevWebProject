@@ -1,19 +1,15 @@
 import React from "react";
+import "../css/Greetings.css";
 /**
  * This component is used to render a personalised greeting message.
- * It rendre the greetings message in h1.
+ * It rendre the greetings message in a h1 element.
  * @param {*} props
  */
 
 const Greet = (props) => {
   return (
-    //ici le /n ne fonctionne pas!
     <div>
-      <h3 className="Text">
-        Welcome to the application, {props.name}! This application is on
-        construction!
-        {"\n"} What would you do?
-      </h3>
+      <h1 className="Text">Welcome to your profile page {props.name}!</h1>
     </div>
   );
 };

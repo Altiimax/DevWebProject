@@ -23,7 +23,7 @@ class Header extends Component {
       <>
         <Navbar expand="lg" fixed="top">
           <Navbar.Brand>
-          <img
+            <img
               className="logoHead"
               src={icon}
               alt="webApp Logo"
@@ -35,19 +35,29 @@ class Header extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end" style={{ width: "100%" }}>
               <Nav.Item id="homeNav">
-                <a className="Header_item" href="/">Home</a>
+                <a className="Header_item" href="/">
+                  Home
+                </a>
               </Nav.Item>
               <Nav.Item id="helpNav">
-                <a className="Header_item" href="/help">Help</a>
+                <a className="Header_item" href="/help">
+                  Help
+                </a>
               </Nav.Item>
               <Nav.Item id="myGroupsNav">
-                <a className="Header_item" href="/myGroups">My groups</a>
+                <a className="Header_item" href="/myGroups">
+                  My groups
+                </a>
               </Nav.Item>
               <Nav.Item id="myToolsNav">
-                <a className="Header_item" href="/myTools">My tools</a>
+                <a className="Header_item" href="/myTools">
+                  My tools
+                </a>
               </Nav.Item>
               <Nav.Item id="myProfileNav">
-                <a className="Header_item" href="/profile">My profile</a>
+                <a className="Header_item" href="/profile">
+                  My profile
+                </a>
               </Nav.Item>
               <Nav.Item id="signInNav">
                 <SignIn />

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Greet from "./Greetings";
 /**
  * This component is used to display the account informations
  * of the member.
@@ -12,28 +13,26 @@ class Profile extends Component {
   }
 
   componentDidMount = () => {
-    document.getElementById("homeNav").style.display="none";
-    document.getElementById("myGroupsNav").style.display="block";
-    document.getElementById("myToolsNav").style.display="block";
-    document.getElementById("myProfileNav").style.display="block";
-    document.getElementById("myToolsNav").style.display="block";
-    document.getElementById("signUpNav").style.display="none";
-    document.getElementById("signInNav").style.display="none";
-    document.getElementById("signOutNav").style.display="block";
-  }
-
-  
+    document.getElementById("homeNav").style.display = "block";
+    document.getElementById("myGroupsNav").style.display = "block";
+    document.getElementById("myToolsNav").style.display = "block";
+    document.getElementById("myProfileNav").style.display = "block";
+    document.getElementById("myToolsNav").style.display = "block";
+    document.getElementById("signUpNav").style.display = "none";
+    document.getElementById("signInNav").style.display = "none";
+    document.getElementById("signOutNav").style.display = "block";
+  };
 
   render() {
     return (
       <>
+        <Greet className="error" name="Host" />
       </>
     );
   }
 }
 
 export default Profile;
-
 
 /*
 <div className="profilPage">
