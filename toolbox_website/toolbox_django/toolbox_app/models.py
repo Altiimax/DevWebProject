@@ -69,6 +69,7 @@ class Persons(models.Model):
         managed = True
         constraints = [
             models.UniqueConstraint(fields= ['alias'],name='unique_alias'),
+            models.UniqueConstraint(fields= ['email'],name='unique_email'),
         ]
         db_table = 'Persons'
     

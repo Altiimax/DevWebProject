@@ -229,6 +229,8 @@ create table "Persons"
 			unique,
 	"birthDate" date not null,
 	email varchar(254) not null
+		constraint unique_email
+			unique,
 );
 
 alter table "Persons" owner to admin;
