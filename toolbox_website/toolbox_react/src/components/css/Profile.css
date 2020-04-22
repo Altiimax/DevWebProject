@@ -1,0 +1,22 @@
+.myTools {
+  border: solid 1px black;
+}
+.container {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+}
+th {
+  color: black;
+  border: solid 1px black;
+  text-align: center;
+}
+td {
+  color: black;
+  border: solid 1px black;
+}
+/* Grey 1/2 row */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
