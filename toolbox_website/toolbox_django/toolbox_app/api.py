@@ -10,6 +10,8 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
+from django.db import IntegrityError
+
 #######################
 ###   PERSONS API   ###
 
@@ -34,8 +36,15 @@ class personsViewSet(viewsets.GenericViewSet):
         """" create a new user """
         serializer = personsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except IntegrityError as exception:
+            if "unique_alias" in str(exception):
+                error = "alias already exists"
+            elif "unique_email" in str(exception):
+                error = "email already exists"
+            return Response({'error': error}, status=status.HTTP_409_CONFLICT)
 
     # GET 127.0.0.1:8000/api/persons/aliases/
     @action(detail=False, methods=['get'])

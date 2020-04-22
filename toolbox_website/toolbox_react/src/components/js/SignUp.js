@@ -55,6 +55,19 @@ class SignUp extends Component {
           self.closePopUp(); //on ferme le popup
           //TODO redirection vers la page "Profile"
         }
+        else if (this.status === 409) {
+          let error = JSON.parse(this.responseText).error;
+          if (error.includes("alias")){
+            document.getElementById("alias_error").innerHTML = error;
+          }
+          else if (error.includes("email")){
+            document.getElementById("email_error").innerHTML = error;
+          }
+          else{
+            console.log(error);
+          }
+
+        }
       }
     });
     req.send(newprofile);
@@ -182,6 +195,7 @@ class SignUp extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
+                <span className="error" id="email_error"></span>
                 <label className="FormField_Label" htmlFor="firstname">
                   First name
                 </label>
@@ -231,6 +245,7 @@ class SignUp extends Component {
                   value={this.state.alias}
                   onChange={this.handleChange}
                 />
+                <span className="error" id="alias_error"></span>
                 <label className="FormField_Label" htmlFor="newPassword">
                   New password
                 </label>
