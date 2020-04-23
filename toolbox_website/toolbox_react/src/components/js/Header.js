@@ -1,68 +1,73 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { Nav, Navbar } from "react-bootstrap";
+import icon from "../assets/toolBox_logo.png";
+
 import "../css/Header.css";
 import "../css/PopUp.css";
-import icon from "../assets/toolBox_logo.png";
-import { Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import SignOut from "./SignOut";
-//import { LinkContainer } from "react-router-bootstrap";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      signIn: false,
-      signUp: false,
-    };
-  }
-
-  render() {
-    return (
-      <>
-        <Navbar expand="lg" fixed="top">
-          <Navbar.Brand>
+function Header(props) {
+  
+  const signed_out_header = (
+    <Navbar expand="lg" fixed="top">
+      <Navbar.Brand>
+        <NavLink to="/">
           <img
-              className="logoHead"
-              src={icon}
-              alt="webApp Logo"
-              data-logo-alt={icon}
-            />
-            <h1 className="navTitle">ToolBox</h1>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="justify-content-end" style={{ width: "100%" }}>
-              <Nav.Item id="homeNav">
-                <a className="Header_item" href="/">Home</a>
-              </Nav.Item>
-              <Nav.Item id="helpNav">
-                <a className="Header_item" href="/help">Help</a>
-              </Nav.Item>
-              <Nav.Item id="myGroupsNav">
-                <a className="Header_item" href="/myGroups">My groups</a>
-              </Nav.Item>
-              <Nav.Item id="myToolsNav">
-                <a className="Header_item" href="/myTools">My tools</a>
-              </Nav.Item>
-              <Nav.Item id="myProfileNav">
-                <a className="Header_item" href="/profile">My profile</a>
-              </Nav.Item>
-              <Nav.Item id="signInNav">
-                <SignIn />
-              </Nav.Item>
-              <Nav.Item id="signUpNav">
-                <SignUp />
-              </Nav.Item>
-              <Nav.Item id="signOutNav">
-                <SignOut />
-              </Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </>
-    );
-  }
+            className="logoHead"
+            src={icon}
+            alt="webApp Logo"
+            data-logo-alt={icon}
+          />
+          <h1 className="navTitle">ToolBox</h1>
+        </NavLink>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="justify-content-end" style={{ width: "100%" }}>
+          <Nav.Item id="homeNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
+          <Nav.Item id="helpNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/help">Help</NavLink> </Nav.Item>
+          <Nav.Item id="signInNav"> <button className="Header_item" onClick={() => props.display_popUp('sign-in')} >Sign In</button> </Nav.Item>
+          <Nav.Item id="signUpNav"> <button className="Header_item" onClick={() => props.display_popUp('sign-up')} >Sign Up</button> </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+
+  const signed_in_header = (
+    <Navbar expand="lg" fixed="top">
+      <Navbar.Brand>
+        <NavLink to="/">
+          <img
+            className="logoHead"
+            src={icon}
+            alt="webApp Logo"
+            data-logo-alt={icon}
+          />
+          <h1 className="navTitle">ToolBox</h1>
+        </NavLink>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="justify-content-end" style={{ width: "100%" }}>
+          <Nav.Item id="homeNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
+          <Nav.Item id="helpNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/help">Help</NavLink> </Nav.Item>
+          <Nav.Item id="signOutNav"> <button className="Header_item" onClick={() => props.display_popUp('sign-out')} >Sign Out</button> </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+
+  return (
+    <div>{props.signed_in ? signed_in_header : signed_out_header}</div>
+  )
+  
 }
+
 export default Header;
+
+Header.propTypes = {
+  signed_in: PropTypes.bool.isRequired,
+  display_popUp: PropTypes.func.isRequired
+};

@@ -32,7 +32,7 @@ class SignUp extends Component {
     super();
 
     this.state = {
-      showPopup: false,
+      showPopup: true,
       initialState,
     };
 
@@ -159,153 +159,141 @@ class SignUp extends Component {
   render() {
     return (
       <>
-        <a
-          className="Header_item"
-          href="#"
-          onClick={() => {
-            this.showPopUp(true);
+        {/* Sign-up popup */}
+        <Modal
+          show={this.state.showPopup}
+          onHide={() => {
+            this.showPopUp(false);
           }}
-          variant="primary"
         >
-          Sign-up
-        </a>
-        <div>
-          {/* Sign-up popup */}
-          <Modal
-            show={this.state.showPopup}
-            onHide={() => {
-              this.showPopUp(false);
-            }}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Sign Up</Modal.Title>
-            </Modal.Header>
+          <Modal.Header closeButton>
+            <Modal.Title>Sign Up</Modal.Title>
+          </Modal.Header>
 
-            <Modal.Body>
-              <form id="signUpForm" onSubmit={this.handleSubmit}>
-                <label className="FormField_Label" htmlFor="email">
-                  E-mail address
-                </label>
+          <Modal.Body>
+            <form id="signUpForm" onSubmit={this.handleSubmit}>
+              <label className="FormField_Label" htmlFor="email">
+                E-mail address
+              </label>
+              <input
+                required
+                type="email"
+                className="FormField_Input"
+                name="email"
+                placeholder="Enter your e-mail address"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+              <span className="error" id="email_error"></span>
+              <label className="FormField_Label" htmlFor="firstname">
+                First name
+              </label>
+              <input
+                required
+                type="text"
+                className="FormField_Input"
+                name="firstname"
+                placeholder="Enter your forename"
+                value={this.state.firstname}
+                onChange={this.handleChange}
+              />
+              <label className="FormField_Label" htmlFor="lastname">
+                Last name
+              </label>
+              <input
+                required
+                type="text"
+                className="FormField_Input"
+                name="lastname"
+                placeholder="Enter your surename"
+                value={this.state.lastname}
+                onChange={this.handleChange}
+              />
+              <label className="FormField_Label" htmlFor="birthDate">
+                Birthdate
+              </label>
+              <span className="check-img" id="greencheck"></span>
+              <input
+                required
+                type="date"
+                className="FormField_Input"
+                name="birthDate"
+                value={this.state.birthDate}
+                onChange={this.handleChange}
+              />
+              <span className="error" id="date_error"></span>
+              <label className="FormField_Label" htmlFor="alias">
+                Alias
+              </label>
+              <input
+                required
+                type="text"
+                className="FormField_Input"
+                name="alias"
+                placeholder="Enter your alias"
+                value={this.state.alias}
+                onChange={this.handleChange}
+              />
+              <span className="error" id="alias_error"></span>
+              <label className="FormField_Label" htmlFor="newPassword">
+                New password
+              </label>
+              <input
+                required
+                type="password"
+                className="FormField_Input"
+                name="newPassword"
+                placeholder="Enter a new password"
+                value={this.state.newPassword}
+                onChange={this.handleChange}
+              />
+              <span className="error" id="newpassword_error"></span>
+              <label className="FormField_Label" htmlFor="confirmPassword">
+                Password confirmation
+              </label>
+              <input
+                required
+                type="password"
+                className="FormField_Input"
+                name="confirmPassword"
+                placeholder="Enter your password"
+                value={this.state.confirmPassword}
+                onChange={this.handleChange}
+              />
+              <span className="error" id="password_error"></span>
+              <br />
+              <label
+                className="FormField_CheckBox"
+                htmlFor="hasagreed"
+              ></label>
+              <input
+                required
+                type="checkbox"
+                className="FormField_Input_Check"
+                name="hasagreed"
+                value={this.state.hasagreed}
+                onChange={this.handleChange}
+              />{" "}
+              I agree with all the statements in{" "}
+              <a href="/terms" className="FormField_TermsLink">
+                terms of service.
+              </a>
+              <div className="FormBtns">
                 <input
-                  required
-                  type="email"
-                  className="FormField_Input"
-                  name="email"
-                  placeholder="Enter your e-mail address"
-                  value={this.state.email}
-                  onChange={this.handleChange}
+                  className="FormCancelBtn"
+                  type="button"
+                  value="Cancel"
+                  onClick={this.closePopUp}
                 />
-                <span className="error" id="email_error"></span>
-                <label className="FormField_Label" htmlFor="firstname">
-                  First name
-                </label>
                 <input
-                  required
-                  type="text"
-                  className="FormField_Input"
-                  name="firstname"
-                  placeholder="Enter your forename"
-                  value={this.state.firstname}
-                  onChange={this.handleChange}
+                  className="FormSubmitBtn"
+                  type="submit"
+                  value="Sign-up"
                 />
-                <label className="FormField_Label" htmlFor="lastname">
-                  Last name
-                </label>
-                <input
-                  required
-                  type="text"
-                  className="FormField_Input"
-                  name="lastname"
-                  placeholder="Enter your surename"
-                  value={this.state.lastname}
-                  onChange={this.handleChange}
-                />
-                <label className="FormField_Label" htmlFor="birthDate">
-                  Birthdate
-                </label>
-                <span className="check-img" id="greencheck"></span>
-                <input
-                  required
-                  type="date"
-                  className="FormField_Input"
-                  name="birthDate"
-                  value={this.state.birthDate}
-                  onChange={this.handleChange}
-                />
-                <span className="error" id="date_error"></span>
-                <label className="FormField_Label" htmlFor="alias">
-                  Alias
-                </label>
-                <input
-                  required
-                  type="text"
-                  className="FormField_Input"
-                  name="alias"
-                  placeholder="Enter your alias"
-                  value={this.state.alias}
-                  onChange={this.handleChange}
-                />
-                <span className="error" id="alias_error"></span>
-                <label className="FormField_Label" htmlFor="newPassword">
-                  New password
-                </label>
-                <input
-                  required
-                  type="password"
-                  className="FormField_Input"
-                  name="newPassword"
-                  placeholder="Enter a new password"
-                  value={this.state.newPassword}
-                  onChange={this.handleChange}
-                />
-                <span className="error" id="newpassword_error"></span>
-                <label className="FormField_Label" htmlFor="confirmPassword">
-                  Password confirmation
-                </label>
-                <input
-                  required
-                  type="password"
-                  className="FormField_Input"
-                  name="confirmPassword"
-                  placeholder="Enter your password"
-                  value={this.state.confirmPassword}
-                  onChange={this.handleChange}
-                />
-                <span className="error" id="password_error"></span>
-                <br />
-                <label
-                  className="FormField_CheckBox"
-                  htmlFor="hasagreed"
-                ></label>
-                <input
-                  required
-                  type="checkbox"
-                  className="FormField_Input_Check"
-                  name="hasagreed"
-                  value={this.state.hasagreed}
-                  onChange={this.handleChange}
-                />{" "}
-                I agree with all the statements in{" "}
-                <a href="/terms" className="FormField_TermsLink">
-                  terms of service.
-                </a>
-                <div className="FormBtns">
-                  <input
-                    className="FormCancelBtn"
-                    type="button"
-                    value="Cancel"
-                    onClick={this.closePopUp}
-                  />
-                  <input
-                    className="FormSubmitBtn"
-                    type="submit"
-                    value="Sign-up"
-                  />
-                </div>
-              </form>
-            </Modal.Body>
-          </Modal>
-        </div>
+              </div>
+            </form>
+          </Modal.Body>
+        </Modal>
       </>
     );
   }

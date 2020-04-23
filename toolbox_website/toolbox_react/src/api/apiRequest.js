@@ -18,10 +18,10 @@ export class apiRequest {
      * @param {String} type - options: "json", "formData"
      */
     contentType(type){
-        if (type == "json"){
+        if (type === "json"){
             this.xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         }
-        else if (type == "formData"){
+        else if (type === "formData"){
             // no headers needed
         }
         

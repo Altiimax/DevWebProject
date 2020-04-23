@@ -13,6 +13,7 @@
   color: rgb(247, 220, 9);
 }
 
+
 .Header_item {
   background-color: transparent;
   color: rgb(247, 220, 9);
@@ -25,6 +26,14 @@
   padding: 0.2em 1em;
   margin: 1em 0.2em;
   border-width: 0;
+  display: block;
+}
+
+
+.Header_item-active {
+  color: rgba(66, 66, 56, 1);
+  background-color: rgb(247, 220, 9);
+  border-radius: 2em;
 }
 
 .Header_item:hover {
@@ -33,31 +42,4 @@
   border-radius: 2em;
 }
 
-/* Controle de l'affichage des éléments dans la barre de navigation 
-  visible => display: block;
-  non visible => display: none;
-*/
 
-#myGroupsNav {
-  display: none;
-}
-
-#myToolsNav {
-  display: none;
-}
-
-#myProfileNav {
-  display: none;
-}
-
-#signOutNav {
-  display: none;
-}
-
-#signUpNav {
-  display: block;
-}
-
-#signInNav {
-  display: block;
-}

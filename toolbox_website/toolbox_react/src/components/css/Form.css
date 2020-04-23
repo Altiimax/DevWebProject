@@ -1,5 +1,4 @@
-
-.FormField_Label,
+label.FormField_Label,
 .FormField_CheckBox {
   font-family: 'Abel', sans-serif;
   color: black;
@@ -7,7 +6,7 @@
   margin: 0.2em 0em;
 }
 
-.FormField_Input,
+input.FormField_Input,
 .FormField_Input_Check {
   font-family: 'Abel', sans-serif;
   padding: 0;
