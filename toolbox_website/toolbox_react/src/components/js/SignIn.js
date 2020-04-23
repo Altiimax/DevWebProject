@@ -47,7 +47,7 @@ class SignIn extends Component {
         if (this.status === 200) {
           let usr = JSON.parse(this.responseText);
           let usr_id = usr[0].id_person;
-          let usr_pwd = usr[0].pwd_test;
+          let usr_pwd = usr[0].password;
           if(usr_pwd === self.state.password){
             document.getElementById("signInError").innerHTML = "";
             self.props.handle_signIn(usr_id);

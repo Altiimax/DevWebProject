@@ -138,7 +138,7 @@ class SignUp extends Component {
       birthDate: this.state.birthDate,
       alias: this.state.alias,
       email: this.state.email,
-      pwd_test: this.state.newPassword,
+      password: this.state.newPassword,
     };
 
     this.newAccountAPIRequest(JSON.stringify(data));
