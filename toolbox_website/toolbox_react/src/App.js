@@ -30,7 +30,7 @@ class App extends Component {
         p = <SignIn showPopUp={true} handle_signIn={this.handle_signIn}/>;
         break;
       case 'sign-up':
-        p = <SignUp />;
+        p = <SignUp showPopUp={true} handle_signUp={this.handle_signUp}/>;
         break;
       case 'sign-out':
         p = <SignOut showPopUp={true} handle_signOut={this.handle_signOut}/>;
@@ -42,6 +42,13 @@ class App extends Component {
   }
 
   handle_signIn = (u_id) => {
+    this.setState({
+      user_id: u_id,
+      signed_in: true,
+    })
+  }
+
+  handle_signUp = (u_id) => {
     this.setState({
       user_id: u_id,
       signed_in: true,

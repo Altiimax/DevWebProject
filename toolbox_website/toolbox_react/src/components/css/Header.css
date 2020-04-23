@@ -27,8 +27,12 @@
   margin: 1em 0.2em;
   border-width: 0;
   display: block;
+  outline: none;
 }
 
+span.Header_item {
+  cursor: pointer;
+}
 
 .Header_item-active {
   color: rgba(66, 66, 56, 1);

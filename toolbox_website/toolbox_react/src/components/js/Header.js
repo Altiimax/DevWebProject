@@ -28,8 +28,8 @@ function Header(props) {
         <Nav className="justify-content-end" style={{ width: "100%" }}>
           <Nav.Item id="homeNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
           <Nav.Item id="helpNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/help">Help</NavLink> </Nav.Item>
-          <Nav.Item id="signInNav"> <button className="Header_item" onClick={() => props.display_popUp('sign-in')} >Sign In</button> </Nav.Item>
-          <Nav.Item id="signUpNav"> <button className="Header_item" onClick={() => props.display_popUp('sign-up')} >Sign Up</button> </Nav.Item>
+          <Nav.Item id="signInNav"> <span className="Header_item" onClick={() => props.display_popUp('sign-in')} >Sign In</span> </Nav.Item>
+          <Nav.Item id="signUpNav"> <span className="Header_item" onClick={() => props.display_popUp('sign-up')} >Sign Up</span> </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -53,7 +53,7 @@ function Header(props) {
         <Nav className="justify-content-end" style={{ width: "100%" }}>
           <Nav.Item id="homeNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
           <Nav.Item id="helpNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/help">Help</NavLink> </Nav.Item>
-          <Nav.Item id="signOutNav"> <button className="Header_item" onClick={() => props.display_popUp('sign-out')} >Sign Out</button> </Nav.Item>
+          <Nav.Item id="signOutNav"> <span className="Header_item" onClick={() => props.display_popUp('sign-out')} >Sign Out</span> </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -1,16 +1,16 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Modal } from "react-bootstrap";
-import "../css/Form.css";
-import "../css/Header.css";
 import { apiRequest } from "../../api/apiRequest.js";
-//import GreenCheck from './assets/Green-Check.png'
 
-/*-----Here are the URL links to the back-end-----*/
+import "../css/Form.css";
+
+/*-----api request url information-----*/
 let uri = "http://127.0.0.1";
 let port = 8000;
 let endpoint = "/api/persons/";
 
-const initialState = {
+const user_initialState = {
   email: "",
   firstname: "",
   lastname: "",
@@ -22,38 +22,40 @@ const initialState = {
 };
 
 /**
- * This component is used to register the information set by
- * the user to the database. He must enter his forename, surname,
- * email address, alias, password, ...
- * @param
+ * Popup containing a form to sign-up
  */
 class SignUp extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      showPopup: true,
-      initialState,
-    };
-
+  constructor(props) {
+    super(props);
+    this.state = user_initialState;
+    this.showPopUp = true;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  accountRequest(newprofile) {
-    let self = this;
+  componentDidUpdate(){
+    this.showPopUp = this.props.showPopUp;
+  }
+
+  closePopUp = () => {
+    this.showPopUp = false;
+    this.setState(user_initialState);
+  }
+
+  newAccountAPIRequest(newprofile) {
+    let self = this; //self will be a reference to the SignUp class object
+
     let req = new apiRequest();
     req.open("POST", `${uri}:${port}${endpoint}`);
     req.contentType("json");
+
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
-        console.log("resp status :" + this.status);
-        console.log("resp text :" + this.responseText);
-        //let obj = JSON.parse(this.responseText);
-        //console.log(obj);
         if (this.status === 201) {
-          self.closePopUp(); //on ferme le popup
-          //TODO redirection vers la page "Profile"
+          let usr = JSON.parse(this.responseText);
+          let usr_id = usr.id_person;
+          self.props.handle_signUp(usr_id);
+          self.closePopUp();
         }
         else if (this.status === 409) {
           let error = JSON.parse(this.responseText).error;
@@ -66,25 +68,12 @@ class SignUp extends Component {
           else{
             console.log(error);
           }
-
         }
       }
     });
+
     req.send(newprofile);
   }
-
-  showPopUp(s) {
-    if (s) {
-      this.setState({ showPopup: true });
-    } else {
-      this.setState({ showPopup: false });
-      this.setState(initialState);
-    }
-  }
-
-  closePopUp = () => {
-    this.showPopUp(false);
-  };
 
   handleChange(e) {
     let target = e.target;
@@ -97,7 +86,7 @@ class SignUp extends Component {
       },
       function () {
         if (name === "birthDate") {
-          //Verify if the age is correct
+          //Check if the age is correct
           let now = new Date();
           let input = new Date(value);
           let age = Math.floor((now - input) / 31557600000);
@@ -109,12 +98,11 @@ class SignUp extends Component {
             document.getElementById("date_error").innerHTML = errorMessage;
           } else {
             document.getElementById("date_error").innerHTML = "";
-            //document.getElementById('greencheck').innerHTML = '<img className="img-greenCheck" src='+{GreenCheck}+' alt="This field as passed the test"/>'
           }
         }
 
         if (name === "newPassword") {
-          //Verify if password has a minimum length of 8
+          //Check if password has a minimum length of 8
           if (value !== "" && value.length < 8) {
             let errorMessage =
               "<p>The password must be 8 characters minimum!</p>";
@@ -127,7 +115,7 @@ class SignUp extends Component {
         }
 
         if (name === "confirmPassword") {
-          //Verify if passwords are matching
+          //Check if passwords are matching
           if (
             value !== "" &&
             this.state.newPassword !== this.state.confirmPassword
@@ -144,7 +132,7 @@ class SignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let request = {
+    let data = {
       lastName: this.state.lastname,
       firstName: this.state.firstname,
       birthDate: this.state.birthDate,
@@ -153,28 +141,23 @@ class SignUp extends Component {
       pwd_test: this.state.newPassword,
     };
 
-    this.accountRequest(JSON.stringify(request));
+    this.newAccountAPIRequest(JSON.stringify(data));
   }
 
   render() {
     return (
       <>
         {/* Sign-up popup */}
-        <Modal
-          show={this.state.showPopup}
-          onHide={() => {
-            this.showPopUp(false);
-          }}
-        >
+        <Modal show={this.showPopUp} onHide={() => {this.closePopUp();}}>
+
           <Modal.Header closeButton>
             <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <form id="signUpForm" onSubmit={this.handleSubmit}>
-              <label className="FormField_Label" htmlFor="email">
-                E-mail address
-              </label>
+
+              <label className="FormField_Label" htmlFor="email"> E-mail address </label>
               <input
                 required
                 type="email"
@@ -185,9 +168,8 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="email_error"></span>
-              <label className="FormField_Label" htmlFor="firstname">
-                First name
-              </label>
+
+              <label className="FormField_Label" htmlFor="firstname"> First name </label>
               <input
                 required
                 type="text"
@@ -197,9 +179,8 @@ class SignUp extends Component {
                 value={this.state.firstname}
                 onChange={this.handleChange}
               />
-              <label className="FormField_Label" htmlFor="lastname">
-                Last name
-              </label>
+
+              <label className="FormField_Label" htmlFor="lastname"> Last name </label>
               <input
                 required
                 type="text"
@@ -209,10 +190,8 @@ class SignUp extends Component {
                 value={this.state.lastname}
                 onChange={this.handleChange}
               />
-              <label className="FormField_Label" htmlFor="birthDate">
-                Birthdate
-              </label>
-              <span className="check-img" id="greencheck"></span>
+
+              <label className="FormField_Label" htmlFor="birthDate"> Birthdate </label>
               <input
                 required
                 type="date"
@@ -222,9 +201,8 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="date_error"></span>
-              <label className="FormField_Label" htmlFor="alias">
-                Alias
-              </label>
+              
+              <label className="FormField_Label" htmlFor="alias"> Alias </label>
               <input
                 required
                 type="text"
@@ -235,9 +213,8 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="alias_error"></span>
-              <label className="FormField_Label" htmlFor="newPassword">
-                New password
-              </label>
+
+              <label className="FormField_Label" htmlFor="newPassword"> New password </label>
               <input
                 required
                 type="password"
@@ -248,9 +225,8 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="newpassword_error"></span>
-              <label className="FormField_Label" htmlFor="confirmPassword">
-                Password confirmation
-              </label>
+
+              <label className="FormField_Label" htmlFor="confirmPassword"> Password confirmation </label>
               <input
                 required
                 type="password"
@@ -261,11 +237,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="password_error"></span>
+
               <br />
-              <label
-                className="FormField_CheckBox"
-                htmlFor="hasagreed"
-              ></label>
+
+              <label className="FormField_CheckBox" htmlFor="hasagreed"></label>
               <input
                 required
                 type="checkbox"
@@ -273,24 +248,15 @@ class SignUp extends Component {
                 name="hasagreed"
                 value={this.state.hasagreed}
                 onChange={this.handleChange}
-              />{" "}
-              I agree with all the statements in{" "}
-              <a href="/terms" className="FormField_TermsLink">
-                terms of service.
-              </a>
+              />
+              {" "} I agree with all the statements in {" "}
+              <a href="/terms" className="FormField_TermsLink"> terms of service. </a>
+              
               <div className="FormBtns">
-                <input
-                  className="FormCancelBtn"
-                  type="button"
-                  value="Cancel"
-                  onClick={this.closePopUp}
-                />
-                <input
-                  className="FormSubmitBtn"
-                  type="submit"
-                  value="Sign-up"
-                />
+                <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp}/>
+                <input className="FormSubmitBtn" type="submit" value="Sign-up"/>
               </div>
+
             </form>
           </Modal.Body>
         </Modal>
@@ -300,3 +266,9 @@ class SignUp extends Component {
 }
 
 export default SignUp;
+
+
+SignUp.propTypes = {
+  showPopUp: PropTypes.bool.isRequired,
+  handle_signUp: PropTypes.func.isRequired
+};
