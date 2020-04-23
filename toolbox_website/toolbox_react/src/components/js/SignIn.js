@@ -15,12 +15,6 @@ const initialState = {
   password: "",
 };
 
-/**
- * This component is the formular the user must fill to connect
- * to his account.
- * @param
- * @return 'XML form'
- */
 class SignIn extends Component {
   constructor(props) {
     super(props);
