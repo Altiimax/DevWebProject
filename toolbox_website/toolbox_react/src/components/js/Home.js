@@ -6,9 +6,9 @@ import "../css/Home.css";
 export default function Home() {
   return (
     <>
-      <div className="App">
-        <section className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <div className="Home">
+        <section>
+          <img src={logo} className="Home-logo" alt="logo" />
         </section>
       </div>
     </>

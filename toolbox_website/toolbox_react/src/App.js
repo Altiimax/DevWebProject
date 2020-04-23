@@ -65,19 +65,18 @@ class App extends Component {
   render() {
     
     return (
-      <>
-        <header>
-          <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp}/>
-        </header>
+      <div>
 
-        {this.popUp()} {/*every popup will be displayed here*/}
-
+        <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp}/>
         <Routes />
-  
-        <footer>
-          <Footer />
-        </footer>
-      </>
+      
+        <div id="bodyContent">
+          {this.popUp()} {/*every popup will be displayed here*/}
+        </div>
+      
+        <Footer />
+
+      </div>
     );
   }
 

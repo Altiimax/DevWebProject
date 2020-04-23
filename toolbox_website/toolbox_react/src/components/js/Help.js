@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import "../css/Help.css";
+
 class Help extends Component {
   render() {
     return (

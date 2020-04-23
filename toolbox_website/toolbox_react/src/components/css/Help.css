@@ -1,0 +1,32 @@
+.helpPage {
+    background-color: #282c34;
+    height: 100vh; /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.Text {
+    color: white;
+  }
+
+.divider {
+    width: 5px;
+    height: auto;
+    display: inline-block;
+  }
+
+.goBackMenuButton {
+background-color: black;
+color: white;
+border-radius: 25px;
+border: none;
+padding: 10px;
+}
+
+.goBackMenuButton:hover {
+    background-color: #61dafb;
+    color: black;
+    border: 2px, solid, inherit;
+    border-radius: 25px;
+  }
