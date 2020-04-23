@@ -2,6 +2,9 @@ import React, { Component, Table } from "react";
 import { Link } from "react-router-dom";
 import Greet from "./Greetings";
 import "../css/Profile.css";
+import AddTools from "./AddTools";
+import MyTools from "./MyTools";
+import MyGroups from "./MyGroups";
 /**
  * This component is used to display the account informations
  * of the member.
@@ -30,43 +33,9 @@ class Profile extends Component {
       <div className="myProfile">
         <div className="container">
           <Greet className="error" name="Host" />
-          <div className="container">
-            <table id="myTools">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Owner</th>
-                  <th>Renting infos</th>
-                  <th>State</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Image not found</td>
-                  <td>Screwdriver</td>
-                  <td>Bob</td>
-                  <td>
-                    Was borrowed on 20/04/2012 and must be given back before
-                    24/05/2012
-                  </td>
-                  <td>Used</td>
-                </tr>
-                <tr>
-                  <td>Image not found</td>
-                  <td>Screwdriver</td>
-                  <td>Bob</td>
-                  <td>
-                    Was borrowed on 20/04/2012 and must be given back before
-                    24/05/2012
-                  </td>
-                  <td>Used</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <table id="myGroups"></table>
+          <AddTools />
+          <MyTools />
+          <MyGroups />
         </div>
       </div>
     );
