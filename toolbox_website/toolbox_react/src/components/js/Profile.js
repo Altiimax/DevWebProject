@@ -16,7 +16,9 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    this.getUserProfileAPIRequest(this.props.user_id);
+    if(this.props.user_id != 0){
+      this.getUserProfileAPIRequest(this.props.user_id);
+    }
   }
 
   getUserProfileAPIRequest(id) {
@@ -29,7 +31,7 @@ class Profile extends Component {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let profile = JSON.parse(this.responseText)[0];
-          document.getElementById("profile").innerHTML = "Welcome " + profile.firstName + profile.lastName;
+          document.getElementById("profile").innerHTML = "Welcome " + profile.firstName + " " + profile.lastName;
         }
       }
     });

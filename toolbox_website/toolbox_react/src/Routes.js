@@ -18,7 +18,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route
           exact path='/profile'
-          render={(props) => < Profile user_id={this.props.user.id}/>}
+          render={(props) => < Profile user_id={this.props.user_id}/>}
         />
         <Route exact path="/help" component={Help} />
         <Route exact path="/contact" component={Contact} />

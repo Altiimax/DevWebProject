@@ -15,15 +15,13 @@ class App extends Component {
     super(props);
     this.state = {
       signed_in: false,
-      user_id: "",
+      user_id: 0,
       show_popUp: "",
     }
-    this.user = {
-      id: 1,
-    };
   }
 
   display_popUp = (type) => {
+    //this.props.history.push('/');
     this.setState({show_popUp: type})
   }
   
@@ -70,19 +68,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
         <div className="bg">
           <div className="Header">
             <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp} />
           </div>
 
           <div className="Body">
-            <Routes user={this.user}/>
+            <Routes user_id={this.state.user_id}/>
 
             <div id="bodyContent">
               {this.popUp()} {/*every popup will be displayed here*/}
             </div>
           </div>
+
         </div>
+
         <div className="Footer">
           <Footer />
         </div>
