@@ -16,7 +16,7 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    if(this.props.user_id != 0){
+    if(this.props.user_id !== 0){
       this.getUserProfileAPIRequest(this.props.user_id);
     }
     else {
