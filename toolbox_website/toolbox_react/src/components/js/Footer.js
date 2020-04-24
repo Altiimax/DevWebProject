@@ -67,7 +67,6 @@ class Footer extends Component {
               </ul>
             </div>
           </div>
-          <hr />
           <div className="row" id="copyrights">
             <p className="col-sm">
               &copy;{new Date().getFullYear()} ToolBox | All right reserved

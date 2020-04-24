@@ -68,18 +68,23 @@ class App extends Component {
   
   render() {
     return (
-      <div>
+      <div className="App">
+        <div className="bg">
+          <div className="Header">
+            <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp} />
+          </div>
 
-        <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp} />
-        
-        <Routes user={this.user}/>
+          <div className="Body">
+            <Routes user={this.user}/>
 
-        <div id="bodyContent">
-          {this.popUp()} {/*every popup will be displayed here*/}
+            <div id="bodyContent">
+              {this.popUp()} {/*every popup will be displayed here*/}
+            </div>
+          </div>
         </div>
-
-        <Footer />
-
+        <div className="Footer">
+          <Footer />
+        </div>
       </div>
     );
   }

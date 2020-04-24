@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function Header(props) {
   
   const signed_out_header = (
-    <Navbar expand="lg" fixed="top">
+    <Navbar expand="lg">
       <Navbar.Brand>
         <NavLink to="/">
           <img
@@ -25,8 +25,8 @@ function Header(props) {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="justify-content-end" style={{ width: "100%" }}>
-          <Nav.Item id="homeNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
+        <Nav className="justify-content-end" style={{ width: "100%" }} >
+          <Nav.Item id="homeNav" > <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
           <Nav.Item id="helpNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/help">Help</NavLink> </Nav.Item>
           <Nav.Item id="signInNav"> <span className="Header_item" onClick={() => props.display_popUp('sign-in')} >Sign In</span> </Nav.Item>
           <Nav.Item id="signUpNav"> <span className="Header_item" onClick={() => props.display_popUp('sign-up')} >Sign Up</span> </Nav.Item>
@@ -36,7 +36,7 @@ function Header(props) {
   );
 
   const signed_in_header = (
-    <Navbar expand="lg" fixed="top">
+    <Navbar expand="lg">
       <Navbar.Brand>
         <NavLink to="/">
           <img

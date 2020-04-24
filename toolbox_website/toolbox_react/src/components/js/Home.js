@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../nut.svg";
+
 import "../css/Home.css";
 
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { apiRequest } from "../../api/apiRequest.js"
 
-import "../css/Home.css";
+import "../css/Profile.css";
 
 
 
@@ -39,7 +39,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="Home">
+      <div className="Profile">
         <h1> Temporary Profile </h1>
         <section id="profile"></section>
       </div>

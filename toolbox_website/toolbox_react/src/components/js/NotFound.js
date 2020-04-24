@@ -1,9 +1,10 @@
 import React from "react";
+
 import "../css/NotFound.css";
 
 export default function NotFound() {
   return (
-    <div className="NotFound">
+    <div>
       <h3>Sorry, page not found!</h3>
     </div>
   );

@@ -1,1 +1,22 @@
 
+.App {
+  font-family: 'Abel', sans-serif;
+  font-size: calc(3px + 2vmin);
+  color: white;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.bg {
+    /*Bg generated with: https://cssgradient.io */
+    background: rgb(247, 220, 9);
+    background: linear-gradient(
+      349deg,
+      rgba(247, 220, 9, 1) 18%,
+      rgba(175, 158, 26, 1) 50%,
+      rgba(66, 66, 56, 1) 50%,
+      rgba(18, 18, 18, 1) 88%
+    );
+    min-height: 100vh;
+}
