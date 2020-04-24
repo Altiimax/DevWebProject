@@ -1,7 +1,7 @@
 
 .App {
   font-family: 'Abel', sans-serif;
-  font-size: calc(3px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: white;
   
   display: flex;
