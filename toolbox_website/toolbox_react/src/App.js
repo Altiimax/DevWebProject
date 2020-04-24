@@ -7,6 +7,7 @@ import SignUp from "./components/js/SignUp";
 import SignOut from "./components/js/SignOut";
 
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 class App extends Component {

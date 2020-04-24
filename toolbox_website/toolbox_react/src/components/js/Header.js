@@ -6,10 +6,9 @@ import icon from "../assets/toolBox_logo.png";
 
 import "../css/Header.css";
 import "../css/PopUp.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function Header(props) {
-  
+
   const signed_out_header = (
     <Navbar expand="lg">
       <Navbar.Brand>
