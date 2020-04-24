@@ -5,12 +5,6 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "../css/Form.css";
 
-
-/*-----api request url information-----*/
-let uri = "http://127.0.0.1";
-let port = 8000;
-let endpoint = "/api/persons/login/?email=";
-
 const user_initialState = {
   id: "",
   email: "",
@@ -38,9 +32,11 @@ class SignIn extends Component {
 
   loginAPIRequest(email) {
     let self = this; //self will be a reference to the SignIn class object
-  
+    
+    let endpoint = "/api/persons/login/?email=";
+
     let req = new apiRequest();
-    req.open("GET", `${uri}:${port}${endpoint}${email}`);
+    req.open("GET", `${endpoint}${email}`);
 
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {

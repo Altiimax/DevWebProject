@@ -16,6 +16,7 @@ class Countries(models.Model):
 
 class Groups(models.Model):
     id_groupName = models.CharField(primary_key=True, max_length=50)
+    groupDescription = models.TextField(blank=True, null=True)
     groupType = models.CharField(max_length=7, blank=True, null=True)
     id_town = models.ForeignKey('Towns', models.DO_NOTHING, db_column='id_town')
     groupRange = models.IntegerField()

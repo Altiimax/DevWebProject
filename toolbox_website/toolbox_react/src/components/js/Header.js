@@ -53,6 +53,7 @@ function Header(props) {
         <Nav className="justify-content-end" style={{ width: "100%" }}>
           <Nav.Item id="homeNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/">Home</NavLink> </Nav.Item>
           <Nav.Item id="helpNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/help">Help</NavLink> </Nav.Item>
+          <Nav.Item id="profileNav"> <NavLink className="Header_item" activeClassName="Header_item-active" exact to="/profile" >My Profile</NavLink> </Nav.Item>
           <Nav.Item id="signOutNav"> <span className="Header_item" onClick={() => props.display_popUp('sign-out')} >Sign Out</span> </Nav.Item>
         </Nav>
       </Navbar.Collapse>
@@ -69,5 +70,5 @@ export default Header;
 
 Header.propTypes = {
   signed_in: PropTypes.bool.isRequired,
-  display_popUp: PropTypes.func.isRequired
+  display_popUp: PropTypes.func.isRequired,
 };

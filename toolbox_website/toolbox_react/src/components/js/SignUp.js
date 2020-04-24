@@ -5,10 +5,6 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "../css/Form.css";
 
-/*-----api request url information-----*/
-let uri = "http://127.0.0.1";
-let port = 8000;
-let endpoint = "/api/persons/";
 
 const user_initialState = {
   email: "",
@@ -45,8 +41,10 @@ class SignUp extends Component {
   newAccountAPIRequest(newprofile) {
     let self = this; //self will be a reference to the SignUp class object
 
+    let endpoint = "/api/persons/";
+
     let req = new apiRequest();
-    req.open("POST", `${uri}:${port}${endpoint}`);
+    req.open("POST", `${endpoint}`);
     req.contentType("json");
 
     req.addEventListener("readystatechange", function () {

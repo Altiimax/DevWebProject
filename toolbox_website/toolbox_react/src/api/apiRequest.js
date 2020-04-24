@@ -1,6 +1,10 @@
 let user = "admin";
 let password = "devweb2";
 
+/*-----api request url information-----*/
+let uri = "http://127.0.0.1";
+let port = 8000;
+
 export class apiRequest {
 
     constructor(){
@@ -8,8 +12,8 @@ export class apiRequest {
         this.xhr.withCredentials = true;
     };
     
-    open(method,url){
-        this.xhr.open(method,url,true);
+    open(method,endpoint){
+        this.xhr.open(method,`${uri}:${port}${endpoint}`,true);
         this.xhr.setRequestHeader("Authorization", "Basic " + btoa(user+":"+password));
     };
 

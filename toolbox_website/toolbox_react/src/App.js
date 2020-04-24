@@ -17,6 +17,9 @@ class App extends Component {
       user_id: "",
       show_popUp: "",
     }
+    this.user = {
+      id: 1,
+    };
   }
 
   display_popUp = (type) => {
@@ -62,18 +65,19 @@ class App extends Component {
     })
   }
 
+  
   render() {
-    
     return (
       <div>
 
-        <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp}/>
-        <Routes />
-      
+        <Header signed_in={this.state.signed_in} display_popUp={this.display_popUp} />
+        
+        <Routes user={this.user}/>
+
         <div id="bodyContent">
           {this.popUp()} {/*every popup will be displayed here*/}
         </div>
-      
+
         <Footer />
 
       </div>
