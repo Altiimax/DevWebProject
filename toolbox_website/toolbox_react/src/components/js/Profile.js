@@ -19,6 +19,9 @@ class Profile extends Component {
     if(this.props.user_id != 0){
       this.getUserProfileAPIRequest(this.props.user_id);
     }
+    else {
+      document.getElementById("profile").innerHTML = "You must be logged-in to access this page !"
+    }
   }
 
   getUserProfileAPIRequest(id) {
