@@ -1,6 +1,5 @@
-.container {
-  overflow-x: auto;
-}
-table {
+.Profile {
   width: 100%;
+
+  margin: 1em;
 }

@@ -11,48 +11,52 @@
   color: rgb(247, 220, 9);
 }
 
-.navbar .navbar-collapse .justify-content-end .nav-item .nav-link {
+
+.Header_item {
+  background-color: transparent;
   color: rgb(247, 220, 9);
   width: 6em;
   text-align: center;
   font-weight: bold;
 }
 
-.navbar .navbar-collapse .justify-content-end .nav-item .nav-link:hover {
-  color: rgb(160, 158, 42);
+  padding: 0.2em 1em;
+  margin: 1em 0.2em;
+  border-width: 0;
+  display: block;
+  outline: none;
 }
 
-.navbar .navbar-collapse .justify-content-end .nav-item .nav-link.active {
+span.Header_item {
+  cursor: pointer;
+}
+
+.Header_item-active {
   color: rgba(66, 66, 56, 1);
   background-color: rgb(247, 220, 9);
   border-radius: 2em;
 }
 
-.navbar .navbar-collapse .justify-content-end .nav-item {
-  margin: 0em 0.2em;
+.Header_item:hover {
+  color: rgba(66, 66, 56, 1);
+  background-color: rgb(247, 220, 9);
+  border-radius: 2em;
 }
 
-/* Controle de l'affichage des éléments dans la barre de navigation 
-  visible => display: block;
-  non visible => display: none;
-*/
 
-#myGroupsNav {
-  display: none;
+/* change navbar background on collapse */
+@media (max-width: 768px) {
+  nav.navbar {
+    background: rgb(0, 0, 0);
+  }
 }
 
-#myToolsNav {
-  display: none;
+/* change navbar-toggler inside lines color (stroke) */
+.navbar-light span.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='yellow' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  outline: none;
 }
 
-#myProfileNav {
-  display: none;
-}
-
-#signUpNav {
-  display: block;
-}
-
-#signInNav {
-  display: block;
+.navbar-collapse {
+  overflow: hidden;
 }

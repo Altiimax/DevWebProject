@@ -25,14 +25,14 @@ class Footer extends Component {
               <ul className="list-unstyled">
                 <li>
                   <h5 className="footDivTitle">About us</h5>
-                  <text className="footText">
+                  <section className="footText">
                     We're students at EPHEC and we've made this web application
                     for our course of web development.
-                  </text>
+                  </section>
                 </li>
                 <li>
                   <h5 className="footDivTitle">Contact</h5>
-                  <text className="footText">HE201649@students.ephec.be</text>
+                  <section className="footText">HE201649@students.ephec.be</section>
                 </li>
               </ul>
             </div>
@@ -67,7 +67,6 @@ class Footer extends Component {
               </ul>
             </div>
           </div>
-          <hr />
           <div className="row" id="copyrights">
             <p className="col-sm">
               &copy;{new Date().getFullYear()} ToolBox | All right reserved

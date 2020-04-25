@@ -1,8 +1,6 @@
 .mainFooter {
   background-color: rgb(0, 0, 0);
-  padding-top: 1cm;
-  position: relative;
-  bottom: 0;
+  padding-top: 1em;
   width: 100%;
 }
 

@@ -1,3 +1,38 @@
-.container {
+.Home {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.Home .SearchFrom {
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
   padding: 20px;
+  margin: 1em;
+}
+
+.Home .searchButtonContainer {
+  text-align: center;
+}
+
+.Home .searchButton {
+  background-color: rgb(192, 11, 11);
+  color: white;
+  border-radius: 10px;
+  width: 80%;
+  padding: 0.3em 0em;
+}
+
+.Home .QuickLook {
+  margin: 1em;
+
+  /*PROVISOIRE*/
+  width: 20em;
+  height: 15em;
+  background-color: rgb(102, 99, 99);
+  text-align: center;
 }
