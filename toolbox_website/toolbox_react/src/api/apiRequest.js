@@ -11,28 +11,26 @@ export class apiRequest {
     this.xhr.withCredentials = true;
   }
 
-    constructor(){
-        this.xhr = new XMLHttpRequest();
-        this.xhr.withCredentials = true;
-    };
-    
-    open(method,endpoint){
-        this.xhr.open(method,`${uri}:${port}${endpoint}`,true);
-        this.xhr.setRequestHeader("Authorization", "Basic " + btoa(user+":"+password));
-    };
+  open(method, endpoint) {
+    this.xhr.open(method, `${uri}:${port}${endpoint}`, true);
+    this.xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(user + ":" + password)
+    );
+  }
 
-    /**
-     * 
-     * @param {String} type - options: "json", "formData"
-     */
-    contentType(type){
-        if (type === "json"){
-            this.xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        }
-        else if (type === "formData"){
-            // no headers needed
-        }
-        
+  /**
+   *
+   * @param {String} type - options: "json", "formData"
+   */
+  contentType(type) {
+    if (type === "json") {
+      this.xhr.setRequestHeader(
+        "Content-Type",
+        "application/json;charset=UTF-8"
+      );
+    } else if (type === "formData") {
+      // no headers needed
     }
   }
 

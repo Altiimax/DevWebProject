@@ -7,24 +7,8 @@
   justify-content: space-around;
 }
 
-.Home .SearchFrom {
-  color: black;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 1em;
-}
-
 .Home .searchButtonContainer {
   text-align: center;
-}
-
-.Home .searchButton {
-  background-color: rgb(192, 11, 11);
-  color: white;
-  border-radius: 10px;
-  width: 80%;
-  padding: 0.3em 0em;
 }
 
 .Home .QuickLook {

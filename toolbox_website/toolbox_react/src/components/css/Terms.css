@@ -1,13 +1,11 @@
-
-.Term{
+.Term {
   font-family: Arial, Helvetica, sans-serif;
   font-size: medium;
   color: black;
   text-align: left;
-  
+
   background-color: white;
   width: 80%;
   padding: 2% 5%;
   margin: auto;
 }
-

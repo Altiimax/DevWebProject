@@ -5,7 +5,7 @@ import "../css/FindTools.css";
 class FindTools extends Component {
   render() {
     return (
-      <div>
+      <div className="searchForm">
         <h1 className="formTitle">Find nearby tools</h1>
         <Form className="baseForm">
           <Form.Group>
@@ -19,6 +19,7 @@ class FindTools extends Component {
             <Form.Label>Where?</Form.Label>
             <Form.Control type="text" placeholder="Select a city by name" />
           </Form.Group>
+          {/* //TODO pour le moment on implémente pas cette fonctionalitée ;) 
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>From</Form.Label>
@@ -28,10 +29,12 @@ class FindTools extends Component {
               <Form.Label>To</Form.Label>
               <Form.Control type="date" />
             </Form.Group>
-          </Form.Row>
-          <button className="searchButton" type="submit">
-            Research
-          </button>
+          </Form.Row>*/}
+          <div className="searchButtonContainer">
+            <button className="searchButton" type="submit">
+              Search
+            </button>
+          </div>
         </Form>
       </div>
     );

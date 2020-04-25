@@ -1,9 +1,11 @@
 .navbar {
-  background-color: transparent;
+  background-color: none;
 }
 
 .logoHead {
   float: left;
+  width: 45px;
+  height: 45px;
 }
 
 .navTitle {
@@ -11,14 +13,14 @@
   color: rgb(247, 220, 9);
 }
 
-
 .Header_item {
   background-color: transparent;
   color: rgb(247, 220, 9);
-  width: 6em;
+
   text-align: center;
+  font-family: "Abel", sans-serif;
+  font-size: 1.1em;
   font-weight: bold;
-}
 
   padding: 0.2em 1em;
   margin: 1em 0.2em;
@@ -42,7 +44,6 @@ span.Header_item {
   background-color: rgb(247, 220, 9);
   border-radius: 2em;
 }
-
 
 /* change navbar background on collapse */
 @media (max-width: 768px) {
