@@ -59,7 +59,7 @@ class App extends Component {
 
   handle_signOut = () => {
     this.setState({
-      user_id: "",
+      user_id: 0,
       signed_in: false,
     })
   }
