@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-import "../css/Help.css";
+import "./Help.css";
 
 class Help extends Component {
   render() {

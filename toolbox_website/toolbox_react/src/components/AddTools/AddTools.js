@@ -37,8 +37,9 @@ class AddTools extends Component {
 
   render() {
     return (
-      <div>
-        <Form id="addToolForm" onSubmit={this.handleSubmit}>
+      <div className="addToolForm">
+        <h1>Add new tool</h1>
+        <Form onSubmit={this.handleSubmit}>
           <label className="FormField_Label" htmlFor="toolName">
             Tool Name
           </label>

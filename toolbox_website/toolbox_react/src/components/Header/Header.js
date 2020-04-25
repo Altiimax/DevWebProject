@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
-import icon from "../assets/toolBox_logo.png";
-import "../css/Header.css";
-import "../css/PopUp.css";
+import icon from "../../assets/toolBox_logo.png";
+import "./Header.css";
+import "./PopUp.css";
 
 function Header(props) {
   const signed_out_header = (

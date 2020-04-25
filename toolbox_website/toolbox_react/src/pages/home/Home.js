@@ -1,6 +1,6 @@
 import React from "react";
-import FindTools from "./FindTools";
-import "../css/Home.css";
+import FindTools from "../../components/FindTools/FindTools.js";
+import "./Home.css";
 
 export default function Home() {
   return (

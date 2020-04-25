@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { Modal } from "react-bootstrap";
 import { apiRequest } from "../../api/apiRequest.js";
 
-import "../css/Form.css";
-
+import "./Form.css";
 
 const user_initialState = {
   email: "",
@@ -29,14 +28,14 @@ class SignUp extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.showPopUp = this.props.showPopUp;
   }
 
   closePopUp = () => {
     this.showPopUp = false;
     this.setState(user_initialState);
-  }
+  };
 
   newAccountAPIRequest(newprofile) {
     let self = this; //self will be a reference to the SignUp class object
@@ -54,16 +53,13 @@ class SignUp extends Component {
           let usr_id = usr.id_person;
           self.props.handle_signUp(usr_id);
           self.closePopUp();
-        }
-        else if (this.status === 409) {
+        } else if (this.status === 409) {
           let error = JSON.parse(this.responseText).error;
-          if (error.includes("alias")){
+          if (error.includes("alias")) {
             document.getElementById("alias_error").innerHTML = error;
-          }
-          else if (error.includes("email")){
+          } else if (error.includes("email")) {
             document.getElementById("email_error").innerHTML = error;
-          }
-          else{
+          } else {
             console.log(error);
           }
         }
@@ -146,16 +142,22 @@ class SignUp extends Component {
     return (
       <>
         {/* Sign-up popup */}
-        <Modal show={this.showPopUp} onHide={() => {this.closePopUp();}}>
-
+        <Modal
+          show={this.showPopUp}
+          onHide={() => {
+            this.closePopUp();
+          }}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <form id="signUpForm" onSubmit={this.handleSubmit}>
-
-              <label className="FormField_Label" htmlFor="email"> E-mail address </label>
+              <label className="FormField_Label" htmlFor="email">
+                {" "}
+                E-mail address{" "}
+              </label>
               <input
                 required
                 type="email"
@@ -166,8 +168,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="email_error"></span>
-
-              <label className="FormField_Label" htmlFor="firstname"> First name </label>
+              <label className="FormField_Label" htmlFor="firstname">
+                {" "}
+                First name{" "}
+              </label>
               <input
                 required
                 type="text"
@@ -177,8 +181,10 @@ class SignUp extends Component {
                 value={this.state.firstname}
                 onChange={this.handleChange}
               />
-
-              <label className="FormField_Label" htmlFor="lastname"> Last name </label>
+              <label className="FormField_Label" htmlFor="lastname">
+                {" "}
+                Last name{" "}
+              </label>
               <input
                 required
                 type="text"
@@ -188,8 +194,10 @@ class SignUp extends Component {
                 value={this.state.lastname}
                 onChange={this.handleChange}
               />
-
-              <label className="FormField_Label" htmlFor="birthDate"> Birthdate </label>
+              <label className="FormField_Label" htmlFor="birthDate">
+                {" "}
+                Birthdate{" "}
+              </label>
               <input
                 required
                 type="date"
@@ -199,8 +207,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="date_error"></span>
-              
-              <label className="FormField_Label" htmlFor="alias"> Alias </label>
+              <label className="FormField_Label" htmlFor="alias">
+                {" "}
+                Alias{" "}
+              </label>
               <input
                 required
                 type="text"
@@ -211,8 +221,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="alias_error"></span>
-
-              <label className="FormField_Label" htmlFor="newPassword"> New password </label>
+              <label className="FormField_Label" htmlFor="newPassword">
+                {" "}
+                New password{" "}
+              </label>
               <input
                 required
                 type="password"
@@ -223,8 +235,10 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="newpassword_error"></span>
-
-              <label className="FormField_Label" htmlFor="confirmPassword"> Password confirmation </label>
+              <label className="FormField_Label" htmlFor="confirmPassword">
+                {" "}
+                Password confirmation{" "}
+              </label>
               <input
                 required
                 type="password"
@@ -235,9 +249,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="password_error"></span>
-
               <br />
-
               <label className="FormField_CheckBox" htmlFor="hasagreed"></label>
               <input
                 required
@@ -246,15 +258,25 @@ class SignUp extends Component {
                 name="hasagreed"
                 value={this.state.hasagreed}
                 onChange={this.handleChange}
-              />
-              {" "} I agree with all the statements in {" "}
-              <a href="/terms" className="FormField_TermsLink"> terms of service. </a>
-              
+              />{" "}
+              I agree with all the statements in{" "}
+              <a href="/terms" className="FormField_TermsLink">
+                {" "}
+                terms of service.{" "}
+              </a>
               <div className="FormBtns">
-                <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp}/>
-                <input className="FormSubmitBtn" type="submit" value="Sign-up"/>
+                <input
+                  className="FormCancelBtn"
+                  type="button"
+                  value="Cancel"
+                  onClick={this.closePopUp}
+                />
+                <input
+                  className="FormSubmitBtn"
+                  type="submit"
+                  value="Sign-up"
+                />
               </div>
-
             </form>
           </Modal.Body>
         </Modal>
@@ -265,8 +287,7 @@ class SignUp extends Component {
 
 export default SignUp;
 
-
 SignUp.propTypes = {
   showPopUp: PropTypes.bool.isRequired,
-  handle_signUp: PropTypes.func.isRequired
+  handle_signUp: PropTypes.func.isRequired,
 };

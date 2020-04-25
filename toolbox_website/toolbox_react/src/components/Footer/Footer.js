@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "../css/Footer.css";
-import Logo from "../assets/toolBox_logo.png";
+import "./Footer.css";
+import Logo from "../../assets/toolBox_logo.png";
 
 class Footer extends Component {
   render() {
@@ -32,7 +32,9 @@ class Footer extends Component {
                 </li>
                 <li>
                   <h5 className="footDivTitle">Contact</h5>
-                  <section className="footText">HE201649@students.ephec.be</section>
+                  <section className="footText">
+                    HE201649@students.ephec.be
+                  </section>
                 </li>
               </ul>
             </div>

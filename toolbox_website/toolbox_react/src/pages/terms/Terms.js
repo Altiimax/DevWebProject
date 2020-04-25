@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-import "../css/Terms.css";
+import "./Terms.css";
 
 class Terms extends Component {
   render() {
@@ -37,8 +36,8 @@ class Terms extends Component {
             directors or other managing authority.
           </li>
           <li>
-            <strong>Company</strong> (referred to as either "the Company",
-            "We", "Us" or "Our" in this Agreement) refers to ToolBox.
+            <strong>Company</strong> (referred to as either "the Company", "We",
+            "Us" or "Our" in this Agreement) refers to ToolBox.
           </li>
           <li>
             <strong>Country</strong> refers to: Belgium
@@ -57,10 +56,10 @@ class Terms extends Component {
             .
           </li>
           <li>
-            <strong>Third-party Social Media Service</strong> means any
-            services or content (including data, information, products or
-            services) provided by a third-party that may be displayed,
-            included or made available by the Service.
+            <strong>Third-party Social Media Service</strong> means any services
+            or content (including data, information, products or services)
+            provided by a third-party that may be displayed, included or made
+            available by the Service.
           </li>
           <li>
             <strong>Website</strong> refers to ToolBox, accessible from
@@ -87,9 +86,9 @@ class Terms extends Component {
           access or use the Service.
         </p>
         <p>
-          By accessing or using the Service You agree to be bound by these
-          Terms and Conditions. If You disagree with any part of these Terms
-          and Conditions then You may not access the Service.
+          By accessing or using the Service You agree to be bound by these Terms
+          and Conditions. If You disagree with any part of these Terms and
+          Conditions then You may not access the Service.
         </p>
         <p>
           Your access to and use of the Service is also conditioned on Your
@@ -109,11 +108,11 @@ class Terms extends Component {
         <p>
           The Company has no control over, and assumes no responsibility for,
           the content, privacy policies, or practices of any third party web
-          sites or services. You further acknowledge and agree that the
-          Company shall not be responsible or liable, directly or indirectly,
-          for any damage or loss caused or alleged to be caused by or in
-          connection with the use of or reliance on any such content, goods or
-          services available on or through any such web sites or services.
+          sites or services. You further acknowledge and agree that the Company
+          shall not be responsible or liable, directly or indirectly, for any
+          damage or loss caused or alleged to be caused by or in connection with
+          the use of or reliance on any such content, goods or services
+          available on or through any such web sites or services.
         </p>
         <p>
           We strongly advise You to read the terms and conditions and privacy
@@ -133,12 +132,11 @@ class Terms extends Component {
 
         <h1>Limitation of Liability</h1>
         <p>
-          Notwithstanding any damages that You might incur, the entire
-          liability of the Company and any of its suppliers under any
-          provision of this Terms and Your exclusive remedy for all of the
-          foregoing shall be limited to the amount actually paid by You
-          through the Service or 100 USD if You haven't purchased anything
-          through the Service.
+          Notwithstanding any damages that You might incur, the entire liability
+          of the Company and any of its suppliers under any provision of this
+          Terms and Your exclusive remedy for all of the foregoing shall be
+          limited to the amount actually paid by You through the Service or 100
+          USD if You haven't purchased anything through the Service.
         </p>
         <p>
           To the maximum extent permitted by applicable law, in no event shall
@@ -147,39 +145,38 @@ class Terms extends Component {
           limited to, damages for loss of profits, loss of data or other
           information, for business interruption, for personal injury, loss of
           privacy arising out of or in any way related to the use of or
-          inability to use the Service, third-party software and/or
-          third-party hardware used with the Service, or otherwise in
-          connection with any provision of this Terms), even if the Company or
-          any supplier has been advised of the possibility of such damages and
-          even if the remedy fails of its essential purpose.
+          inability to use the Service, third-party software and/or third-party
+          hardware used with the Service, or otherwise in connection with any
+          provision of this Terms), even if the Company or any supplier has been
+          advised of the possibility of such damages and even if the remedy
+          fails of its essential purpose.
         </p>
         <p>
           Some states do not allow the exclusion of implied warranties or
-          limitation of liability for incidental or consequential damages,
-          which means that some of the above limitations may not apply. In
-          these states, each party's liability will be limited to the greatest
-          extent permitted by law.
+          limitation of liability for incidental or consequential damages, which
+          means that some of the above limitations may not apply. In these
+          states, each party's liability will be limited to the greatest extent
+          permitted by law.
         </p>
 
         <h1>"AS IS" and "AS AVAILABLE" Disclaimer</h1>
         <p>
-          The Service is provided to You "AS IS" and "AS AVAILABLE" and with
-          all faults and defects without warranty of any kind. To the maximum
-          extent permitted under applicable law, the Company, on its own
-          behalf and on behalf of its Affiliates and its and their respective
-          licensors and service providers, expressly disclaims all warranties,
-          whether express, implied, statutory or otherwise, with respect to
-          the Service, including all implied warranties of merchantability,
-          fitness for a particular purpose, title and non-infringement, and
-          warranties that may arise out of course of dealing, course of
-          performance, usage or trade practice. Without limitation to the
-          foregoing, the Company provides no warranty or undertaking, and
-          makes no representation of any kind that the Service will meet Your
-          requirements, achieve any intended results, be compatible or work
-          with any other software, applications, systems or services, operate
-          without interruption, meet any performance or reliability standards
-          or be error free or that any errors or defects can or will be
-          corrected.
+          The Service is provided to You "AS IS" and "AS AVAILABLE" and with all
+          faults and defects without warranty of any kind. To the maximum extent
+          permitted under applicable law, the Company, on its own behalf and on
+          behalf of its Affiliates and its and their respective licensors and
+          service providers, expressly disclaims all warranties, whether
+          express, implied, statutory or otherwise, with respect to the Service,
+          including all implied warranties of merchantability, fitness for a
+          particular purpose, title and non-infringement, and warranties that
+          may arise out of course of dealing, course of performance, usage or
+          trade practice. Without limitation to the foregoing, the Company
+          provides no warranty or undertaking, and makes no representation of
+          any kind that the Service will meet Your requirements, achieve any
+          intended results, be compatible or work with any other software,
+          applications, systems or services, operate without interruption, meet
+          any performance or reliability standards or be error free or that any
+          errors or defects can or will be corrected.
         </p>
         <p>
           Without limiting the foregoing, neither the Company nor any of the
@@ -187,11 +184,11 @@ class Terms extends Component {
           express or implied: (i) as to the operation or availability of the
           Service, or the information, content, and materials or products
           included thereon; (ii) that the Service will be uninterrupted or
-          error-free; (iii) as to the accuracy, reliability, or currency of
-          any information or content provided through the Service; or (iv)
-          that the Service, its servers, the content, or e-mails sent from or
-          on behalf of the Company are free of viruses, scripts, trojan
-          horses, worms, malware, timebombs or other harmful components.
+          error-free; (iii) as to the accuracy, reliability, or currency of any
+          information or content provided through the Service; or (iv) that the
+          Service, its servers, the content, or e-mails sent from or on behalf
+          of the Company are free of viruses, scripts, trojan horses, worms,
+          malware, timebombs or other harmful components.
         </p>
         <p>
           Some jurisdictions do not allow the exclusion of certain types of
@@ -213,8 +210,7 @@ class Terms extends Component {
         <h1>Disputes Resolution</h1>
         <p>
           If You have any concern or dispute about the Service, You agree to
-          first try to resolve the dispute informally by contacting the
-          Company.
+          first try to resolve the dispute informally by contacting the Company.
         </p>
 
         <h1>For European Union (EU) Users</h1>
@@ -229,27 +225,27 @@ class Terms extends Component {
           You represent and warrant that (i) You are not located in a country
           that is subject to the United States government embargo, or that has
           been designated by the United States government as a “terrorist
-          supporting” country, and (ii) You are not listed on any United
-          States government list of prohibited or restricted parties.
+          supporting” country, and (ii) You are not listed on any United States
+          government list of prohibited or restricted parties.
         </p>
 
         <h1>Severability and Waiver</h1>
         <h2>Severability</h2>
         <p>
           If any provision of these Terms is held to be unenforceable or
-          invalid, such provision will be changed and interpreted to
-          accomplish the objectives of such provision to the greatest extent
-          possible under applicable law and the remaining provisions will
-          continue in full force and effect.
+          invalid, such provision will be changed and interpreted to accomplish
+          the objectives of such provision to the greatest extent possible under
+          applicable law and the remaining provisions will continue in full
+          force and effect.
         </p>
 
         <h2>Waiver</h2>
         <p>
           Except as provided herein, the failure to exercise a right or to
-          require performance of an obligation under this Terms shall not
-          effect a party's ability to exercise such right or require such
-          performance at any time thereafter nor shall be the waiver of a
-          breach constitute a waiver of any subsequent breach.
+          require performance of an obligation under this Terms shall not effect
+          a party's ability to exercise such right or require such performance
+          at any time thereafter nor shall be the waiver of a breach constitute
+          a waiver of any subsequent breach.
         </p>
 
         <h1>Translation Interpretation</h1>
@@ -258,8 +254,8 @@ class Terms extends Component {
           them available to You on our Service.
         </p>
         <p>
-          You agree that the original English text shall prevail in the case
-          of a dispute.
+          You agree that the original English text shall prevail in the case of
+          a dispute.
         </p>
 
         <h1>Changes to These Terms and Conditions</h1>
@@ -273,8 +269,8 @@ class Terms extends Component {
         <p>
           By continuing to access or use Our Service after those revisions
           become effective, You agree to be bound by the revised terms. If You
-          do not agree to the new terms, in whole or in part, please stop
-          using the website and the Service.
+          do not agree to the new terms, in whole or in part, please stop using
+          the website and the Service.
         </p>
 
         <h1>Contact Us</h1>

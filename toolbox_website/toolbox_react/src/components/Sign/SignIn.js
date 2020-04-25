@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Modal } from "react-bootstrap";
 import { apiRequest } from "../../api/apiRequest.js";
 
-import "../css/Form.css";
+import "./Form.css";
 
 const user_initialState = {
   id: "",
@@ -21,18 +21,18 @@ class SignIn extends Component {
     this.showPopUp = true;
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.showPopUp = this.props.showPopUp;
   }
 
   closePopUp = () => {
     this.showPopUp = false;
     this.setState(user_initialState);
-  }
+  };
 
   loginAPIRequest(email) {
     let self = this; //self will be a reference to the SignIn class object
-    
+
     let endpoint = "/api/persons/login/?email=";
 
     let req = new apiRequest();
@@ -44,27 +44,26 @@ class SignIn extends Component {
           let usr = JSON.parse(this.responseText);
           let usr_id = usr[0].id_person;
           let usr_pwd = usr[0].password;
-          if(usr_pwd === self.state.password){
+          if (usr_pwd === self.state.password) {
             document.getElementById("signInError").innerHTML = "";
             self.props.handle_signIn(usr_id);
             self.closePopUp();
-          }
-          else{
+          } else {
             //wrong password
-            document.getElementById("signInError").innerHTML = "Incorrect password";
+            document.getElementById("signInError").innerHTML =
+              "Incorrect password";
           }
         }
         if (this.status === 404) {
           //no user with this email
-          document.getElementById("signInError").innerHTML = "No user with this email address";
+          document.getElementById("signInError").innerHTML =
+            "No user with this email address";
         }
       }
     });
 
     req.send();
   }
-
-
 
   handleChange = (e) => {
     let target = e.target;
@@ -82,16 +81,22 @@ class SignIn extends Component {
     return (
       <>
         {/* Sign-in popup */}
-        <Modal show={this.showPopUp} onHide={ () => {this.closePopUp();}}>
-
+        <Modal
+          show={this.showPopUp}
+          onHide={() => {
+            this.closePopUp();
+          }}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Sign In</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <form id="signInForm" onSubmit={this.handleSubmit}>
-
-              <label className="FormField_Label" htmlFor="email"> E-mail address </label>
+              <label className="FormField_Label" htmlFor="email">
+                {" "}
+                E-mail address{" "}
+              </label>
               <input
                 required
                 type="email"
@@ -101,8 +106,11 @@ class SignIn extends Component {
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              
-              <label className="FormField_Label" htmlFor="password"> Password </label>
+
+              <label className="FormField_Label" htmlFor="password">
+                {" "}
+                Password{" "}
+              </label>
               <input
                 required
                 type="password"
@@ -116,13 +124,20 @@ class SignIn extends Component {
               <div className="error" id="signInError" disabled="disabled"></div>
 
               <div className="FormBtns">
-                <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp} />
-                <input className="FormSubmitBtn" type="submit" value="Sign-in" />
+                <input
+                  className="FormCancelBtn"
+                  type="button"
+                  value="Cancel"
+                  onClick={this.closePopUp}
+                />
+                <input
+                  className="FormSubmitBtn"
+                  type="submit"
+                  value="Sign-in"
+                />
               </div>
-              
             </form>
           </Modal.Body>
-
         </Modal>
       </>
     );
@@ -131,9 +146,7 @@ class SignIn extends Component {
 
 export default SignIn;
 
-
 SignIn.propTypes = {
   showPopUp: PropTypes.bool.isRequired,
-  handle_signIn: PropTypes.func.isRequired
+  handle_signIn: PropTypes.func.isRequired,
 };
-

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Header from "./components/js/Header";
+import Header from "./components/Header/Header.js";
 import Routes from "./Routes";
-import Footer from "./components/js/Footer";
-import SignIn from "./components/js/SignIn";
-import SignUp from "./components/js/SignUp";
-import SignOut from "./components/js/SignOut";
+import Footer from "./components/Footer/Footer.js";
+import SignIn from "./components/Sign/SignIn.js";
+import SignUp from "./components/Sign/SignUp.js";
+import SignOut from "./components/Sign/SignOut.js";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";

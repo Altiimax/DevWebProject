@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Greetings.css";
+import "./Greetings.css";
 /**
  * This component is used to render a personalised greeting message.
  * It rendre the greetings message in a h1 element.

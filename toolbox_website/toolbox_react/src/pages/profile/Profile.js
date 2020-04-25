@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { apiRequest } from "../../api/apiRequest.js";
-
-import "../css/Profile.css";
+import AddTools from "../../components/AddTools/AddTools.js";
+import MyGroups from "../../components/MyGroups/MyGroups.js";
+import MyTools from "../../components/MyTools/MyTools.js";
+import "./Profile.css";
 
 /**
  * This component is used to display the account informations
@@ -48,6 +50,9 @@ class Profile extends Component {
       <div className="Profile">
         <h1> Temporary Profile </h1>
         <section id="profile"></section>
+        <AddTools />
+        <MyGroups />
+        <MyTools />
       </div>
     );
   }
