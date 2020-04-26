@@ -1,52 +1,94 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { Component } from "react";
+import Header from "./components/Header/Header.js";
+import Routes from "./Routes";
+import Footer from "./components/Footer/Footer.js";
+import SignIn from "./components/Sign/SignIn.js";
+import SignUp from "./components/Sign/SignUp.js";
+import SignOut from "./components/Sign/SignOut.js";
+
 import "./App.css";
-import {BrowserRouter as Router,Route} from "react-router-dom";
-import Greet from "./components/js/Greetings";
-import SignUp from "./components/js/SignUp";
-import SignIn from "./components/js/SignIn";
-import Profile from "./components/js/Profile";
-import Menu from "./components/js/Menu";
-import Help from "./components/js/Help";
-import Header from "./components/js/Header";
-import Footer from "./components/js/Footer";
-import AboutUs from "./components/js/AboutUs"
-import Contact from "./components/js/Contact";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import apiExample from "./api/apiExample";
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signed_in: false,
+      user_id: 0,
+      show_popUp: "",
+    };
+  }
 
-function App() {
-  return (
-    <>
-    <Header>
-      <Header/>
-    </Header>
+  display_popUp = (type) => {
+    //this.props.history.push('/');
+    this.setState({ show_popUp: type });
+  };
 
-    <Router>
-      
-      <Route exact path="/">
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-          </header>
+  popUp = () => {
+    let p;
+    switch (this.state.show_popUp) {
+      case "sign-in":
+        p = <SignIn showPopUp={true} handle_signIn={this.handle_signIn} />;
+        break;
+      case "sign-up":
+        p = <SignUp showPopUp={true} handle_signUp={this.handle_signUp} />;
+        break;
+      case "sign-out":
+        p = <SignOut showPopUp={true} handle_signOut={this.handle_signOut} />;
+        break;
+      default:
+        p = null;
+    }
+    return p;
+  };
+
+  handle_signIn = (u_id) => {
+    this.setState({
+      user_id: u_id,
+      signed_in: true,
+    });
+  };
+
+  handle_signUp = (u_id) => {
+    this.setState({
+      user_id: u_id,
+      signed_in: true,
+    });
+  };
+
+  handle_signOut = () => {
+    this.setState({
+      user_id: 0,
+      signed_in: false,
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <div className="bg">
+          <div className="Header">
+            <Header
+              signed_in={this.state.signed_in}
+              display_popUp={this.display_popUp}
+            />
+          </div>
+
+          <div className="Body">
+            <Routes user_id={this.state.user_id} />
+
+            <div id="bodyContent">
+              {this.popUp()} {/*every popup will be displayed here*/}
+            </div>
+          </div>
         </div>
-      </Route>
 
-      <Route exact path="/Contact" component={Contact}/>
-      <Route exact path="/about-us" component={AboutUs}/>
-      <Route exact path="/sign-up" component={SignUp}/>
-      <Route exact path="/sign-in" component={SignIn}/>
-      <Route exact path="/profile" component={Profile}/>
-      <Route exact path="/help" component={Help}/>
-
-      <Route exact path="/apiExample" component={apiExample}/>
-    </Router>
-
-    <Footer>
-      <Footer/>
-    </Footer>
-    </>
-  );
+        <div className="Footer">
+          <Footer />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,0 +1,63 @@
+.navbar {
+  background-color: none;
+}
+
+.logoHead {
+  float: left;
+  width: 45px;
+  height: 45px;
+}
+
+.navTitle {
+  font-family: "Abel", sans-serif;
+  color: rgb(247, 220, 9);
+}
+
+.Header_item {
+  background-color: transparent;
+  color: rgb(247, 220, 9);
+  text-align: center;
+  font-family: "Abel", sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+
+  padding: 0.2em 1em;
+  margin: 1em 0.2em;
+  border-width: 0;
+  display: block;
+  outline: none;
+}
+
+span.Header_item {
+  cursor: pointer;
+}
+
+.Header_item-active {
+  color: rgba(66, 66, 56, 1);
+  background-color: rgb(247, 220, 9);
+  border-radius: 2em;
+}
+
+.Header_item:hover {
+  color: rgba(66, 66, 56, 1);
+  background-color: rgb(247, 220, 9);
+  border-radius: 2em;
+  text-decoration: none;
+}
+
+/* change navbar background on collapse */
+@media (max-width: 768px) {
+  nav.navbar {
+    background: rgb(0, 0, 0);
+  }
+}
+
+/* change navbar-toggler inside lines color (stroke) */
+.navbar-light span.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='yellow' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  outline: none;
+}
+
+.navbar-collapse {
+  overflow: hidden;
+}

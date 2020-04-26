@@ -1,0 +1,23 @@
+.modal {
+  font-family: "Abel", sans-serif;
+}
+
+.modal .modal-header {
+  background-color: rgb(247, 220, 9);
+  border-bottom: 0;
+}
+
+.modal .modal-body {
+  padding-bottom: 0;
+}
+
+.modal .modal-footer {
+  border-top: 0;
+  justify-content: center;
+}
+
+.modal .modal-footer button {
+  border-radius: 1em;
+  width: 8em;
+  margin: 0 2em;
+}

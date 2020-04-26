@@ -1,0 +1,22 @@
+.Home {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.Home .searchButtonContainer {
+  text-align: center;
+}
+
+.Home .QuickLook {
+  margin: 1em;
+
+  /*PROVISOIRE*/
+  width: 20em;
+  height: 15em;
+  background-color: rgb(102, 99, 99);
+  text-align: center;
+}

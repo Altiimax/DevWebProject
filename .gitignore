@@ -8,3 +8,4 @@
 **/*.back.*
 */venv
 node_modules
+toolbox_website/toolbox_react/package-lock.json

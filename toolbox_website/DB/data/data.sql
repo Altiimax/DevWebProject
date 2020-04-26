@@ -12,10 +12,10 @@ insert into "Towns" ("postCode", "townName","id_countryCode")
 values  (1330, 'Rixensart','BE'),
         (1000, 'Bruxelles','BE');
 
-insert into "Persons" ("lastName", "firstName",alias,"birthDate",email)
-values  ('Gordon','Harry E ','HEGy','1969-10-07','marietta.kel@hotmail.com'),
-        ('Sheridan','Dorothy',Null,'1973-01-01','garth2002@hotmail.com'),
-        ('Doak','Kristine','shDoak','1983-03-18','favian1972@yahoo.com');
+insert into "Persons" ("lastName", "firstName","alias","birthDate","email","test_pwd")
+values  ('Gordon','Harry E ','HEGy','1969-10-07','marietta.kel@hotmail.com','testpwd1'),
+        ('Sheridan','Dorothy',Null,'1973-01-01','garth2002@hotmail.com','testpwd1'),
+        ('Doak','Kristine','shDoak','1983-03-18','favian1972@yahoo.com','testpwd1');
 
 insert into "PersonsTowns" (id_person,id_town)
 values (1,2);

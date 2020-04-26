@@ -65,12 +65,12 @@ class personReviewsSerializer(serializers.ModelSerializer):
 class personsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Persons
-        fields = ('id_person', 'lastName', 'firstName', 'alias', 'birthDate', 'email', 'pwd_test')
+        fields = ('id_person', 'lastName', 'firstName', 'alias', 'birthDate', 'email', 'password')
 
 class personsLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = Persons
-        fields = ('id_person', 'email', 'pwd_test')
+        fields = ('id_person', 'email', 'password')
 
 
 ##################################
