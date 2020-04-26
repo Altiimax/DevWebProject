@@ -27,7 +27,7 @@ class SetupClass(APITestCase):
             "alias": "fobar",
             "birthDate": "1000-12-01",
             "email": "foo.bar@gmail.com",
-            "pwd_test": "testpwd2"
+            "password": "testPwd2"
         }
         self.dummyPerson_object = Persons.objects.create(**self.dummyPerson_dict)
         self.dummyPerson_object_id = self.dummyPerson_object.id_person
@@ -61,6 +61,7 @@ class SetupClass(APITestCase):
         ## group
         self.dummyGroup_dict = {
             "id_groupName": "TestGroup4",
+            "groupDescription": "stupid desc",
             "groupType": "public",
             "groupRange": 50,
             "id_town": self.dummyTown_object
@@ -93,7 +94,7 @@ class TestPersonsApi(SetupClass):
             "alias": "fobar2",
             "birthDate": "1000-12-01",
             "email": "foo2.bar2@gmail.com",
-            "pwd_test": "testpwd22"
+            "password": "testpwd22"
         }
         response = self.auth_client.post("/api/persons/", data ,format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -163,7 +164,7 @@ class TestToolsApi(SetupClass):
 
     def test_toolsViewSet_list_GET(self):
         response = self.auth_client.get("/api/tools/", format='json')
-        print(response.content)
+        #print(response.content)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
     def test_toolsViewSet_images_GET(self):
@@ -182,7 +183,7 @@ class TestToolsApi(SetupClass):
             "comment": "NC",
         }
         response = self.auth_client.post("/api/tools/%s/reviews/"%self.dummyTool_object_id, data, format='json')
-        print(response.content)
+        #print(response.content)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_groupsViewSet_images_GET(self):
