@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal } from "react-bootstrap";
+//import { Modal } from "react-bootstrap";
 import { Form, Col } from "react-bootstrap";
 import "./AddTools.css";
 
@@ -63,12 +63,12 @@ class AddTools extends Component {
           <label className="FormField_Label" htmlFor="toolState">
             State of wear
           </label>
-          <select name="toolState">
-            <option>New</option>
-            <option>Bit used</option>
-            <option selected>Used</option>
-            <option>Pretty used</option>
-            <option>In bad conditions</option>
+          <select defaultValue={"Used"} name="toolState">
+            <option value="New">New</option>
+            <option value="Bit used">Bit used</option>
+            <option value="Used">Used</option>
+            <option value="Pretty used">Pretty used</option>
+            <option value="In bad conditions">In bad conditions</option>
           </select>
           <Form.Row>
             <Col>
@@ -101,12 +101,12 @@ class AddTools extends Component {
               <label className="FormField_Label" htmlFor="typeOfRent">
                 Type of renting
               </label>
-              <select name="typeOfRent">
-                <option>Free</option>
-                <option>Per hours</option>
-                <option selected>Per day</option>
-                <option>Per week</option>
-                <option>Per month</option>
+              <select defaultValue="Per day" name="typeOfRent">
+                <option value="Free">Free</option>
+                <option value="Per hours">Per hours</option>
+                <option value="Per day">Per day</option>
+                <option value="Per week">Per week</option>
+                <option value="Per month">Per month</option>
               </select>
             </Col>
           </Form.Row>
