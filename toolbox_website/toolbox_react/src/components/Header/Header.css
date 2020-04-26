@@ -16,7 +16,6 @@
 .Header_item {
   background-color: transparent;
   color: rgb(247, 220, 9);
-
   text-align: center;
   font-family: "Abel", sans-serif;
   font-size: 1.1em;
@@ -43,6 +42,7 @@ span.Header_item {
   color: rgba(66, 66, 56, 1);
   background-color: rgb(247, 220, 9);
   border-radius: 2em;
+  text-decoration: none;
 }
 
 /* change navbar background on collapse */

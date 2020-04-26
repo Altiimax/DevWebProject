@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
 import { Form, Col } from "react-bootstrap";
+import "./AddTools.css";
 
 const initialStates = {
   toolName: "",
@@ -32,14 +33,13 @@ class AddTools extends Component {
     this.setState({
       [name]: value,
     });
-    console.log(value);
   };
 
   render() {
     return (
       <div className="addToolForm">
-        <h1>Add new tool</h1>
-        <Form onSubmit={this.handleSubmit}>
+        <h1 className="formTitle">Add new tool</h1>
+        <Form className="baseForm" onSubmit={this.handleSubmit}>
           <label className="FormField_Label" htmlFor="toolName">
             Tool Name
           </label>
@@ -56,7 +56,7 @@ class AddTools extends Component {
           </label>
           <textarea
             type="text"
-            className="FormField_Input"
+            className="FormField_TextArea"
             name="toolDescription"
             onChange={this.handleChange}
           />

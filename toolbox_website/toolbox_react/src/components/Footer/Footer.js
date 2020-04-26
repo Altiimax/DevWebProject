@@ -42,13 +42,20 @@ class Footer extends Component {
               <h5 className="footDivTitle">Informations</h5>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/about-us">About Us</a>
+                  <a className="links" href="/about-us">
+                    About Us
+                  </a>
                 </li>
                 <li>
-                  <a href="/Contact">Contact</a>
+                  <a className="links" href="/Contact">
+                    Contact
+                  </a>
                 </li>
                 <li>
-                  <a href="/terms"> Terms of Service </a>
+                  <a className="links" href="/terms">
+                    {" "}
+                    Terms of Service{" "}
+                  </a>
                 </li>
               </ul>
             </div>
@@ -56,15 +63,25 @@ class Footer extends Component {
               <h5 className="footDivTitle">Helpfull Links</h5>
               <ul className="list-unstyled">
                 <li>
-                  <a href="https://trello.com/b/Y4rZYhcT/projet-dev-web">
+                  <a
+                    className="links"
+                    href="https://trello.com/b/Y4rZYhcT/projet-dev-web"
+                  >
                     Trello
                   </a>
                 </li>
                 <li>
-                  <a href="https://github.com/Altiimax/DevWebProject">Github</a>
+                  <a
+                    className="links"
+                    href="https://github.com/Altiimax/DevWebProject"
+                  >
+                    Github
+                  </a>
                 </li>
                 <li>
-                  <a href="/help">Helpdesk</a>
+                  <a className="links" href="/help">
+                    Helpdesk
+                  </a>
                 </li>
               </ul>
             </div>
