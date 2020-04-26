@@ -79,13 +79,13 @@ class personsLoginSerializer(serializers.ModelSerializer):
 class groupsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Groups
-        fields = ('id_groupName', 'groupType', 'groupRange','id_town')
+        fields = ('id_groupName', 'groupType', 'groupDescription','groupRange','id_town')
 
 class groupsDetailSerializer(serializers.ModelSerializer):
     town = townsSerializer(source='id_town', read_only=True)
     class Meta:
         model = Groups
-        fields = ('id_groupName', 'groupType', 'groupRange','town')
+        fields = ('id_groupName', 'groupType', 'groupDescription','groupRange','town')
 
 class groupsMembersSerializer(serializers.ModelSerializer):
     class Meta:
