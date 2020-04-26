@@ -5,6 +5,8 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "./Form.css";
 
+const bcrypt = require('bcryptjs');
+
 const user_initialState = {
   id: "",
   email: "",
@@ -44,15 +46,19 @@ class SignIn extends Component {
           let usr = JSON.parse(this.responseText);
           let usr_id = usr[0].id_person;
           let usr_pwd = usr[0].password;
-          if (usr_pwd === self.state.password) {
-            document.getElementById("signInError").innerHTML = "";
-            self.props.handle_signIn(usr_id);
-            self.closePopUp();
-          } else {
-            //wrong password
-            document.getElementById("signInError").innerHTML =
+          bcrypt.compare(self.state.password, usr_pwd, function(err, result) {
+            // check if password is valid
+            if(result){
+              document.getElementById("signInError").innerHTML = "";
+              self.props.handle_signIn(usr_id);
+              self.closePopUp();
+            }
+            else{
+              //wrong password
+              document.getElementById("signInError").innerHTML =
               "Incorrect password";
-          }
+            }
+          });
         }
         if (this.status === 404) {
           //no user with this email

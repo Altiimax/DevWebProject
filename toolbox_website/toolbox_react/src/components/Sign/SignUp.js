@@ -5,6 +5,9 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "./Form.css";
 
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
 const user_initialState = {
   email: "",
   firstname: "",
@@ -126,16 +129,19 @@ class SignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let data = {
-      lastName: this.state.lastname,
-      firstName: this.state.firstname,
-      birthDate: this.state.birthDate,
-      alias: this.state.alias,
-      email: this.state.email,
-      password: this.state.newPassword,
-    };
-
-    this.newAccountAPIRequest(JSON.stringify(data));
+    let self = this;
+    bcrypt.hash(this.state.newPassword, saltRounds, function(err, hash) {
+      // Password encryption
+      let data = {
+        lastName: self.state.lastname,
+        firstName: self.state.firstname,
+        birthDate: self.state.birthDate,
+        alias: self.state.alias,
+        email: self.state.email,
+        password: hash,
+      };
+      self.newAccountAPIRequest(JSON.stringify(data));
+    });
   }
 
   render() {

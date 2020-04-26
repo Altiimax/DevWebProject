@@ -13,9 +13,9 @@ values  (1330, 'Rixensart','BE'),
         (1000, 'Bruxelles','BE');
 
 insert into "Persons" ("lastName", "firstName", "alias", "birthDate", "email", "password")
-values  ('Gordon','Harry E ','HEGy','1969-10-07','marietta.kel@hotmail.com','testPwd1'),
-        ('Sheridan','Dorothy',Null,'1973-01-01','garth2002@hotmail.com','testPwd1'),
-        ('Doak','Kristine','shDoak','1983-03-18','favian1972@yahoo.com','testPwd1');
+values  ('Gordon','Harry E ','HEGy','1969-10-07','marietta.kel@hotmail.com','$2a$10$hgivPBtUFmqnNZmvHsMeW.WLn/qHwXgVw16WMpcQXGcx74TJbNlry'),  --mdp = testPwd1 (pour tous)
+        ('Sheridan','Dorothy',Null,'1973-01-01','garth2002@hotmail.com','$2a$10$hgivPBtUFmqnNZmvHsMeW.WLn/qHwXgVw16WMpcQXGcx74TJbNlry'),
+        ('Doak','Kristine','shDoak','1983-03-18','favian1972@yahoo.com','$2a$10$hgivPBtUFmqnNZmvHsMeW.WLn/qHwXgVw16WMpcQXGcx74TJbNlry');
 
 insert into "PersonsTowns" (id_person,id_town)
 values (1,2);
