@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a form 1`] = `
+<div
+  className="searchForm"
+>
+  <h1
+    className="formTitle"
+  >
+    Find nearby tools
+  </h1>
+  <form
+    className="baseForm"
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Which tool?
+      </label>
+      <input
+        className="form-control"
+        placeholder="Wrench, saw, screwdriver, ..."
+        type="text"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Where?
+      </label>
+      <input
+        className="form-control"
+        placeholder="Select a city by name"
+        type="text"
+      />
+    </div>
+    <div
+      className="searchButtonContainer"
+    >
+      <button
+        className="searchButton"
+        type="submit"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+</div>
+`;

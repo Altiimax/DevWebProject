@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a table 1`] = `
+<div>
+  <table
+    className="table table-dark table-striped table-bordered table-hover"
+  >
+    <thead>
+      <tr>
+        <th>
+          Image
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Owner
+        </th>
+        <th>
+          Renting infos
+        </th>
+        <th>
+          State
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Image not found
+        </td>
+        <td>
+          Screwdriver
+        </td>
+        <td>
+          Bob
+        </td>
+        <td>
+          Was borrowed on 20/04/2012 and must be given back before 24/05/2012
+        </td>
+        <td>
+          Used
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Image not found
+        </td>
+        <td>
+          Screwdriver
+        </td>
+        <td>
+          Bob
+        </td>
+        <td>
+          Was borrowed on 20/04/2012 and must be given back before 24/05/2012
+        </td>
+        <td>
+          Used
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

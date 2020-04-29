@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a table 1`] = `
+<div>
+  <table
+    className="table table-dark table-striped table-bordered table-hover"
+  >
+    <thead>
+      <tr>
+        <th>
+          Name of the group
+        </th>
+        <th>
+          Location
+        </th>
+        <th>
+          Number of member
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Test
+        </td>
+        <td>
+          Test
+        </td>
+        <td>
+          Test
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Test
+        </td>
+        <td>
+          Test
+        </td>
+        <td>
+          Test
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
