@@ -4,6 +4,7 @@ import { apiRequest } from "../../api/apiRequest.js";
 import AddTools from "../../components/AddTools/AddTools.js";
 import MyGroups from "../../components/MyGroups/MyGroups.js";
 import MyTools from "../../components/MyTools/MyTools.js";
+import CreateGroup from "../../components/CreateGroup/CreateGroup.js";
 import "./Profile.css";
 
 /**
@@ -51,6 +52,7 @@ class Profile extends Component {
         <h1> Temporary Profile </h1>
         <section id="profile"></section>
         <AddTools />
+        <CreateGroup />
         <MyGroups />
         <MyTools />
       </div>
