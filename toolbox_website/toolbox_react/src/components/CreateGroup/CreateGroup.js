@@ -6,6 +6,7 @@ class CreateGroup extends Component {
   state = {
     groupName: "",
     groupDescription: "",
+    groupType: "",
   };
 
   handleChange = (e) => {
@@ -27,33 +28,44 @@ class CreateGroup extends Component {
       <div className="addToolForm">
         <h1 className="formTitle">Create a new group</h1>
         <Form className="baseForm" onSubmit={this.handleSubmit}>
-          <label className="FormField_Label" htmlFor="groupName">
-            Name of your group
-          </label>
-          <input
-            required
-            type="text"
-            className="FormField_Input"
-            name="groupName"
-            placeholder="Enter the name of your group"
-            onChange={this.handleChange}
-          />
-          <label className="FormField_Label" htmlFor="groupDescription">
-            Group Description
-          </label>
-          <textarea
-            type="text"
-            className="FormField_TextArea"
-            name="groupDescription"
-            onChange={this.handleChange}
-          />
+          <Form.Row>
+            <label className="FormField_Label" htmlFor="groupName">
+              Name of your group
+            </label>
+            <input
+              required
+              type="text"
+              className="FormField_Input"
+              name="groupName"
+              placeholder="Enter the name of your group"
+              onChange={this.handleChange}
+            />
+            <label className="FormField_Label" htmlFor="groupDescription">
+              Group Description
+            </label>
+            <textarea
+              type="text"
+              className="FormField_TextArea"
+              name="groupDescription"
+              onChange={this.handleChange}
+            />
+          </Form.Row>
+          <Form.Row>
+            <Col>
+              <label className="FormField_Label" htmlFor="groupType">
+                Group Type
+              </label>
+              <select defaultValue="private" name="groupType">
+                <option value="private">Private</option>
+                <option value="public">Public</option>
+              </select>
+            </Col>
+          </Form.Row>
           <br />
           <Form.Row>
-            <label htmlFor="pictures">Image of the Group:</label>
             <input
               type="file"
-              id="pictures"
-              name="pictures"
+              className="pictures"
               onChange={this.handleChange}
             />
           </Form.Row>
