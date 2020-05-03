@@ -5,7 +5,7 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "./Form.css";
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 const user_initialState = {
@@ -130,7 +130,7 @@ class SignUp extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let self = this;
-    bcrypt.hash(this.state.newPassword, saltRounds, function(err, hash) {
+    bcrypt.hash(this.state.newPassword, saltRounds, function (err, hash) {
       // Password encryption
       let data = {
         lastName: self.state.lastname,

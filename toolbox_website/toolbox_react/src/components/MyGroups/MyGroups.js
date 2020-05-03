@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
+import "./MyGroups.css";
 
 export default class MyGroups extends Component {
   render() {
