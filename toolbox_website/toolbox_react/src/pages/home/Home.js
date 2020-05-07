@@ -8,9 +8,9 @@ export default function Home() {
     <div className="Home">
       <div className="SearchFrom">
         <FindTools />
-        <Test />
       </div>
       <div className="QuickLook">Ceci est provisoire</div>
     </div>
   );
 }
+//<Test />
