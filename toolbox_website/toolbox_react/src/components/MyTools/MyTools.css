@@ -1,0 +1,20 @@
+.oneTool {
+  background-color: black;
+  flex: auto;
+  width: 10vmax;
+  margin: 10px;
+  padding: 10px;
+}
+
+.oneTool:hover {
+  background-color: red;
+}
+
+.imageTool {
+  margin: 10px;
+}
+
+.informTool {
+  border-top: white solid 2px;
+  text-align: center;
+}
