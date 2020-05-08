@@ -147,8 +147,11 @@ class Profile extends Component {
         <span className="myGroups">
           <MyGroups data={this.state.data2} />
         </span>
-        <button onClick={this.getMyToolsApi}>MyTools</button>
-        <button onClick={this.getMyGroupsApi}>MyGroups</button>
+        <div class="sidenav">
+          <button onClick={this.getMyToolsApi}>MyTools</button>
+          <button onClick={this.getMyGroupsApi}>MyGroups</button>
+          <button onClick={this.getMyProfileApi}>MyProfile</button>
+        </div>
       </div>
     );
   }

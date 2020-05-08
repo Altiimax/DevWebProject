@@ -1,4 +1,5 @@
 .Profile {
+  margin-left: 10px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -35,4 +36,38 @@
 .addTools:active {
   background-color: grey;
   outline: none;
+}
+
+.sidenav {
+  width: 120px; /* Set the width of the sidebar */
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0;
+  overflow-x: hidden; 
+  padding-top: 20px;
+  float: left;
+}
+
+.sidenav button {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  background-color: transparent;
+  color: rgb(247, 220, 9);
+  outline: none;
+  border-width: 0;
+}
+
+.sidenav button:hover {
+  color: rgba(66, 66, 56, 1);
+  background-color: rgb(247, 220, 9);
+  border-radius: 2em;
+  text-decoration: none;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav button {font-size: 18px;}
 }
