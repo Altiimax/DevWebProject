@@ -5,3 +5,34 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+.myTools {
+  border: 1px solid black;
+  margin: 10px;
+  display: flex;
+}
+
+.addTools {
+  flex: auto;
+  max-width: 250px;
+  min-width: 150px;
+  height: 350px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid black;
+  transition: margin-top 0.5s;
+  font-family: "Abel", sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  outline: none;
+}
+.addTools:hover {
+  box-shadow: 5px 5px 10px black;
+
+  outline: none;
+}
+.addTools:active {
+  background-color: grey;
+  outline: none;
+}

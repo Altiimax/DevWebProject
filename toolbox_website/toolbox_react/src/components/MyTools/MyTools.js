@@ -4,7 +4,7 @@ import "./MyTools.css";
 
 function MyTools(props) {
   //pour les images il faudrait pouvoir les faire défiler onHover!!! Ici qu'une seule affichée..
-  const [image] = useState(props.img);
+  const [picture] = useState(props.picture);
   const [name] = useState(props.name);
   const [description] = useState(props.desc);
   const [price] = useState(props.price);
@@ -14,7 +14,7 @@ function MyTools(props) {
     <div className="oneTool">
       <div className="imageTool">
         <img
-          src={image}
+          src={picture}
           alt="--Image of the tool not found--"
           height="auto"
           width="100%"

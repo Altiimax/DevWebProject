@@ -15,6 +15,57 @@ import icon from "../../assets/toolBox_logo.png";
 class Profile extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: "",
+      data2: [
+        {
+          id_groupName: "TestGroup1",
+          groupType: "public",
+          groupDescription: null,
+          groupRange: 50,
+          id_town: 1,
+        },
+        {
+          id_groupName: "TestGroup2",
+          groupType: "public",
+          groupDescription: null,
+          groupRange: 35,
+          id_town: 2,
+        },
+        {
+          id_groupName: "TestGroup3",
+          groupType: "private",
+          groupDescription: null,
+          groupRange: 20,
+          id_town: 1,
+        },
+        {
+          id_groupName: "TestGroup4",
+          groupType: "public",
+          groupDescription: null,
+          groupRange: 50,
+          id_town: 1,
+        },
+      ],
+    };
+  }
+
+  getMyGroupsApi(id_pers) {
+    let endpoint = "/api/persons/1/groups";
+
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          let resp = JSON.parse(this.responseText);
+          console.log(resp);
+        }
+      }
+    });
+
+    req.send();
   }
 
   getMyToolsApi() {
@@ -86,10 +137,18 @@ class Profile extends Component {
         <section id="profile"></section>
         <AddTools />
         <CreateGroup />
-        <MyGroups />
-        <MyTools img={icon} name="trorororo" price="8800" />
-        <div className="myTools"></div>
+        <span className="myTools">
+          <button className="addTools" onClick={console.log("ajouter")}>
+            Add tools
+          </button>
+          <MyTools picture={icon} name="Nom De L'objet" price="8800" />
+          <MyTools picture={icon} name="Nom De L'objet" price="20" />
+        </span>
+        <span className="myGroups">
+          <MyGroups data={this.state.data2} />
+        </span>
         <button onClick={this.getMyToolsApi}>MyTools</button>
+        <button onClick={this.getMyGroupsApi}>MyGroups</button>
       </div>
     );
   }

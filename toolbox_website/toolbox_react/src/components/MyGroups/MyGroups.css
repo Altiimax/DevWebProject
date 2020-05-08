@@ -1,0 +1,13 @@
+.tableHead {
+  display: inline-block;
+  position: top;
+}
+
+.sortButtons {
+  display: inline-block;
+  margin-left: 5px;
+}
+.sortButtons span {
+  display: block;
+  color: white;
+}
