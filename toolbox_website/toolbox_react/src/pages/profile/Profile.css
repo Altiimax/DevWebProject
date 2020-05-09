@@ -40,12 +40,13 @@
 
 .sidenav {
   width: 120px; /* Set the width of the sidebar */
-  position: fixed; 
-  z-index: 1; 
-  top: 0; 
+  position: fixed;
+  z-index: 1;
+  top: 0;
   left: 0;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   padding-top: 20px;
+  transition: 0.5s;
   float: left;
 }
 
@@ -68,6 +69,10 @@
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav button {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav button {
+    font-size: 18px;
+  }
 }
