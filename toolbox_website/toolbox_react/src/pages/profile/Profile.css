@@ -1,13 +1,11 @@
 .Profile {
   margin-left: 10px;
-  margin-right: 150px;
   margin-top: 10;
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 10px;
 }
 
 .myTools {
@@ -85,7 +83,7 @@
 
 .openbtn {
   position: fixed;
-  top: 8em;
+  top: 10;
   left: 0;
   font-size: 20px;
   cursor: pointer;
