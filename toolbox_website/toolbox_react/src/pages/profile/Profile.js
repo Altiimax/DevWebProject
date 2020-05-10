@@ -16,6 +16,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      toolData: "",
       data: "",
       data2: [
         {
@@ -51,7 +52,7 @@ class Profile extends Component {
   }
 
   getMyGroupsApi(id_pers) {
-    let endpoint = "/api/persons/1/groups";
+    let endpoint = "/api/persons/" + id_pers + "/groups";
 
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
@@ -147,9 +148,9 @@ class Profile extends Component {
         <span className="myGroups">
           <MyGroups data={this.state.data2} />
         </span>
-        <div class="sidenav" id="side">
+        <div className="sidenav" id="side">
           <a
-            class="closebtn"
+            className="closebtn"
             onClick={function closeNav() {
               document.getElementById("side").style.width = "0";
               document.getElementById("opbtn").style.left = "0";
@@ -159,7 +160,7 @@ class Profile extends Component {
             ×
           </a>
           <button onClick={this.getMyToolsApi}>MyTools</button>
-          <button onClick={this.getMyGroupsApi}>MyGroups</button>
+          <button onClick={this.getMyGroupsApi(1)}>MyGroups</button>
           <button onClick={this.getMyProfileApi}>MyProfile</button>
         </div>
         <button
@@ -177,19 +178,6 @@ class Profile extends Component {
     );
   }
 }
-/*<button
-          className="triggerSidenav"
-          onClick={function display() {
-            let x = document.getElementById("side").style;
-            console.log(x);
-            if (x.display === "none") x.display = "block";
-            else {
-              x.display = "none";
-            }
-          }}
-        >
-          >>
-        </button>*/
 export default Profile;
 
 Profile.propTypes = {
