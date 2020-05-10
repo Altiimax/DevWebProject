@@ -132,7 +132,7 @@ class Profile extends Component {
   //et mettre le tout dans un side bar pour display que ce qu'il faut.
   render() {
     return (
-      <div className="Profile">
+      <div className="Profile" id="main">
         <h1> Temporary Profile </h1>
         <section id="profile"></section>
         <AddTools />
@@ -147,16 +147,49 @@ class Profile extends Component {
         <span className="myGroups">
           <MyGroups data={this.state.data2} />
         </span>
-        <div class="sidenav">
+        <div class="sidenav" id="side">
+          <a
+            class="closebtn"
+            onClick={function closeNav() {
+              document.getElementById("side").style.width = "0";
+              document.getElementById("opbtn").style.left = "0";
+              document.getElementById("main").style.marginLeft = "10px";
+            }}
+          >
+            ×
+          </a>
           <button onClick={this.getMyToolsApi}>MyTools</button>
           <button onClick={this.getMyGroupsApi}>MyGroups</button>
           <button onClick={this.getMyProfileApi}>MyProfile</button>
         </div>
+        <button
+          className="openbtn"
+          id="opbtn"
+          onClick={function openNav() {
+            document.getElementById("side").style.width = "120px";
+            document.getElementById("opbtn").style.left = "120px";
+            document.getElementById("main").style.marginLeft = "150px";
+          }}
+        >
+          ||
+        </button>
       </div>
     );
   }
 }
-
+/*<button
+          className="triggerSidenav"
+          onClick={function display() {
+            let x = document.getElementById("side").style;
+            console.log(x);
+            if (x.display === "none") x.display = "block";
+            else {
+              x.display = "none";
+            }
+          }}
+        >
+          >>
+        </button>*/
 export default Profile;
 
 Profile.propTypes = {
