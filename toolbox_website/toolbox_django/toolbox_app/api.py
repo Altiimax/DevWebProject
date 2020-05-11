@@ -388,3 +388,30 @@ class countriesViewSet(viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+#######################
+###   SEARCH  API   ###
+
+class searchViewSet(viewsets.GenericViewSet):
+
+    # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
+    def list(self, request, *args, **kwargs):
+        """" list all users """
+        what = "'%%{}%%'".format(request.query_params.get('what').replace("'", ""))
+        where = request.query_params.get('where')
+        query = '''
+                SELECT *
+                FROM "Groups"
+                JOIN "Towns" ON ("Groups".id_town = "Towns".id_town)
+                JOIN "ToolsGroups" ON ("Groups"."id_groupName" = "ToolsGroups"."id_groupName")
+                JOIN "Tools" ON ("ToolsGroups".id_tool = "Tools".id_tool)
+                WHERE "Groups"."groupType" = 'public' 
+                  AND LOWER("Towns"."townName") LIKE LOWER(%s) 
+                  AND ( LOWER("Tools"."toolName") LIKE LOWER(%s) 
+                        OR LOWER("Tools"."toolName") LIKE LOWER(%s) 
+                       );
+                ''' %(where, what, what)
+        queryset = Groups.objects.raw(query)
+        serializer = groupsDetailSerializer(queryset, many=True)
+        return Response(serializer.data)
