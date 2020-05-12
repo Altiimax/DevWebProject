@@ -61,7 +61,7 @@ class App extends Component {
         p = <SignIn showPopUp={true} handle_signIn={this.handle_signIn} />;
         break;
       case "sign-up":
-        p = <SignUp showPopUp={true} handle_signUp={this.handle_signIn} />;
+        p = <SignUp showPopUp={true} handle_signIn={this.handle_signIn} />;
         break;
       case "sign-out":
         p = <SignOut showPopUp={true} handle_signOut={this.handle_signOut} />;
