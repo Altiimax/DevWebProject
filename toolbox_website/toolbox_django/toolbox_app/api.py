@@ -1,4 +1,5 @@
 import json
+import bcrypt
 from idlelib import query
 from os.path import defpath
 
@@ -46,10 +47,19 @@ class personsViewSet(viewsets.GenericViewSet):
     # POST 127.0.0.1:8000/api/persons/
     def create(self, request, *args, **kwargs):
         """" create a new user """
-        serializer = personsSerializer(data=request.data)
+        data = request.data.copy()
+        data['password']= bcrypt.hashpw(data['password'].encode('utf8'), bcrypt.gensalt())
+        data['password'] = data['password'].decode('utf8')
+        serializer = personsSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         try:
             serializer.save()
+            queryset = Persons.objects.filter(email=data['email'])
+            user = queryset.get()
+            user.token = self.create_token(user)
+            queryset = set()
+            queryset.add(user)
+            serializer = personsLoginGetTokenSerializer(queryset,many=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except IntegrityError as exception:
             if "unique_alias" in str(exception):
@@ -72,14 +82,18 @@ class personsViewSet(viewsets.GenericViewSet):
         """" authenticate user w/o token"""
         email = request.query_params.get('email')
         pwd = request.query_params.get('pwd')
-        queryset = Persons.objects.filter(email=email,password=pwd)
+        queryset = Persons.objects.filter(email=email)
         if queryset:
             user = queryset.get()
-            user.token = self.create_token(user)
-            queryset = set()
-            queryset.add(user)
-            serializer = personsLoginGetTokenSerializer(queryset,many=True)
-            return Response(serializer.data)
+            if bcrypt.checkpw(pwd.encode('utf8'), user.password.encode('utf8')):
+                user.token = self.create_token(user)
+                queryset = set()
+                queryset.add(user)
+                serializer = personsLoginGetTokenSerializer(queryset,many=True)
+                return Response(serializer.data)
+            else:
+                error = "wrong sign-in information for: %s"%(email)
+                return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
         else:
             error = "wrong sign-in information for: %s"%(email)
             return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
@@ -90,7 +104,7 @@ class personsViewSet(viewsets.GenericViewSet):
         """" authenticate user w/ token"""
         token = request.query_params.get('token')
         try:
-            decoded_payload = jwt_decode_handler(token)
+            decoded_payload = jwt_decode_handler(token) #TODO signature expired? 
             id_person = decoded_payload['user_id']
             queryset = Persons.objects.filter(id_person=id_person)
             if queryset:

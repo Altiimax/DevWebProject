@@ -57,9 +57,6 @@ class Persons(models.Model):
     email = models.EmailField()
     password= models.CharField(max_length=254)
 
-    def __repr__(self):
-        return id_person + " : " + email
-
     class Meta:
         managed = True
         constraints = [

@@ -42,14 +42,16 @@ class App extends Component {
     return p;
   };
 
-  handle_signIn = (u_id) => {
+  handle_signIn = (u_id, u_token) => {
+    localStorage.setItem('token',u_token);
     this.setState({
       user_id: u_id,
       signed_in: true,
     });
   };
 
-  handle_signUp = (u_id) => {
+  handle_signUp = (u_id, u_token) => {
+    localStorage.setItem('token',u_token);
     this.setState({
       user_id: u_id,
       signed_in: true,
@@ -57,6 +59,7 @@ class App extends Component {
   };
 
   handle_signOut = () => {
+    localStorage.removeItem('token');
     this.setState({
       user_id: 0,
       signed_in: false,

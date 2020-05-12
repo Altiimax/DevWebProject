@@ -52,9 +52,10 @@ class SignUp extends Component {
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 201) {
-          let usr = JSON.parse(this.responseText);
+          let usr = JSON.parse(this.responseText)[0];
           let usr_id = usr.id_person;
-          self.props.handle_signUp(usr_id);
+          let usr_token = usr.token;
+          self.props.handle_signUp(usr_id,usr_token);
           self.closePopUp();
         } else if (this.status === 409) {
           let error = JSON.parse(this.responseText).error;
@@ -129,7 +130,7 @@ class SignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let self = this;
+    /*let self = this;
     bcrypt.hash(this.state.newPassword, saltRounds, function (err, hash) {
       // Password encryption
       let data = {
@@ -141,7 +142,16 @@ class SignUp extends Component {
         password: hash,
       };
       self.newAccountAPIRequest(JSON.stringify(data));
-    });
+    });*/
+    let data = {
+      lastName: this.state.lastname,
+      firstName: this.state.firstname,
+      birthDate: this.state.birthDate,
+      alias: this.state.alias,
+      email: this.state.email,
+      password: this.state.newPassword,
+    };
+    this.newAccountAPIRequest(JSON.stringify(data));
   }
 
   render() {
