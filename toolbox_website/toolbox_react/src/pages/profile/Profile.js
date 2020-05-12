@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { apiRequest } from "../../api/apiRequest.js";
+import tokenIsValid, {userFromToken} from "../../utils";
+import history from "../../history";
 import AddTools from "../../components/AddTools/AddTools.js";
 import MyGroups from "../../components/MyGroups/MyGroups.js";
 import MyTools from "../../components/MyTools/MyTools.js";
@@ -13,9 +15,6 @@ import icon from "../../assets/toolBox_logo.png";
  * of the member.
  */
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   getMyToolsApi() {
     let endpoint = "/api/tools/";
@@ -50,11 +49,11 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    if (this.props.user_id !== 0) {
-      this.getUserProfileAPIRequest(this.props.user_id);
-    } else {
-      document.getElementById("profile").innerHTML =
-        "You must be logged-in to access this page !";
+    if(tokenIsValid()){
+      this.getUserProfileAPIRequest(userFromToken().id);
+    }
+    else {
+      history.push('/');
     }
   }
 
@@ -97,6 +96,3 @@ class Profile extends Component {
 
 export default Profile;
 
-Profile.propTypes = {
-  user_id: PropTypes.number.isRequired,
-};

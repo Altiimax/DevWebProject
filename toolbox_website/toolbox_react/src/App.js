@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import Header from "./components/Header/Header.js";
+import tokenIsValid from "./utils";
+import history from "./history";
 import Routes from "./Routes";
+import Header from "./components/Header/Header.js";
 import Footer from "./components/Footer/Footer.js";
 import SignIn from "./components/Sign/SignIn.js";
 import SignUp from "./components/Sign/SignUp.js";
@@ -9,6 +11,7 @@ import { apiRequest } from "./api/apiRequest.js";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('token') ? true : false) {
+    if (tokenIsValid()) {
       let token = localStorage.getItem('token');
       let endpoint = "/api/persons/login_token/?token=";
       let req = new apiRequest();
@@ -38,7 +41,7 @@ class App extends Component {
             });
           }
           if (this.status === 404) {
-            console.log("token expired or wrong token"); //TODO
+            console.log("token expired or wrong token");
           }
         }
       });
@@ -48,7 +51,6 @@ class App extends Component {
   }
 
   display_popUp = (type) => {
-    //this.props.history.push('/');
     this.setState({ show_popUp: type });
   };
 
@@ -81,6 +83,7 @@ class App extends Component {
 
   handle_signOut = () => {
     localStorage.removeItem('token');
+    history.push('/');
     this.setState({
       user_id: 0,
       signed_in: false,
@@ -99,7 +102,7 @@ class App extends Component {
           </div>
 
           <div className="Body">
-            <Routes user_id={this.state.user_id} />
+            <Routes/>
 
             <div id="bodyContent">
               {this.popUp()} {/*every popup will be displayed here*/}
