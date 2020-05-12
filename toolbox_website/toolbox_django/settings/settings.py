@@ -141,3 +141,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
+
+JWT_AUTH = {
+    'JWT_PAYLOAD_HANDLER':'toolbox_app.utils.jwt_payload_handler',
+}

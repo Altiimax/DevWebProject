@@ -3,9 +3,12 @@ from idlelib import query
 from os.path import defpath
 
 from django.http import QueryDict
+from django.db.models import CharField, Value
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.utils import jwt_decode_handler
 
 from .models import *
 from .serializers import *
@@ -16,6 +19,15 @@ from django.db import IntegrityError
 ###   PERSONS API   ###
 
 class personsViewSet(viewsets.GenericViewSet):
+
+    def create_token(self,user):
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(user)
+        token = jwt_encode_handler(payload)
+
+        return token
 
     # GET 127.0.0.1:8000/api/persons/
     def list(self, request, *args, **kwargs):
@@ -54,17 +66,41 @@ class personsViewSet(viewsets.GenericViewSet):
         serializer = aliasesSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com
+    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com&pwd=ddfehisffdsfdcfcrfqc
     @action(detail=False, methods=['get'])
     def login(self, request, *args, **kwargs):
-        """" get user login info by its email"""
+        """" authenticate user w/o token"""
         email = request.query_params.get('email')
-        queryset = Persons.objects.filter(email=email)
+        pwd = request.query_params.get('pwd')
+        queryset = Persons.objects.filter(email=email,password=pwd)
         if queryset:
-            serializer = personsLoginSerializer(queryset,many=True)
+            user = queryset.get()
+            user.token = self.create_token(user)
+            queryset = set()
+            queryset.add(user)
+            serializer = personsLoginGetTokenSerializer(queryset,many=True)
             return Response(serializer.data)
         else:
-            error = "no user with this email: %s"%(email)
+            error = "wrong sign-in information for: %s"%(email)
+            return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
+    
+    # GET 127.0.0.1:8000/api/persons/login_token/?token=dghffgnndsklskjskff
+    @action(detail=False, methods=['get'])
+    def login_token(self, request, *args, **kwargs):
+        """" authenticate user w/ token"""
+        token = request.query_params.get('token')
+        try:
+            decoded_payload = jwt_decode_handler(token)
+            id_person = decoded_payload['user_id']
+            queryset = Persons.objects.filter(id_person=id_person)
+            if queryset:
+                serializer = personsLoginSerializer(queryset,many=True)
+                return Response(serializer.data)
+            else:
+                error = "Invalid token"
+                return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            error = "Invalid token"
             return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
 
     # GET,POST 127.0.0.1:8000/api/persons/1/towns/

@@ -55,7 +55,10 @@ class Persons(models.Model):
     alias = models.CharField(max_length=100, blank=True, null=True)
     birthDate = models.DateField()
     email = models.EmailField()
-    password= models.CharField(max_length=254) #This field is only used for preliminary test purpose! a true auth will be implemented later. //TODO
+    password= models.CharField(max_length=254)
+
+    def __repr__(self):
+        return id_person + " : " + email
 
     class Meta:
         managed = True
