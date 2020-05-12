@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (!this.state.logged_in) {
+    if (localStorage.getItem('token') ? true : false) {
       let token = localStorage.getItem('token');
       let endpoint = "/api/persons/login_token/?token=";
       let req = new apiRequest();
