@@ -55,7 +55,7 @@ class SignUp extends Component {
           let usr = JSON.parse(this.responseText)[0];
           let usr_id = usr.id_person;
           let usr_token = usr.token;
-          self.props.handle_signUp(usr_id,usr_token);
+          self.props.handle_signIn(usr_id,usr_token);
           self.closePopUp();
         } else if (this.status === 409) {
           let error = JSON.parse(this.responseText).error;
@@ -305,5 +305,5 @@ export default SignUp;
 
 SignUp.propTypes = {
   showPopUp: PropTypes.bool.isRequired,
-  handle_signUp: PropTypes.func.isRequired,
+  handle_signIn: PropTypes.func.isRequired,
 };
