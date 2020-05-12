@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer.js";
 import SignIn from "./components/Sign/SignIn.js";
 import SignUp from "./components/Sign/SignUp.js";
 import SignOut from "./components/Sign/SignOut.js";
+import { apiRequest } from "./api/apiRequest.js";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,6 +18,33 @@ class App extends Component {
       user_id: 0,
       show_popUp: "",
     };
+  }
+
+  componentDidMount() {
+    if (!this.state.logged_in) {
+      let token = localStorage.getItem('token');
+      let endpoint = "/api/persons/login_token/?token=";
+      let req = new apiRequest();
+      req.open("GET", `${endpoint}${token}`);
+
+      let self = this;
+      req.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            let user = this.responseText[0];
+            self.setState({
+              user_id: user.id_person,
+              signed_in: true,
+            });
+          }
+          if (this.status === 404) {
+            console.log("token expired or wrong token"); //TODO
+          }
+        }
+      });
+  
+      req.send();
+    }
   }
 
   display_popUp = (type) => {

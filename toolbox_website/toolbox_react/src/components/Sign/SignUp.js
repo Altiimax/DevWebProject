@@ -5,8 +5,8 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "./Form.css";
 
-const bcrypt = require("bcryptjs");
-const saltRounds = 10;
+//const bcrypt = require("bcryptjs");
+//const saltRounds = 10;
 
 const user_initialState = {
   email: "",
