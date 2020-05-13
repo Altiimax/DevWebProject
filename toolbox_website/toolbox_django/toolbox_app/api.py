@@ -1,11 +1,15 @@
 import json
+import bcrypt
 from idlelib import query
 from os.path import defpath
 
 from django.http import QueryDict
+from django.db.models import CharField, Value
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.utils import jwt_decode_handler
 
 from .models import *
 from .serializers import *
@@ -16,6 +20,15 @@ from django.db import IntegrityError
 ###   PERSONS API   ###
 
 class personsViewSet(viewsets.GenericViewSet):
+
+    def create_token(self,user):
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+        payload = jwt_payload_handler(user)
+        token = jwt_encode_handler(payload)
+
+        return token
 
     # GET 127.0.0.1:8000/api/persons/
     def list(self, request, *args, **kwargs):
@@ -34,10 +47,19 @@ class personsViewSet(viewsets.GenericViewSet):
     # POST 127.0.0.1:8000/api/persons/
     def create(self, request, *args, **kwargs):
         """" create a new user """
-        serializer = personsSerializer(data=request.data)
+        data = request.data.copy()
+        data['password']= bcrypt.hashpw(data['password'].encode('utf8'), bcrypt.gensalt())
+        data['password'] = data['password'].decode('utf8')
+        serializer = personsSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         try:
             serializer.save()
+            queryset = Persons.objects.filter(email=data['email'])
+            user = queryset.get()
+            user.token = self.create_token(user)
+            queryset = set()
+            queryset.add(user)
+            serializer = personsLoginGetTokenSerializer(queryset,many=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except IntegrityError as exception:
             if "unique_alias" in str(exception):
@@ -54,17 +76,45 @@ class personsViewSet(viewsets.GenericViewSet):
         serializer = aliasesSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com
+    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com&pwd=ddfehisffdsfdcfcrfqc
     @action(detail=False, methods=['get'])
     def login(self, request, *args, **kwargs):
-        """" get user login info by its email"""
+        """" authenticate user w/o token"""
         email = request.query_params.get('email')
+        pwd = request.query_params.get('pwd')
         queryset = Persons.objects.filter(email=email)
         if queryset:
-            serializer = personsLoginSerializer(queryset,many=True)
-            return Response(serializer.data)
+            user = queryset.get()
+            if bcrypt.checkpw(pwd.encode('utf8'), user.password.encode('utf8')):
+                user.token = self.create_token(user)
+                queryset = set()
+                queryset.add(user)
+                serializer = personsLoginGetTokenSerializer(queryset,many=True)
+                return Response(serializer.data)
+            else:
+                error = "wrong sign-in information for: %s"%(email)
+                return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
         else:
-            error = "no user with this email: %s"%(email)
+            error = "wrong sign-in information for: %s"%(email)
+            return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
+    
+    # GET 127.0.0.1:8000/api/persons/login_token/?token=dghffgnndsklskjskff
+    @action(detail=False, methods=['get'])
+    def login_token(self, request, *args, **kwargs):
+        """" authenticate user w/ token"""
+        token = request.query_params.get('token')
+        try:
+            decoded_payload = jwt_decode_handler(token) #TODO signature expired? 
+            id_person = decoded_payload['user_id']
+            queryset = Persons.objects.filter(id_person=id_person)
+            if queryset:
+                serializer = personsLoginSerializer(queryset,many=True)
+                return Response(serializer.data)
+            else:
+                error = "Invalid token"
+                return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            error = "Invalid token"
             return Response({'error': error}, status=status.HTTP_404_NOT_FOUND)
 
     # GET,POST 127.0.0.1:8000/api/persons/1/towns/
@@ -388,3 +438,30 @@ class countriesViewSet(viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+#######################
+###   SEARCH  API   ###
+
+class searchViewSet(viewsets.GenericViewSet):
+
+    # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
+    def list(self, request, *args, **kwargs):
+        """" list all users """
+        what = "'%%{}%%'".format(request.query_params.get('what').replace("'", ""))
+        where = request.query_params.get('where')
+        query = '''
+                SELECT *
+                FROM "Groups"
+                JOIN "Towns" ON ("Groups".id_town = "Towns".id_town)
+                JOIN "ToolsGroups" ON ("Groups"."id_groupName" = "ToolsGroups"."id_groupName")
+                JOIN "Tools" ON ("ToolsGroups".id_tool = "Tools".id_tool)
+                WHERE "Groups"."groupType" = 'public' 
+                  AND LOWER("Towns"."townName") LIKE LOWER(%s) 
+                  AND ( LOWER("Tools"."toolName") LIKE LOWER(%s) 
+                        OR LOWER("Tools"."toolName") LIKE LOWER(%s) 
+                       );
+                ''' %(where, what, what)
+        queryset = Groups.objects.raw(query)
+        serializer = groupsDetailSerializer(queryset, many=True)
+        return Response(serializer.data)

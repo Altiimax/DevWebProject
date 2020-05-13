@@ -5,9 +5,6 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "./Form.css";
 
-const bcrypt = require("bcryptjs");
-const saltRounds = 10;
-
 const user_initialState = {
   email: "",
   firstname: "",
@@ -40,6 +37,7 @@ class SignUp extends Component {
     this.setState(user_initialState);
   };
 
+
   newAccountAPIRequest(newprofile) {
     let self = this; //self will be a reference to the SignUp class object
 
@@ -52,17 +50,21 @@ class SignUp extends Component {
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 201) {
-          let usr = JSON.parse(this.responseText);
+          let usr = JSON.parse(this.responseText)[0];
           let usr_id = usr.id_person;
-          self.props.handle_signUp(usr_id);
+          let usr_token = usr.token;
+          self.props.handle_signIn(usr_id,usr_token);
           self.closePopUp();
         } else if (this.status === 409) {
           let error = JSON.parse(this.responseText).error;
-          if (error.includes("alias")) {
-            document.getElementById("alias_error").innerHTML = error;
-          } else if (error.includes("email")) {
+          if (error.includes("email")) {
             document.getElementById("email_error").innerHTML = error;
-          } else {
+          } 
+          else if (error.includes("alias")) {
+            document.getElementById("email_error").innerHTML = "";
+            document.getElementById("alias_error").innerHTML = error;
+          } 
+          else {
             console.log(error);
           }
         }
@@ -117,7 +119,7 @@ class SignUp extends Component {
             value !== "" &&
             this.state.newPassword !== this.state.confirmPassword
           ) {
-            let errorMessage = "<p>Your passwords doesn't match!</p>";
+            let errorMessage = "<p>Passwords don't match!</p>";
             document.getElementById("password_error").innerHTML = errorMessage;
           } else {
             document.getElementById("password_error").innerHTML = "";
@@ -129,19 +131,15 @@ class SignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let self = this;
-    bcrypt.hash(this.state.newPassword, saltRounds, function (err, hash) {
-      // Password encryption
-      let data = {
-        lastName: self.state.lastname,
-        firstName: self.state.firstname,
-        birthDate: self.state.birthDate,
-        alias: self.state.alias,
-        email: self.state.email,
-        password: hash,
-      };
-      self.newAccountAPIRequest(JSON.stringify(data));
-    });
+    let data = {
+      lastName: this.state.lastname,
+      firstName: this.state.firstname,
+      birthDate: this.state.birthDate,
+      alias: this.state.alias,
+      email: this.state.email,
+      password: this.state.newPassword,
+    };
+    this.newAccountAPIRequest(JSON.stringify(data));
   }
 
   render() {
@@ -255,21 +253,22 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
               <span className="error" id="password_error"></span>
-              <br />
-              <label className="FormField_CheckBox" htmlFor="hasagreed"></label>
-              <input
-                required
-                type="checkbox"
-                className="FormField_Input_Check"
-                name="hasagreed"
-                value={this.state.hasagreed}
-                onChange={this.handleChange}
-              />{" "}
-              I agree with all the statements in{" "}
-              <a href="/terms" className="FormField_TermsLink">
-                {" "}
-                terms of service.{" "}
-              </a>
+              <div>
+                <label className="FormField_CheckBox" htmlFor="hasagreed"></label>
+                <input
+                  required
+                  type="checkbox"
+                  className="FormField_Input_Check"
+                  name="hasagreed"
+                  value={this.state.hasagreed}
+                  onChange={this.handleChange}
+                />{" "}
+                I agree with all the statements in{" "}
+                <a href="/terms" className="FormField_TermsLink">
+                  {" "}
+                  terms of service.{" "}
+                </a>
+              </div>
               <div className="FormBtns">
                 <input
                   className="FormCancelBtn"
@@ -295,5 +294,5 @@ export default SignUp;
 
 SignUp.propTypes = {
   showPopUp: PropTypes.bool.isRequired,
-  handle_signUp: PropTypes.func.isRequired,
+  handle_signIn: PropTypes.func.isRequired,
 };

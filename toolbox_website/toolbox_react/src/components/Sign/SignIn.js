@@ -5,7 +5,6 @@ import { apiRequest } from "../../api/apiRequest.js";
 
 import "./Form.css";
 
-const bcrypt = require("bcryptjs");
 
 const user_initialState = {
   id: "",
@@ -32,37 +31,27 @@ class SignIn extends Component {
     this.setState(user_initialState);
   };
 
-  loginAPIRequest(email) {
+  loginAPIRequest(email,pwd) {
     let self = this; //self will be a reference to the SignIn class object
 
     let endpoint = "/api/persons/login/?email=";
 
     let req = new apiRequest();
-    req.open("GET", `${endpoint}${email}`);
+    req.open("GET", `${endpoint}${email}&pwd=${pwd}`);
 
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let usr = JSON.parse(this.responseText);
           let usr_id = usr[0].id_person;
-          let usr_pwd = usr[0].password;
-          bcrypt.compare(self.state.password, usr_pwd, function (err, result) {
-            // check if password is valid
-            if (result) {
-              document.getElementById("signInError").innerHTML = "";
-              self.props.handle_signIn(usr_id);
-              self.closePopUp();
-            } else {
-              //wrong password
-              document.getElementById("signInError").innerHTML =
-                "Incorrect password";
-            }
-          });
+          let usr_token = usr[0].token;
+          document.getElementById("signInError").innerHTML = "";
+          self.props.handle_signIn(usr_id,usr_token);
+          self.closePopUp();
         }
         if (this.status === 404) {
-          //no user with this email
-          document.getElementById("signInError").innerHTML =
-            "No user with this email address";
+
+          document.getElementById("signInError").innerHTML = "Incorrect sign-in information";
         }
       }
     });
@@ -79,7 +68,8 @@ class SignIn extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.loginAPIRequest(this.state.email);
+    this.loginAPIRequest(this.state.email, this.state.password);
+
   };
 
   render() {

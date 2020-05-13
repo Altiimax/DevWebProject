@@ -9,6 +9,7 @@ router.register(r'tools', api.toolsViewSet, basename='tools')
 router.register(r'groups', api.groupsViewSet, basename='groups')
 router.register(r'towns', api.townsViewSet, basename='towns')
 router.register(r'countries', api.countriesViewSet, basename='countries')
+router.register(r'search', api.searchViewSet, basename='search')
 
 
 urlpatterns = [

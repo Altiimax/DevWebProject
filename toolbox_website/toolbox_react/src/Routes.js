@@ -14,11 +14,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route
-          exact
-          path="/profile"
-          render={(props) => <Profile user_id={this.props.user_id} />}
-        />
+        <Route exact path="/profile" component={Profile} />
         <Route exact path="/help" component={Help} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/about-us" component={AboutUs} />

@@ -70,7 +70,17 @@ class personsSerializer(serializers.ModelSerializer):
 class personsLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = Persons
-        fields = ('id_person', 'email', 'password')
+        fields = ('id_person', 'alias', 'email')
+
+class personsLoginGetTokenSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
+
+    def get_token(self,obj):
+        return obj.token
+
+    class Meta:
+        model = Persons
+        fields = ('id_person', 'email', 'password', 'token')
 
 
 ##################################
