@@ -49,6 +49,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    //del this comment in master
     if(tokenIsValid()){
       this.getUserProfileAPIRequest(userFromToken().id);
     }
