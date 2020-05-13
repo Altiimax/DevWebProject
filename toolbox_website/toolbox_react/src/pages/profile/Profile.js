@@ -17,8 +17,6 @@ class Profile extends Component {
     super(props);
     this.state = {
       user_id: 0,
-      groupData: "",
-      data: "",
     };
   }
 
@@ -94,15 +92,20 @@ class Profile extends Component {
           for (let i in resp) {
             console.log(resp[i]);
             //il faut rajouter les images via le props 'img' j'ai des problèmes lors de l'import je sais pas pq!
-            toolList +=
-              "<MyTools name='" +
+            toolList += (
+              <MyTools
+                picture={resp[1].toolImages[0].image}
+                name={resp[i].toolName}
+                price={resp[i].toolPrice}
+                desc={resp[i].toolDescription}
+              />
+            );
+            /* "<MyTools name='" +
               resp[i].toolName +
               "' price='" +
               resp[i].toolPrice +
-              "'/>";
+              "'/>";*/
           }
-          //je ne peux pas utiliser document.getElementById ici mais seulement dans componentDidMount
-          //document.getElementById("myTools").innerHTML += toolList;
           console.log(toolList);
           console.log(resp);
           ReactDOM.render(toolList, document.getElementById("displayInfos"));
@@ -124,7 +127,7 @@ class Profile extends Component {
         <div className="contentProfile" id="displayInfos"></div>
         <AddTools />
         <CreateGroup />
-        <span className="myTools">
+        <span className="myTools" id="ici">
           <button className="addTools" onClick={console.log("ajouter")}>
             Add tools
           </button>
@@ -149,7 +152,7 @@ class Profile extends Component {
             ×
           </a>
           <button onClick={this.getMyToolsApi}>MyTools</button>
-          <button onClick={() => this.getMyGroupsApi(1)}>MyGroups</button>
+          <button onClick={() => this.getMyGroupsApi(6)}>MyGroups</button>
           <button onClick={this.getMyProfileApi}>MyProfile</button>
         </div>
         <button
