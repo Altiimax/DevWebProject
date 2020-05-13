@@ -5,7 +5,7 @@
 
 .FormField_Label,
 .FormField_CheckBox {
-  font-family: 'Abel', sans-serif;
+  font-family: "Abel", sans-serif;
   text-transform: uppercase;
   color: black;
   padding: 0;
@@ -14,7 +14,7 @@
 }
 
 .FormField_Input {
-  font-family: 'Abel', sans-serif;
+  font-family: "Abel", sans-serif;
   padding: 0;
   margin: 0em 0em 0.5em 0em;
   color: black;
@@ -33,7 +33,7 @@
 
 .FormBtns {
   text-align: center;
-} 
+}
 
 .FormBtns input {
   border-width: 1px;
@@ -41,10 +41,10 @@
   border-radius: 1em;
   width: 8em;
   margin: 0 2em 1em 2em;
-  font-family: 'Abel', sans-serif;
+  font-family: "Abel", sans-serif;
   font-weight: bold;
   font-size: 1.2em;
-} 
+}
 
 .FormBtns input.FormCancelBtn {
   background-color: rgb(240, 89, 89);
@@ -75,7 +75,6 @@
   background-color: rgb(51, 155, 51);
   outline: none;
 }
-
 
 a.FormField_TermsLink {
   color: rgb(12, 141, 201);

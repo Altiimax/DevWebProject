@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Col } from "react-bootstrap";
+import { Form /*Col*/ } from "react-bootstrap";
 import "./FindTools.css";
 
 class FindTools extends Component {

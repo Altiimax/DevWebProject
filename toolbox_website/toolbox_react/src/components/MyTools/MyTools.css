@@ -1,20 +1,50 @@
 .oneTool {
-  background-color: black;
+  background-color: white;
   flex: auto;
-  width: 10vmax;
+  max-width: 250px;
+  min-width: 150px;
+  height: 350px;
   margin: 10px;
   padding: 10px;
+  border-radius: 15px;
+  transition: margin-top 0.5s;
 }
 
 .oneTool:hover {
-  background-color: red;
+  box-shadow: 5px 5px 10px black;
+  margin-top: 5px;
 }
 
 .imageTool {
   margin: 10px;
 }
 
-.informTool {
-  border-top: white solid 2px;
+.toolTipText {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
   text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.oneTool:hover .toolTipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+.informTool {
+  border-top: black solid 2px;
+  text-align: center;
+  color: black;
+}
+
+.priceTool {
+  color: black;
+  text-align: center;
+  border: black 1px solid;
+  border-radius: 10px;
 }
