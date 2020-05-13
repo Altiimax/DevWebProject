@@ -15,7 +15,7 @@ function MyTools(props) {
       <div className="imageTool">
         <img
           src={picture}
-          alt="--Image of the tool not found--"
+          alt="--The tool pic is not found--"
           height="auto"
           width="100%"
         />

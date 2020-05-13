@@ -16,20 +16,9 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user_id: 0,
       groupData: "",
       data: "",
-      data2: [
-        {
-          group: {
-            id_groupName: "TestGroup1",
-            groupType: "public",
-            groupDescription: null,
-            groupRange: 50,
-            id_town: 1,
-          },
-          groupAdmin: true,
-        },
-      ],
     };
   }
 
@@ -62,26 +51,33 @@ class Profile extends Component {
   }
 
   getMyGroupsApi = (id_pers) => {
-    let endpoint = "/api/persons/" + id_pers + "/groups";
+    if (id_pers === 0) {
+      document.getElementById("displayInfos").innerHTML =
+        "You must be logged to acces thoses informations!";
+      document.getElementById("displayInfos").style.display = "flex";
+    } else {
+      let endpoint = "/api/persons/" + id_pers + "/groups";
 
-    let req = new apiRequest();
-    req.open("GET", `${endpoint}`);
+      let req = new apiRequest();
+      req.open("GET", `${endpoint}`);
 
-    req.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        if (this.status === 200) {
-          let resp = JSON.parse(this.responseText);
-          console.log(resp);
-          console.log(this.responseText);
-          ReactDOM.render(
-            <MyGroups data={resp} />,
-            document.getElementById("ici")
-          );
+      req.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+          if (this.status === 200) {
+            let resp = JSON.parse(this.responseText);
+            console.log(resp);
+            console.log(this.responseText);
+            ReactDOM.render(
+              <MyGroups data={resp} />,
+              document.getElementById("displayInfos")
+            );
+            document.getElementById("displayInfos").style.display = "flex";
+          }
         }
-      }
-    });
+      });
 
-    req.send();
+      req.send();
+    }
   };
 
   getMyToolsApi() {
@@ -109,6 +105,8 @@ class Profile extends Component {
           //document.getElementById("myTools").innerHTML += toolList;
           console.log(toolList);
           console.log(resp);
+          ReactDOM.render(toolList, document.getElementById("displayInfos"));
+          document.getElementById("displayInfos").style.display = "flex";
         }
       }
     });
@@ -123,6 +121,7 @@ class Profile extends Component {
       <div className="Profile" id="main">
         <h1> Temporary Profile </h1>
         <section id="profile"></section>
+        <div className="contentProfile" id="displayInfos"></div>
         <AddTools />
         <CreateGroup />
         <span className="myTools">
@@ -150,7 +149,7 @@ class Profile extends Component {
             ×
           </a>
           <button onClick={this.getMyToolsApi}>MyTools</button>
-          <button onClick={this.getMyGroupsApi(1)}>MyGroups</button>
+          <button onClick={() => this.getMyGroupsApi(1)}>MyGroups</button>
           <button onClick={this.getMyProfileApi}>MyProfile</button>
         </div>
         <button
