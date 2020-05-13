@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+//import { Table } from "react-bootstrap";
 import "./MyTools.css";
 
 function MyTools(props) {
@@ -8,7 +8,7 @@ function MyTools(props) {
   const [name] = useState(props.name);
   const [description] = useState(props.desc);
   const [price] = useState(props.price);
-  const [review] = useState(props.review);
+  //const [review] = useState(props.review);
 
   return (
     <div className="oneTool">
@@ -24,6 +24,7 @@ function MyTools(props) {
         <h4>{name}</h4>
       </div>
       <div className="priceTool">Price : {price} €</div>
+      <span className="toolTipText">{description}</span>
     </div>
   );
 }

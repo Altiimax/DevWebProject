@@ -8,18 +8,22 @@ function MyGroups(props) {
   let tabBody = "";
   for (let i in data) {
     let admin = "";
-    /* if (tabData.groupAdmin) {
+    //Obliger de mettre deux if a la suite a cause du useEffect qui accepte pas le if else, je sais pas pq!
+    if (tabData[i].groupAdmin) {
       admin = "Yes";
-    } else {
+    }
+    if (!tabData[i].groupAdmin) {
       admin = "No";
-    }*/
+    }
     tabBody +=
-      "<tr><td>yes</td><td>" +
-      tabData[i].id_groupName +
+      "<tr><td>" +
+      admin +
       "</td><td>" +
-      tabData[i].groupType +
+      tabData[i].group.id_groupName +
+      "</td><td>" +
+      tabData[i].group.groupType +
       "</td><td>location</td><td>" +
-      tabData[i].groupRange +
+      tabData[i].group.groupRange +
       "</td></tr>";
   }
   useEffect(() => {
