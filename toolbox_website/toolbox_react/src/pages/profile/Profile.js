@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { apiRequest } from "../../api/apiRequest.js";
 import tokenIsValid, { userFromToken } from "../../utils";
 import history from "../../history";
@@ -25,11 +24,10 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    if(tokenIsValid()){
+    if (tokenIsValid()) {
       this.getUserProfileAPIRequest(userFromToken().id);
-    }
-    else {
-      history.push('/');
+    } else {
+      history.push("/");
     }
   }
 
@@ -53,33 +51,27 @@ class Profile extends Component {
   }
 
   getMyGroupsApi = (id_pers) => {
-    if (id_pers === 0) {
-      document.getElementById("displayInfos").innerHTML =
-        "You must be logged to acces thoses informations!";
-      document.getElementById("displayInfos").style.display = "flex";
-    } else {
-      let endpoint = "/api/persons/" + id_pers + "/groups";
+    let endpoint = "/api/persons/" + id_pers + "/groups";
 
-      let req = new apiRequest();
-      req.open("GET", `${endpoint}`);
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
 
-      req.addEventListener("readystatechange", function () {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            let resp = JSON.parse(this.responseText);
-            console.log(resp);
-            console.log(this.responseText);
-            ReactDOM.render(
-              <MyGroups data={resp} />,
-              document.getElementById("displayInfos")
-            );
-            document.getElementById("displayInfos").style.display = "flex";
-          }
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          let resp = JSON.parse(this.responseText);
+          console.log(resp);
+          console.log(this.responseText);
+          ReactDOM.render(
+            <MyGroups data={resp} />,
+            document.getElementById("displayInfos")
+          );
+          document.getElementById("displayInfos").style.display = "flex";
         }
-      });
+      }
+    });
 
-      req.send();
-    }
+    req.send();
   };
 
   getMyToolsApi() {
@@ -151,7 +143,9 @@ class Profile extends Component {
             ×
           </a>
           <button onClick={this.getMyToolsApi}>MyTools</button>
-          <button onClick={() => this.getMyGroupsApi(1)}>MyGroups</button>
+          <button onClick={() => this.getMyGroupsApi(userFromToken().id)}>
+            MyGroups
+          </button>
           <button onClick={this.getMyProfileApi}>MyProfile</button>
         </div>
         <button
