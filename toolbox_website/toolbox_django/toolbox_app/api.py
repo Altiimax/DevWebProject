@@ -1,6 +1,5 @@
 import json
 import bcrypt
-from idlelib import query
 from os.path import defpath
 
 from django.http import QueryDict
