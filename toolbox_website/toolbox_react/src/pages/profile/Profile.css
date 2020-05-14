@@ -20,11 +20,9 @@
 
 .contentWrapper {
   flex-wrap: wrap;
-  padding: 10%;
 }
 
 .contentProfile {
-  padding: 10%;
   display: none;
 }
 
@@ -45,7 +43,7 @@
 }
 .addTools:hover {
   box-shadow: 5px 5px 10px black;
-
+  background-color: rgb(192, 197, 181);
   outline: none;
 }
 .addTools:active {

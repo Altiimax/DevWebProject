@@ -7,10 +7,9 @@ import MyGroups from "../../components/MyGroups/MyGroups.js";
 import MyTools from "../../components/MyTools/MyTools.js";
 import CreateGroup from "../../components/CreateGroup/CreateGroup.js";
 import "./Profile.css";
-import icon from "../../assets/toolBox_logo.png";
 import ReactDOM from "react-dom";
 /**
- * This component is used to display the account informations
+ * This page is used to display the account informations
  * of the member.
  */
 class Profile extends Component {
@@ -117,15 +116,6 @@ class Profile extends Component {
         </div>
         <AddTools />
         <CreateGroup />
-        <span className="myTools" id="ici">
-          <MyTools
-            picture={icon}
-            name="Nom De L'objet"
-            price="8800"
-            desc="Description de l'objet"
-          />
-          <MyTools picture={icon} name="Nom De L'objet" price="20" />
-        </span>
         <div className="sidenav" id="side">
           <a
             className="closebtn"
