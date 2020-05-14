@@ -30,6 +30,7 @@ class Profile extends Component {
   }
 
   getUserProfileAPIRequest(id) {
+    let reponse = "";
     let endpoint = "/api/persons/";
 
     let req = new apiRequest();
@@ -72,8 +73,8 @@ class Profile extends Component {
     req.send();
   };
 
-  getMyToolsApi() {
-    let endpoint = "/api/tools/";
+  getMyToolsApi(id_pers) {
+    let endpoint = "/api/persons/" + id_pers + "/tools";
 
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
@@ -82,26 +83,18 @@ class Profile extends Component {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let resp = JSON.parse(this.responseText);
-          let toolList = "";
+          let toolList = [];
           for (let i in resp) {
-            console.log(resp[i]);
             //il faut rajouter les images via le props 'img' j'ai des problèmes lors de l'import je sais pas pq!
-            toolList += (
+            toolList.push(
               <MyTools
-                picture={resp[1].toolImages[0].image}
+                picture={resp[i].toolImages[0].image}
                 name={resp[i].toolName}
                 price={resp[i].toolPrice}
                 desc={resp[i].toolDescription}
               />
             );
-            /* "<MyTools name='" +
-              resp[i].toolName +
-              "' price='" +
-              resp[i].toolPrice +
-              "'/>";*/
           }
-          console.log(toolList);
-          console.log(resp);
           ReactDOM.render(toolList, document.getElementById("displayInfos"));
           document.getElementById("displayInfos").style.display = "flex";
         }
@@ -116,15 +109,17 @@ class Profile extends Component {
   render() {
     return (
       <div className="Profile" id="main">
-        <h1> Temporary Profile </h1>
-        <section id="profile"></section>
-        <div className="contentProfile" id="displayInfos"></div>
-        <AddTools />
-        <CreateGroup />
-        <span className="myTools" id="ici">
+        <h1 className="Greetings"> Temporary Profile </h1>
+        <section className="Greetings" id="profile"></section>
+        <div className="contentWrapper">
           <button className="addTools" onClick={console.log("ajouter")}>
             Add tools
           </button>
+          <div className="contentProfile" id="displayInfos"></div>
+        </div>
+        <AddTools />
+        <CreateGroup />
+        <span className="myTools" id="ici">
           <MyTools
             picture={icon}
             name="Nom De L'objet"
@@ -133,7 +128,6 @@ class Profile extends Component {
           />
           <MyTools picture={icon} name="Nom De L'objet" price="20" />
         </span>
-        <span className="myGroups" id="ici"></span>
         <div className="sidenav" id="side">
           <a
             className="closebtn"
@@ -145,7 +139,9 @@ class Profile extends Component {
           >
             ×
           </a>
-          <button onClick={this.getMyToolsApi}>MyTools</button>
+          <button onClick={() => this.getMyToolsApi(userFromToken().id)}>
+            MyTools
+          </button>
           <button onClick={() => this.getMyGroupsApi(userFromToken().id)}>
             MyGroups
           </button>
