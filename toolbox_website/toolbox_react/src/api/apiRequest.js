@@ -4,15 +4,21 @@ let password = "devweb2";
 /*-----api request url information-----*/
 let uri = "http://127.0.0.1";
 let port = 8000;
+let isInDev = require('../prod.json').inDev;
 
 export class apiRequest {
   constructor() {
     this.xhr = new XMLHttpRequest();
     this.xhr.withCredentials = true;
   }
-
+  
   open(method, endpoint) {
-    this.xhr.open(method, `${uri}:${port}${endpoint}`, true);
+    if(isInDev){
+      this.xhr.open(method, `${uri}:${port}${endpoint}`, true);
+    }
+    else{
+      this.xhr.open(method, `${endpoint}`, true);
+    }
     this.xhr.setRequestHeader(
       "Authorization",
       "Basic " + btoa(user + ":" + password)
