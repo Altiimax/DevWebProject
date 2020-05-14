@@ -75,7 +75,7 @@ class personsViewSet(viewsets.GenericViewSet):
         serializer = aliasesSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com&pwd=ddfehisffdsfdcfcrfqc
+    # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com&pwd=testpwd1
     @action(detail=False, methods=['get'])
     def login(self, request, *args, **kwargs):
         """" authenticate user w/o token"""

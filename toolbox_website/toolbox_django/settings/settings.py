@@ -79,7 +79,8 @@ DATABASES = {
         'NAME': 'toolbox_db',
         'USER': 'admin',
         'PASSWORD': 'devweb2',
-        'HOST': '109.128.245.26',
+        #'HOST': '109.128.245.26',
+        'HOST': '51.178.40.108',
         'PORT': '5432',
     }
 }

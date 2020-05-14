@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+
+  postgre_sql:
+    build: .
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: devweb2
+    volumes:
+      - /home/vps-martin/toolbox_db/log/:/var/log/postgresql
+    container_name: postgreSQL
