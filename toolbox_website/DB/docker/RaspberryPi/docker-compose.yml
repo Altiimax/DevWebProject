@@ -10,4 +10,6 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: devweb2
+    volumes:
+      - /home/toolbox_db/log/:/var/log/postgresql
     container_name: postgreSQL

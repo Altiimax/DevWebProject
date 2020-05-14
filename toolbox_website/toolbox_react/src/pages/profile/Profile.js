@@ -51,7 +51,7 @@ class Profile extends Component {
   }
 
   getMyGroupsApi = (id_pers) => {
-    let endpoint = "/api/persons/" + id_pers + "/groups";
+    let endpoint = "/api/persons/" + id_pers + "/groups/";
 
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
