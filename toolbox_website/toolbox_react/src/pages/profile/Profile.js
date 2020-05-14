@@ -83,7 +83,11 @@ class Profile extends Component {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let resp = JSON.parse(this.responseText);
-          let toolList = [];
+          let toolList = [
+            <button className="addTools" onClick={console.log("ajouter")}>
+              Add tools
+            </button>,
+          ];
           for (let i in resp) {
             //il faut rajouter les images via le props 'img' j'ai des problèmes lors de l'import je sais pas pq!
             toolList.push(
@@ -103,18 +107,12 @@ class Profile extends Component {
 
     req.send();
   }
-
-  //render les tables en claire avec de fausses infos, il faudra y mettre les infos de profil
-  //et mettre le tout dans un side bar pour display que ce qu'il faut.
   render() {
     return (
       <div className="Profile" id="main">
         <h1 className="Greetings"> Temporary Profile </h1>
         <section className="Greetings" id="profile"></section>
         <div className="contentWrapper">
-          <button className="addTools" onClick={console.log("ajouter")}>
-            Add tools
-          </button>
           <div className="contentProfile" id="displayInfos"></div>
         </div>
         <AddTools />
