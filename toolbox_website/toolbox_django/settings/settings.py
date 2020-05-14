@@ -34,6 +34,9 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'corsheaders.middleware.CorsMiddleware',
+    #'django_referrer_policy.middleware.ReferrerPolicyMiddleware',   # ! UN-COMMENT THIS LINE IN PRODUCTION
+    #'csp.middleware.CSPMiddleware',                                 # ! UN-COMMENT THIS LINE IN PRODUCTION
+    #'django_feature_policy.FeaturePolicyMiddleware',                # ! UN-COMMENT THIS LINE IN PRODUCTION
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,6 +129,18 @@ STATIC_URL = '/static/'
 
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #SECURE_SSL_REDIRECT = True
+#SECURE_HSTS_SECONDS = 30
+#REFERRER_POLICY = 'no-referrer'
+#FEATURE_POLICY = {
+#    'geolocation': 'none',
+#}
+#CSP_DEFAULT_SRC = ("'none'")  
+#CSP_CONNECT_SRC = ("'self'",'109.128.245.26:5432')  # ! change this IP with the ip address or url of your database 
+#CSP_STYLE_SRC = ("'self'","'unsafe-inline'",'fonts.googleapis.com','maxcdn.bootstrapcdn.com')
+#CSP_SCRIPT_SRC = ("'self'","'unsafe-inline'")
+#CSP_FONT_SRC = ("'self'","'unsafe-inline'",'fonts.gstatic.com')
+#CSP_IMG_SRC = ("'self'","'unsafe-inline'")
+
 
 
 #STATICFILES_DIRS = [
