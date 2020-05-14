@@ -27,7 +27,7 @@ class SetupClass(APITestCase):
             "alias": "fobar",
             "birthDate": "1000-12-01",
             "email": "foo.bar@gmail.com",
-            "password": "testPwd2"
+            "password": "$2a$10$hgivPBtUFmqnNZmvHsMeW.WLn/qHwXgVw16WMpcQXGcx74TJbNlry"
         }
         self.dummyPerson_object = Persons.objects.create(**self.dummyPerson_dict)
         self.dummyPerson_object_id = self.dummyPerson_object.id_person
@@ -111,15 +111,14 @@ class TestPersonsApi(SetupClass):
 
     def test_personsViewSet_login_GET(self):
         #With correct email
-        response = self.auth_client.get("/api/persons/login/?email=foo.bar@gmail.com", format='json')
+        response = self.auth_client.get("/api/persons/login/?email=foo.bar@gmail.com&pwd=testPwd1", format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(json.loads(response.content)[0].get("email"), self.dummyPerson_dict.get("email"))
-        self.assertEqual(json.loads(response.content)[0].get("pwd_test"), self.dummyPerson_dict.get("pwd_test"))
         
         #With incorrect email
-        response = self.auth_client.get("/api/persons/login/?email=fakefoo.bar@gmail.com", format='json')
+        response = self.auth_client.get("/api/persons/login/?email=fakefoo.bar@gmail.com&pwd=testPwd1", format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertEqual(json.loads(response.content).get("error"), "no user with this email: fakefoo.bar@gmail.com")
+        self.assertEqual(json.loads(response.content).get("error"), "wrong sign-in information for: fakefoo.bar@gmail.com")
 
     def test_personsViewSet_towns_GET(self):
         response = self.auth_client.get("/api/persons/1/towns/", format='json')

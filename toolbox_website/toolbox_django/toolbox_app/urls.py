@@ -13,7 +13,7 @@ router.register(r'search', api.searchViewSet, basename='search')
 
 
 urlpatterns = [
-    path(r'',views.index,name='index'),
+    path(r'dev/',views.index,name='index'),
     path(r'api/', include(router.urls)),
     path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

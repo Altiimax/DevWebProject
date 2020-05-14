@@ -25,7 +25,8 @@ class Groups(models.Model):
 
 
 class GroupsMembers(models.Model):
-    id_person = models.OneToOneField('Persons', models.DO_NOTHING, db_column='id_person', primary_key=True)
+    id_groupsMembers = models.AutoField(primary_key=True)
+    id_person = models.ForeignKey('Persons', models.DO_NOTHING, db_column='id_person')
     id_groupName = models.ForeignKey(Groups, models.DO_NOTHING, db_column='id_groupName')
     groupAdmin = models.BooleanField()
 
@@ -97,6 +98,9 @@ class Tools(models.Model):
     toolDescription = models.TextField(blank=True, null=True)
     toolPrice = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
 
+    def __repr__(self):
+        return "" + toolName
+
     class Meta:
         managed = True
         db_table = 'Tools'
@@ -113,7 +117,8 @@ class ToolImages(models.Model):
 
 
 class ToolsGroups(models.Model):
-    id_tool = models.OneToOneField(Tools, models.DO_NOTHING, db_column='id_tool', primary_key=True)
+    id_toolGroups = models.AutoField(primary_key=True)
+    id_tool = models.ForeignKey(Tools, models.DO_NOTHING, db_column='id_tool')
     id_groupName = models.ForeignKey(Groups, models.DO_NOTHING, db_column='id_groupName')
 
     class Meta:

@@ -1,0 +1,8 @@
+**/__pycache__/
+**.log
+**.pot
+**.pyc
+**.DS_*
+venv
+node_modules
+README.md
