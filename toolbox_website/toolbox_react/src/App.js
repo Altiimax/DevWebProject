@@ -83,6 +83,7 @@ class App extends Component {
 
   handle_signOut = () => {
     localStorage.removeItem('token');
+    document.getElementById("userNameDisplay").innerHTML = "";
     history.push('/');
     this.setState({
       user_id: 0,

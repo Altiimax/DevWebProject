@@ -54,6 +54,7 @@ def index(request):
             <a href="http://127.0.0.1:8000/admin">here</a> to login as admin. 
             </section>
         </div>
+        <img src="/media/toolsImgs/Concrete3_1.jpg" />
     </body>
     </html>
     """

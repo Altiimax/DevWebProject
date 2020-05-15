@@ -17,7 +17,6 @@ SECRET_KEY = '5dja8*ii$qrd+mk^9jksua^7=kl+l3*ricfek0170832$owc_#'
 
 ALLOWED_HOSTS = ['toolbox-app.herokuapp.com','127.0.0.1','localhost']
 
-
 INSTALLED_APPS = [
     'toolbox_app.apps.Toolbox_appConfig',
     'rest_framework',
@@ -123,6 +122,8 @@ JWT_AUTH = {
 }
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 ########################################################
 #! PRODUCTION SETTINGS 
