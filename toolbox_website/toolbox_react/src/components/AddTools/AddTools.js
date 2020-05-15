@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 //import { Modal } from "react-bootstrap";
 import { Form, Col } from "react-bootstrap";
+import { apiRequest } from "../../api/apiRequest.js";
+import { userFromToken } from "../../utils";
 import "./AddTools.css";
 
 const initialStates = {
@@ -25,6 +27,24 @@ class AddTools extends Component {
     initialStates,
   };
 
+  addToolApi = (user_id, data) => {
+    let endpoint = "/api/persons/" + user_id + "/tools/";
+    let req = new apiRequest();
+    req.open("POST", `${endpoint}`);
+    req.contentType("json");
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 201) {
+          console.log(this.responseText);
+        }
+      }
+    });
+
+    req.send(data);
+    console.log("envoyer");
+  };
+
   handleChange = (e) => {
     let target = e.target;
     let value = target.value;
@@ -33,6 +53,16 @@ class AddTools extends Component {
     this.setState({
       [name]: value,
     });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let data = {
+      toolName: this.state.toolName,
+      toolDescription: this.state.toolDescription,
+      toolPrice: this.state.price,
+    };
+    this.addToolApi(userFromToken().id, JSON.stringify(data));
   };
 
   render() {
@@ -89,13 +119,11 @@ class AddTools extends Component {
               <label className="FormField_Label" htmlFor="currency">
                 Currency
               </label>
-              <input
-                type="text"
-                name="currency"
-                required
-                onChange={this.handleChange}
-              />
-              {/*A modifier*/}
+              <select defaultValue={"Euro"} name="currency">
+                <option value="Euro">€</option>
+                <option value="Dollar">$</option>
+                <option value="LivreSterling">£</option>
+              </select>
             </Col>
             <Col>
               <label className="FormField_Label" htmlFor="typeOfRent">
@@ -112,13 +140,19 @@ class AddTools extends Component {
           </Form.Row>
           <br />
           <Form.Row>
-            <label htmlFor="pictures">Select a file: </label>
+            <label htmlFor="pictures"></label>
             <input
               type="file"
+              required
+              multiple
               id="pictures"
               name="pictures"
               onChange={this.handleChange}
             />
+            <section>
+              To select multiple files, hold down the CTRL or SHIFT key while
+              selecting.
+            </section>
           </Form.Row>
           <br />
           <div className="FormBtns">

@@ -29,7 +29,6 @@ class Profile extends Component {
   }
 
   getUserProfileAPIRequest(id) {
-    let reponse = "";
     let endpoint = "/api/persons/";
 
     let req = new apiRequest();
