@@ -10,6 +10,13 @@
   animation: roll-in-left 1.3s ease-out both;
 }
 
+
+#userNameDisplay {
+  display: block;
+  margin-left: 3em;
+  color:rgb(255, 255, 255);
+}
+
 /*.navTitle {
   font-family: "Abel", sans-serif;
   color: rgb(247, 220, 9);

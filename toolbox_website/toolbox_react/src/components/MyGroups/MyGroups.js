@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Table } from "react-bootstrap";
+import CreateGroup from "../CreateGroup/CreateGroup.js";
 import "./MyGroups.css";
 
 function MyGroups(props) {
@@ -44,8 +46,17 @@ function MyGroups(props) {
       return compare();
     }
   }
+
+  function displayPopup(){
+    let p = <CreateGroup showPopUp={true}/>;
+    ReactDOM.render(p, document.getElementById("newGroupPopup"));
+  }
+
+  document.getElementById("profileSection").innerHTML = "My Groups";
   return (
     <div>
+      <button id="newGroupBtn" onClick={displayPopup}>New Group</button>
+      <div id="newGroupPopup"></div>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

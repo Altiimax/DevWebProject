@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-//import { Modal } from "react-bootstrap";
-import { Form, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
+import { Modal, Form, Col } from "react-bootstrap";
 import { apiRequest } from "../../api/apiRequest.js";
 import { userFromToken } from "../../utils";
+import addimg from "./add.png";
+
 import "./AddTools.css";
 
 const initialStates = {
@@ -23,8 +25,19 @@ const initialStates = {
  * @param
  */
 class AddTools extends Component {
-  state = {
-    initialStates,
+  constructor(props) {
+    super(props);
+    this.state = initialStates;
+    this.showPopUp = true;
+  }
+
+  componentDidUpdate() {
+    this.showPopUp = this.props.showPopUp;
+  }
+
+  closePopUp = () => {
+    this.showPopUp = false;
+    this.setState(initialStates);
   };
 
   addToolApi = (user_id, data) => {
@@ -67,8 +80,18 @@ class AddTools extends Component {
 
   render() {
     return (
+      <>
+      <Modal show={this.showPopUp}
+          onHide={() => {
+            this.closePopUp();
+          }}
+      >
+      <Modal.Header closeButton>
+        <Modal.Title>Add new tool</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
       <div className="addToolForm">
-        <h1 className="formTitle">Add new tool</h1>
         <Form className="baseForm" onSubmit={this.handleSubmit}>
           <label className="FormField_Label" htmlFor="toolName">
             Tool Name
@@ -90,16 +113,6 @@ class AddTools extends Component {
             name="toolDescription"
             onChange={this.handleChange}
           />
-          <label className="FormField_Label" htmlFor="toolState">
-            State of wear
-          </label>
-          <select defaultValue={"Used"} name="toolState">
-            <option value="New">New</option>
-            <option value="Bit used">Bit used</option>
-            <option value="Used">Used</option>
-            <option value="Pretty used">Pretty used</option>
-            <option value="In bad conditions">In bad conditions</option>
-          </select>
           <Form.Row>
             <Col>
               <label className="FormField_Label" htmlFor="price">
@@ -116,16 +129,6 @@ class AddTools extends Component {
               />
             </Col>
             <Col>
-              <label className="FormField_Label" htmlFor="currency">
-                Currency
-              </label>
-              <select defaultValue={"Euro"} name="currency">
-                <option value="Euro">€</option>
-                <option value="Dollar">$</option>
-                <option value="LivreSterling">£</option>
-              </select>
-            </Col>
-            <Col>
               <label className="FormField_Label" htmlFor="typeOfRent">
                 Type of renting
               </label>
@@ -138,42 +141,32 @@ class AddTools extends Component {
               </select>
             </Col>
           </Form.Row>
-          <br />
           <Form.Row>
-            <label htmlFor="pictures"></label>
+            <label htmlFor="pictures"><img src={addimg} alt="add_image"/></label>
             <input
               type="file"
-              required
-              multiple
               id="pictures"
               name="pictures"
+              style={{visibility:"hidden"}}
               onChange={this.handleChange}
             />
-            <section>
-              To select multiple files, hold down the CTRL or SHIFT key while
-              selecting.
-            </section>
           </Form.Row>
-          <br />
           <div className="FormBtns">
             <input className="FormCancelBtn" type="button" value="Cancel" />
             <input className="FormSubmitBtn" type="submit" value="Add tool" />
           </div>
         </Form>
       </div>
+      </Modal.Body>
+
+      </Modal>
+      </>
     );
   }
 }
 
-/*
-   <Modal>
-          <Modal.Header closeButton>
-            <Modal.Title>Add new tool</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-             </Modal.Body>
-        </Modal>
-*/
-
 export default AddTools;
+
+AddTools.propTypes = {
+  showPopUp: PropTypes.bool.isRequired,
+};

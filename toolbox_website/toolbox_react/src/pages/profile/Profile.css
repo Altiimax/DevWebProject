@@ -1,114 +1,59 @@
 .Profile {
-  margin-left: 10px;
-  margin-top: 10;
   width: 100%;
+  margin-left: 5%;
+  margin-top: 5%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
-.Greetings {
+#profileContentWrapper {
+  width: 90%;
   display: flex;
-}
-
-.myTools {
-  border: 1px solid black;
-  margin: 10px;
-  display: flex;
-}
-
-.contentWrapper {
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.contentProfile {
-  display: none;
-}
-
-.addTools {
-  flex: auto;
-  max-width: 250px;
-  min-width: 150px;
-  height: 350px;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 15px;
-  border: 1px solid black;
-  transition: margin-top 0.5s;
-  font-family: "Abel", sans-serif;
-  font-weight: bold;
-  font-size: 1.2em;
-  outline: none;
-}
-.addTools:hover {
-  box-shadow: 5px 5px 10px black;
-  background-color: rgb(192, 197, 181);
-  outline: none;
-}
-.addTools:active {
+#navBar {
+  width: auto;
+  height: 10em;
+  margin: 0 2em 2em 0;
+  padding: 1em 1em 1em 0.5em;
+  border-radius: 10px;
   background-color: grey;
-  outline: none;
 }
 
-.sidenav {
-  width: 0; /* Set the width of the sidebar */
-  background-color: black;
-  position: fixed;
-  z-index: 1;
-  top: 10;
-  left: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
-  transition: 0.5s;
-  float: left;
+#profileContent {
+  width: 80%;
 }
 
-.sidenav button {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
+#navBar button {
+  padding: 0.2em 1em;
+  font-size: 1.4em;
+  font-weight: bold;
   display: block;
-  background-color: transparent;
   color: rgb(247, 220, 9);
+  background-color: transparent;
   outline: none;
+  text-decoration: none;
   border-width: 0;
 }
 
-.sidenav button:hover {
+#navBar button:hover {
   color: rgba(66, 66, 56, 1);
   background-color: rgb(247, 220, 9);
   border-radius: 2em;
   text-decoration: none;
 }
 
-.sidenav .closebtn {
-  position: absolute;
-  height: 10px;
-  top: 0;
-  right: 5px;
-  font-size: 36px;
-  margin-left: 50px;
-  color: white;
-  text-decoration: none;
+#profileTitle {
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
 }
 
-.openbtn {
-  position: fixed;
-  top: 10;
-  left: 0;
-  font-size: 20px;
-  cursor: pointer;
-  color: white;
-  border: none;
-  background-color: black;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav button {
-    font-size: 18px;
-  }
+#profileContentDisplay{
+  width: auto;
 }
