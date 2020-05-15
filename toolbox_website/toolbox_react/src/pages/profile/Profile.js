@@ -72,7 +72,7 @@ class Profile extends Component {
   };
 
   getMyToolsApi(id_pers) {
-    let endpoint = "/api/persons/" + id_pers + "/tools";
+    let endpoint = "/api/persons/" + id_pers + "/tools/";
 
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);

@@ -140,7 +140,7 @@ STATIC_URL = '/static/'
 #CSP_STYLE_SRC = ("'self'","'unsafe-inline'",'fonts.googleapis.com','maxcdn.bootstrapcdn.com')
 #CSP_SCRIPT_SRC = ("'self'","'unsafe-inline'")
 #CSP_FONT_SRC = ("'self'","'unsafe-inline'",'fonts.gstatic.com')
-#CSP_IMG_SRC = ("'self'","'unsafe-inline'")
+#CSP_IMG_SRC = ("'self'","'unsafe-inline'",'data:')
 
 
 
