@@ -3,13 +3,17 @@ import ReactDOM from "react-dom";
 import { apiRequest } from "../../api/apiRequest.js";
 import { userFromToken } from "../../utils";
 import CreateGroup from "../CreateGroup/CreateGroup.js";
+import GroupDetail from "../GroupDetail/GroupDetail.js";
 import { Table } from "react-bootstrap";
 import "./MyGroups.css";
 
-function MyGroups(props) {
+function MyGroups() {
 
-  useEffect((data) => {
+  useEffect(() => {
+    document.getElementById("myGroupProfile").style.display="initial";
+    document.getElementById("GroupDetail").style.display="none";
     getMyGroupsApiRequest();
+    document.getElementById("profileSection").innerHTML = "My Groups";
   });
 
   function getMyGroupsApiRequest(){
@@ -22,7 +26,7 @@ function MyGroups(props) {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let resp = JSON.parse(this.responseText);
-          displayTable(resp);
+          displayGroups(resp);
         }
       }
     });
@@ -30,22 +34,27 @@ function MyGroups(props) {
     req.send();
   }
 
-  function displayTable(tabData){
-    let tabBody = "";
-    for (let i in tabData) {
-      let admin = (tabData[i].groupAdmin)? "yes": "No";
-      tabBody +=
-        "<tr><td>" +
-        admin +
-        "</td><td>" +
-        tabData[i].group.id_groupName +
-        "</td><td>" +
-        tabData[i].group.groupType +
-        "</td><td>" + 
-        tabData[i].group.town.townName +
-        "</td></tr>";
+  function displayGroupDetail(group){
+    let gpD = <GroupDetail groupObj={group}/>;
+    ReactDOM.render(gpD, document.getElementById("GroupDetail"));
+  }
+
+  function displayGroups(tabData){
+    let tabBody = [];
+    let key_g = 0;
+    for (let g of tabData) {
+      key_g ++;
+      let admin = (g.groupAdmin)? "yes": "No";
+      tabBody.push(
+        <tr key={key_g} onClick={() => displayGroupDetail(g.group)}>
+          <td>{admin}</td>
+          <td>{g.group.id_groupName}</td>
+          <td>{g.group.groupType}</td>
+          <td>{g.group.town.townName}</td>
+        </tr>
+      );
     };
-    document.getElementById("content").innerHTML = tabBody;
+    ReactDOM.render(tabBody, document.getElementById("content"));
   }
 
   function refreshGroupList(){
@@ -57,30 +66,34 @@ function MyGroups(props) {
     ReactDOM.render(p, document.getElementById("newGroupPopup"));
   }
 
-  document.getElementById("profileSection").innerHTML = "My Groups";
+  
   return (
-    <div id="myGroupProfile">
-      <button id="newGroupBtn" onClick={displayPopup}>Create new Group</button>
-      <div id="newGroupPopup"></div>
-      <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>
-              <span id="tbHGroupAdmin" className="tableHead">Admin</span>
-            </th>
-            <th>
-              <span id="tbHGroupName" className="tableHead">Name</span>
-            </th>
-            <th>
-              <span id="tbHGroupType" className="tableHead">Type</span>
-            </th>
-            <th>
-              <span id="tbHGroupLocation" className="tableHead">Location</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody id="content"></tbody>
-      </Table>
+    <div>
+      <div id="myGroupProfile">
+        <button id="newGroupBtn" onClick={displayPopup}>Create new Group</button>
+        <div id="newGroupPopup"></div>
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>
+                <span id="tbHGroupAdmin" className="tableHead">Admin</span>
+              </th>
+              <th>
+                <span id="tbHGroupName" className="tableHead">Name</span>
+              </th>
+              <th>
+                <span id="tbHGroupType" className="tableHead">Type</span>
+              </th>
+              <th>
+                <span id="tbHGroupLocation" className="tableHead">Location</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="content"></tbody>
+        </Table>
+      </div>
+      <div id="GroupDetail">
+      </div>
     </div>
   );
 }
