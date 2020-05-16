@@ -1,69 +1,69 @@
 import React, { useState } from "react";
-//import { Table } from "react-bootstrap";
+import ReactDOM from "react-dom";
+import { apiRequest } from "../../api/apiRequest.js";
+import Tool from "../Tool/Tool.js";
+import AddTools from "../AddTools/AddTools.js";
 import "./MyTools.css";
 
+
 function MyTools(props) {
-  //pour les images il faudrait pouvoir les faire défiler onHover!!! Ici qu'une seule affichée..
-  const [picture] = useState(props.picture);
-  const [name] = useState(props.name);
-  const [description] = useState(props.desc);
-  const [price] = useState(props.price);
-  //const [review] = useState(props.review);
+  const [user_id] = useState(props.user_id);
+
+  function refreshToolList(){
+    getMyToolsApi(user_id);
+  }
+
+  function getMyToolsApi(id_pers) {
+    let endpoint = "/api/persons/" + id_pers + "/tools/";
+
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
+
+    function displayPopup(){
+      let p = <AddTools showPopUp={true} refreshToolList={refreshToolList}/>;
+      ReactDOM.render(p, document.getElementById("MyToolsPopup"));
+    }
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          let resp = JSON.parse(this.responseText);
+          let key_y = 999;
+          let toolList = [
+            <button key={key_y} className="oneTool" id="addOneTool" onClick={displayPopup}>
+              Add new tool
+            </button>,
+          ];
+          
+          for (let i in resp) {      
+            key_y++;
+            toolList.push(
+              <Tool 
+                key={key_y}
+                picture={resp[i].toolImages[0].image}
+                name={resp[i].toolName}
+                price={resp[i].toolPrice}
+                desc={resp[i].toolDescription}
+              />
+            );
+          }
+          ReactDOM.render(toolList, document.getElementById("MyToolsCont"));
+        }
+      }
+    });
+
+    req.send();
+  };
+
+  document.getElementById("profileSection").innerHTML = "My Tools";
+  getMyToolsApi(user_id);
 
   return (
-    <div className="oneTool">
-      <div className="imageTool">
-        <img
-          src={picture}
-          alt="--The tool pic is not found--"
-          height="auto"
-          width="100%"
-        />
-      </div>
-      <div className="informTool">
-        <h4>{name}</h4>
-      </div>
-      <div className="priceTool">Price : {price} €</div>
-      <span className="toolTipText">{description}</span>
-    </div>
+    <>
+    <div id="MyToolsCont"></div>
+    <div id="MyToolsPopup"></div>
+    </>
   );
 }
 
 export default MyTools;
-/*
-<div>
-<Table striped bordered hover variant="dark">
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Owner</th>
-      <th>Renting infos</th>
-      <th>State</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Image not found</td>
-      <td>Screwdriver</td>
-      <td>Bob</td>
-      <td>
-        Was borrowed on 20/04/2012 and must be given back before
-        24/05/2012
-      </td>
-      <td>Used</td>
-    </tr>
-    <tr>
-      <td>Image not found</td>
-      <td>Screwdriver</td>
-      <td>Bob</td>
-      <td>
-        Was borrowed on 20/04/2012 and must be given back before
-        24/05/2012
-      </td>
-      <td>Used</td>
-    </tr>
-  </tbody>
-</Table>
-</div>
-*/

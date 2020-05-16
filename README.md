@@ -13,8 +13,8 @@ During the whole development and before any release, the web-application must va
 - [X] Backend prototype
 - [X] Frontend prototype
 - [X] API 
-- [ ] Testing
-- [ ] Security 
+- [x] Testing
+- [x] Security 
 
 ## Authors
 

@@ -89,8 +89,7 @@ class SignIn extends Component {
           <Modal.Body>
             <form id="signInForm" onSubmit={this.handleSubmit}>
               <label className="FormField_Label" htmlFor="email">
-                {" "}
-                E-mail address{" "}
+                E-mail address
               </label>
               <input
                 required
@@ -103,8 +102,7 @@ class SignIn extends Component {
               />
 
               <label className="FormField_Label" htmlFor="password">
-                {" "}
-                Password{" "}
+                Password
               </label>
               <input
                 required

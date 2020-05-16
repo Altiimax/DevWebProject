@@ -1,0 +1,27 @@
+#GroupDetailComp {
+  background-color: #454d55;
+  display: flex;
+  flex-direction: column;
+}
+
+#GroupDetailName{
+  margin: 2em 2em 1em 2em;
+}
+
+#GroupDetailDescription {
+  margin: 0em 1em 1em 1em;
+  padding: 1em;
+  color: black;
+  background-color: lightgray;
+  
+  border-radius: 5px;
+}
+
+#GroupDetailTools {
+  width: auto;
+  margin: 0 1em 2em 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

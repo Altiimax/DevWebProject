@@ -1,35 +1,47 @@
-.baseForm {
-  background-color: white;
-  padding: 10px;
-  border-radius: 0px 0px 10px 10px;
-}
 
-.addToolForm {
-  color: black;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 1em;
-}
-
-.formTitle {
-  border-radius: 10px 10px 0px 0px;
-  color: black;
-  margin-bottom: 0;
-  text-align: center;
-  padding: 10px;
-}
-
-.FormField_TextArea {
-  font-family: "Abel", sans-serif;
-  padding: 0;
-  margin: 0em 0em 1.5em 0em;
-  color: black;
+.addToolForm .FormField_TextArea{
   width: 85%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  border: 1px solid #445366;
-  font-size: 1em;
-  font-weight: 300;
+}
+
+.FormRow{
+  width: 85%;
+  padding: 0.2em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.FormRow div{
+  margin-right: 2em;
+}
+
+.FormImgsDrop {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0.2em 0 1em 0;
+}
+
+.FormImgsDrop label{
+  width: 4em;
+  height: 4em;
+  margin: 0.2em 0;
+}
+
+.FormImgsDrop .addImgBtn{
+  width: 100%;
+}
+
+.FormImgsDrop .addImgBtn:active{
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+
+#imgError {
+  display: none;
 }

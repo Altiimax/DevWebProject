@@ -20,11 +20,11 @@ function Header(props) {
           <h1 className="navTitle">ToolBox</h1>
         </NavLink>
       </Navbar.Brand>
+      <div id="userNameDisplay"></div>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="justify-content-end" style={{ width: "100%" }}>
           <Nav.Item id="homeNav">
-            {" "}
             <NavLink
               className="Header_item"
               activeClassName="Header_item-active"
@@ -32,10 +32,9 @@ function Header(props) {
               to="/"
             >
               Home
-            </NavLink>{" "}
+            </NavLink>
           </Nav.Item>
           <Nav.Item id="helpNav">
-            {" "}
             <NavLink
               className="Header_item"
               activeClassName="Header_item-active"
@@ -43,25 +42,23 @@ function Header(props) {
               to="/help"
             >
               Help
-            </NavLink>{" "}
+            </NavLink>
           </Nav.Item>
           <Nav.Item id="signInNav">
-            {" "}
             <span
               className="Header_item"
               onClick={() => props.display_popUp("sign-in")}
             >
               Sign In
-            </span>{" "}
+            </span>
           </Nav.Item>
           <Nav.Item id="signUpNav">
-            {" "}
             <span
               className="Header_item"
               onClick={() => props.display_popUp("sign-up")}
             >
               Sign Up
-            </span>{" "}
+            </span>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>
@@ -81,11 +78,11 @@ function Header(props) {
           <h1 className="navTitle">ToolBox</h1>
         </NavLink>
       </Navbar.Brand>
+      <div id="userNameDisplay"></div>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="justify-content-end" style={{ width: "100%" }}>
           <Nav.Item id="homeNav">
-            {" "}
             <NavLink
               className="Header_item"
               activeClassName="Header_item-active"
@@ -93,10 +90,9 @@ function Header(props) {
               to="/"
             >
               Home
-            </NavLink>{" "}
+            </NavLink>
           </Nav.Item>
           <Nav.Item id="helpNav">
-            {" "}
             <NavLink
               className="Header_item"
               activeClassName="Header_item-active"
@@ -104,10 +100,9 @@ function Header(props) {
               to="/help"
             >
               Help
-            </NavLink>{" "}
+            </NavLink>
           </Nav.Item>
           <Nav.Item id="profileNav">
-            {" "}
             <NavLink
               className="Header_item"
               activeClassName="Header_item-active"
@@ -115,16 +110,15 @@ function Header(props) {
               to="/profile"
             >
               My Profile
-            </NavLink>{" "}
+            </NavLink>
           </Nav.Item>
           <Nav.Item id="signOutNav">
-            {" "}
             <span
               className="Header_item"
               onClick={() => props.display_popUp("sign-out")}
             >
               Sign Out
-            </span>{" "}
+            </span>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>
