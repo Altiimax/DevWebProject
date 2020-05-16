@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import tokenIsValid from "./utils";
+import tokenIsValid, {getUserProfileAPIRequest, userFromToken} from "./utils";
 import history from "./history";
 import Routes from "./Routes";
 import Header from "./components/Header/Header.js";
@@ -41,12 +41,13 @@ class App extends Component {
             });
           }
           if (this.status === 404) {
-            console.log("token expired or wrong token");
+            history.push('/');
           }
         }
       });
   
       req.send();
+      getUserProfileAPIRequest(userFromToken().id);
     }
   }
 
@@ -74,6 +75,7 @@ class App extends Component {
 
   handle_signIn = (u_id, u_token) => {
     localStorage.setItem('token',u_token);
+    getUserProfileAPIRequest(userFromToken().id);
     this.setState({
       user_id: u_id,
       signed_in: true,

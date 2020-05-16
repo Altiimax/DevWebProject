@@ -9,6 +9,11 @@ import "./MyTools.css";
 function MyTools(props) {
   const [user_id] = useState(props.user_id);
 
+  function refreshToolList(){
+    getMyToolsApi(user_id);
+    console.log("coucou");
+  }
+
   function getMyToolsApi(id_pers) {
     let endpoint = "/api/persons/" + id_pers + "/tools/";
 
@@ -16,7 +21,7 @@ function MyTools(props) {
     req.open("GET", `${endpoint}`);
 
     function displayPopup(){
-      let p = <AddTools showPopUp={true}/>;
+      let p = <AddTools showPopUp={true} refreshToolList={refreshToolList}/>;
       ReactDOM.render(p, document.getElementById("MyToolsPopup"));
     }
 
@@ -31,9 +36,7 @@ function MyTools(props) {
             </button>,
           ];
           
-          for (let i in resp) {
-            //pour les images il faudrait pouvoir les faire défiler onHover!!! Ici qu'une seule affichée..
-            //il faut rajouter les images via le props 'img' j'ai des problèmes lors de l'import je sais pas pq!
+          for (let i in resp) {      
             key_y++;
             toolList.push(
               <Tool 

@@ -28,24 +28,13 @@ class Profile extends Component {
     }
   }
 
-  //TODO - a mettre dans une fonction et appeler lors : signinWtoken, signin 
-  getUserProfileAPIRequest(id) {
-    let endpoint = "/api/persons/";
-
-    let req = new apiRequest();
-    req.open("GET", `${endpoint}${id}/`);
-
-    req.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        if (this.status === 200) {
-          let profile = JSON.parse(this.responseText)[0];
-          document.getElementById("userNameDisplay").innerHTML =
-            "Welcome " + profile.firstName + " " + profile.lastName;
-        }
-      }
-    });
-
-    req.send();
+  componentDidUpdate() {
+    if (tokenIsValid()) {
+      //pass
+    } 
+    else {
+      history.push("/");
+    }
   }
 
   getMyGroupsApi = (id_pers) => {

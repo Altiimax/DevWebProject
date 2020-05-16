@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { Table } from "react-bootstrap";
 import "./Tool.css";
 
 let isInDev = require('../../prod.json').inDev;
@@ -14,8 +13,7 @@ function MyTools(props) {
   const [name] = useState(props.name);
   const [description] = useState(props.desc);
   const [price] = useState(props.price);
-  //const [review] = useState(props.review);
-  console.log(picture)
+  
   return (
     <div className="oneTool">
       <div className="imageTool">
@@ -27,9 +25,9 @@ function MyTools(props) {
       <div className="informTool">
         <h4>{name}</h4>
       </div>
-      <div className="priceTool">Price : {price} €</div>
-      <span className="toolTipText">{description}</span>
-    </div>
+      <div className="priceTool">Price : {price} €</div>  
+      <div className="toolTipText">{description}</div>
+    </div> 
   );
 }
 
