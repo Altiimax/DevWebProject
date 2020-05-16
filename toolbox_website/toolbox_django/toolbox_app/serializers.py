@@ -120,7 +120,7 @@ class groupsToolsDetailSerializer(serializers.ModelSerializer):
         fields = ('tool',)
 
 class membersGroupsDetailSerializer(serializers.ModelSerializer):
-    group = groupsSerializer(source='id_groupName', read_only=True)
+    group = groupsDetailSerializer(source='id_groupName', read_only=True)
     class Meta:
         model = GroupsMembers
         fields = ('group','groupAdmin')

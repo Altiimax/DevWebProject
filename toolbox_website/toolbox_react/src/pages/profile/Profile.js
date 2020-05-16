@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { apiRequest } from "../../api/apiRequest.js";
 import tokenIsValid, { userFromToken } from "../../utils";
 import history from "../../history";
 import MyGroups from "../../components/MyGroups/MyGroups.js";
@@ -37,29 +36,11 @@ class Profile extends Component {
     }
   }
 
-  getMyGroupsApi = (id_pers) => {
+  getMyGroupsApi(id_pers){
     if (tokenIsValid()) {
-      let endpoint = "/api/persons/" + id_pers + "/groups/";
-
-      let req = new apiRequest();
-      req.open("GET", `${endpoint}`);
-  
-      req.addEventListener("readystatechange", function () {
-        if (this.readyState === 4) {
-          if (this.status === 200) {
-            let resp = JSON.parse(this.responseText);
-            ReactDOM.render(
-              <MyGroups data={resp} />,
-              document.getElementById("profileContentDisplay")
-            );
-            document.getElementById("profileContentDisplay").style.display = "flex";
-          }
-        }
-      });
-  
-      req.send();
-    } 
-    else {
+      let toolList= <MyGroups/>
+      ReactDOM.render(toolList, document.getElementById("profileContentDisplay"));
+    } else {
       history.push("/");
     }
   };
@@ -84,7 +65,7 @@ class Profile extends Component {
           </div>
           <div id="profileContent">
             <div id="profileTitle"> 
-              <h1 id="profileSection"></h1>
+              <h1 id="profileSection"> </h1>
             </div>
             <div id="profileContentDisplay"></div>
           </div>

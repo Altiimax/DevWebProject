@@ -1,36 +1,22 @@
-/*.baseForm {
-  background-color: white;
-  padding: 10px;
-  border-radius: 0px 0px 10px 10px;
+.addToolForm .FormBtns {
+  margin-top: 1em;
 }
 
-.addToolForm {
-  color: black;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 1em;
+#CreateGrouplocation {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5em;
 }
 
-.formTitle {
-  border-radius: 10px 10px 0px 0px;
-  color: black;
-  margin-bottom: 0;
-  text-align: center;
-  padding: 10px;
+#CreateGrouplocation div{
+  margin-right: 2em;
 }
 
-.FormField_TextArea {
-  font-family: "Abel", sans-serif;
-  padding: 0;
-  margin: 0em 0em 1.5em 0em;
-  color: black;
-  width: 85%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  border: 1px solid #445366;
-  font-size: 1em;
-  font-weight: 300;
+#groupCountrySelect, #groupTownSelect {
+  width: 8em;
 }
-*/
+
+#GrounNameError {
+  margin-top: 0.2em;
+  display: none;
+}

@@ -174,7 +174,7 @@ class personsViewSet(viewsets.GenericViewSet):
     @action(detail=True, methods=['get'])
     def groups(self, request, pk=None, *args, **kwargs):
         """" get all groups in which the user is """
-        queryset = GroupsMembers.objects.filter(id_person=pk)
+        queryset = GroupsMembers.objects.filter(id_person=pk).order_by('id_groupName')
         serializer = membersGroupsDetailSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -249,7 +249,7 @@ class groupsViewSet(viewsets.GenericViewSet):
         serializer = groupsSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    # POST 127.0.0.1:8000/api/towns/
+    # POST 127.0.0.1:8000/api/groups/
     def create(self, request, *args, **kwargs):
         """" create a new group """
         serializer = groupsSerializer(data=request.data)
@@ -400,10 +400,10 @@ class townsViewSet(viewsets.GenericViewSet):
         if country:
             # GET 127.0.0.1:8000/api/towns/?countryCode=BE
             """" list all towns of a country """
-            queryset = Towns.objects.filter(id_countryCode=country)
+            queryset = Towns.objects.filter(id_countryCode=country).order_by('townName')
         else:
             """" list all towns """
-            queryset = Towns.objects.all()
+            queryset = Towns.objects.all().order_by('townName')
 
         serializer = townsSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -426,7 +426,7 @@ class countriesViewSet(viewsets.GenericViewSet):
     # GET 127.0.0.1:8000/api/countries/
     def list(self, request, *args, **kwargs):
         """" list all countries """
-        queryset = Countries.objects.all()
+        queryset = Countries.objects.all().order_by('countryName')
         serializer = countriesSerializer(queryset, many=True)
         return Response(serializer.data)
     

@@ -1,8 +1,42 @@
+
+#myGroupProfile {
+  display: flex;
+  flex-direction: column;
+}
+
+#newGroupBtn {
+  width: 10em;
+  margin: 1em 0;
+  border-radius: 5px;
+  border: solid 2px rgb(155, 152, 152);
+  background-color: rgb(18, 204, 18);
+  outline: none;
+}
+
+#newGroupBtn:hover {
+  background-color: rgb(58, 245, 58);;
+}
+
 .tableHead {
   display: inline-block;
   position: top;
 }
 
+#tbHGroupAdmin{
+  width: 3em;
+}
+
+#tbHGroupName, #tbHGroupLocation {
+  width: 6em;
+}
+
+#tbHGroupType{
+  width: 3em;
+}
+
+
+
+/*
 .sortButtons {
   display: inline-block;
   margin-left: 5px;
@@ -11,3 +45,4 @@
   display: block;
   color: white;
 }
+*/

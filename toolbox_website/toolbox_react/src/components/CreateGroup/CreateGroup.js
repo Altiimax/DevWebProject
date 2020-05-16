@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Modal, Form, Col } from "react-bootstrap";
+import { apiRequest } from "../../api/apiRequest.js";
+import { userFromToken } from "../../utils";
+import { Modal } from "react-bootstrap";
 import "./CreateGroup.css";
 
 const initialStates = {
   groupName: "",
   groupDescription: "",
-  groupType: "",
+  groupType: "private",
+  groupCountry: "",
+  groupTown: "",
+  groupRange: 50,
 };
 
 class CreateGroup extends Component {
@@ -14,6 +19,10 @@ class CreateGroup extends Component {
     super(props);
     this.state = initialStates;
     this.showPopUp = true;
+  }
+
+  componentDidMount() {
+    this.getAllCountriesApiRequest();
   }
 
   componentDidUpdate() {
@@ -25,21 +34,136 @@ class CreateGroup extends Component {
     this.setState(initialStates);
   };
 
+
+  getAllCountriesApiRequest(){
+    let endpoint ="/api/countries/";
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
+
+    let self = this;
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          let countryOptions = JSON.parse(this.responseText);
+          let countrySelectHtml = "";
+          for (let c of countryOptions){
+            countrySelectHtml += `<option value=${c.id_countryCode}>${c.countryName}</option>`
+          }
+          document.getElementById("groupCountrySelect").innerHTML = countrySelectHtml;
+          self.getAllTownsApiRequest(countryOptions[0].id_countryCode);
+        }
+        if (this.status === 404) {
+          //TODO
+        }
+      }
+    });
+  
+    req.send();
+  }
+
+  getAllTownsApiRequest(countryId){
+    let endpoint =`/api/towns/?countryCode=${countryId}`;
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
+  
+    let self = this;
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          let townOptions = JSON.parse(this.responseText);
+          let townSelectHtml = "";
+          for (let t of townOptions){
+            townSelectHtml += `<option value=${t.id_town}>${t.townName}</option>`
+          }
+          document.getElementById("groupTownSelect").innerHTML = townSelectHtml;
+          self.setState({groupTown:townOptions[0].id_town});
+        }
+        if (this.status === 404) {
+          //TODO
+        }
+      }
+    });
+  
+    req.send();
+  }
+
+  postGroupApiRequest(data){
+      let endpoint = "/api/groups/";
+      let req = new apiRequest();
+      req.open("POST", `${endpoint}`);
+      req.contentType("json");
+  
+      let self = this;
+
+      req.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+          if (this.status === 201) {
+            let memberData = {
+              id_person: userFromToken().id,
+              id_groupName: JSON.parse(this.responseText).id_groupName,
+              groupAdmin: true,
+            }
+            self.postGroupMemberApiRequest(JSON.stringify(memberData));
+          }
+          else if (this.status === 400){
+            document.getElementById("GrounNameError").style.display="block";
+          }
+        }
+      });
+      req.send(data);
+  };
+
+  postGroupMemberApiRequest(data){
+    let endpoint = "/api/groups/members/";
+    let req = new apiRequest();
+    req.open("POST", `${endpoint}`);
+    req.contentType("json");
+
+    let self = this;
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 201) {
+          self.props.refreshGroupList();
+          self.closePopUp();
+        }
+      }
+    });
+    req.send(data);
+  }
+
+  
   handleChange = (e) => {
     let target = e.target;
     let value = target.value;
     let name = target.name;
 
-    this.setState({
-      [name]: value,
-    });
+    if(name === "groupCountry"){
+      this.getAllTownsApiRequest(value);
+    }
+    else{
+      this.setState({
+        [name]: value,
+      });
+    }
   };
 
-  handleSubmit = () => {
-    console.log(this.state);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let data = {
+      id_groupName: this.state.groupName,
+      groupType: this.state.groupType,
+      groupDescription: this.state.groupDescription,
+      groupRange: this.state.groupRange,
+      id_town: this.state.groupTown,
+    };
+    this.postGroupApiRequest(JSON.stringify(data));
   };
 
   render() {
+    let self = this;
     return (
       <>
       <Modal show={this.showPopUp}
@@ -52,52 +176,62 @@ class CreateGroup extends Component {
       </Modal.Header>
 
       <Modal.Body>
-        <div className="addToolForm">
-          <Form className="baseForm" onSubmit={this.handleSubmit}>
-            <Form.Row>
-              <label className="FormField_Label" htmlFor="groupName">
-                Name of your group
-              </label>
-              <input
-                required
-                type="text"
-                className="FormField_Input"
-                name="groupName"
-                placeholder="Enter the name of your group"
-                onChange={this.handleChange}
-              />
-              <label className="FormField_Label" htmlFor="groupDescription">
-                Group Description
-              </label>
-              <textarea
-                type="text"
-                className="FormField_TextArea"
-                name="groupDescription"
-                onChange={this.handleChange}
-              />
-            </Form.Row>
-            <Form.Row>
-              <Col>
-                <label className="FormField_Label" htmlFor="groupType">
-                  Group Type
+          <form className="addToolForm" onSubmit={this.handleSubmit}>
+            <label className="FormField_Label" htmlFor="groupName">
+              Name of your group
+            </label>
+            <input
+              required
+              type="text"
+              className="FormField_Input"
+              name="groupName"
+              placeholder="Enter the name of your group"
+              onChange={this.handleChange}
+            />
+
+            <label className="FormField_Label" htmlFor="groupDescription">
+              Group Description
+            </label>
+            <textarea
+              type="text"
+              className="FormField_TextArea"
+              name="groupDescription"
+              onChange={this.handleChange}
+            />
+        
+            <label className="FormField_Label" htmlFor="groupType">
+              Group Type
+            </label>
+            <select defaultValue={self.state.groupType} name="groupType" onChange={this.handleChange}>
+              <option value="private">Private</option>
+              <option value="public">Public</option>
+            </select>
+
+            <div id="CreateGrouplocation">
+              <div>
+                <label className="FormField_Label" htmlFor="groupCountry">
+                  Country
                 </label>
-                <select defaultValue="private" name="groupType">
-                  <option value="private">Private</option>
-                  <option value="public">Public</option>
+                <select id="groupCountrySelect" name="groupCountry" onChange={this.handleChange}>
                 </select>
-              </Col>
-            </Form.Row>
-            <div className="FormBtns">
-              <input className="FormCancelBtn" type="button" value="Cancel" />
-              <input
-                className="FormSubmitBtn"
-                type="submit"
-                value="Add tool"
-                onClick={this.handleSubmit}
-              />
+              </div>
+
+              <div>
+                <label className="FormField_Label" htmlFor="groupTown">
+                  Town
+                </label>
+                <select id="groupTownSelect" name="groupTown" onChange={this.handleChange}>
+                </select>
+              </div>
             </div>
-          </Form>
-        </div>
+        
+            <div id="GrounNameError" className="error">The group-name you chose is already taken!</div>
+
+            <div className="FormBtns">
+              <input className="FormCancelBtn" type="button" value="Cancel" onClick={this.closePopUp}/>
+              <input className="FormSubmitBtn" type="submit" value="Create group"/>
+            </div>
+          </form>
       </Modal.Body>
 
       </Modal>
@@ -110,4 +244,5 @@ export default CreateGroup;
 
 CreateGroup.propTypes = {
   showPopUp: PropTypes.bool.isRequired,
+  refreshGroupList: PropTypes.func.isRequired,
 };

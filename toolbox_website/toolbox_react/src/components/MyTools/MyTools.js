@@ -11,7 +11,6 @@ function MyTools(props) {
 
   function refreshToolList(){
     getMyToolsApi(user_id);
-    console.log("coucou");
   }
 
   function getMyToolsApi(id_pers) {
