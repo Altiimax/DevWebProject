@@ -5,12 +5,12 @@ import "./Search.css";
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state={
-        data: this.props.data,
-    }
+    this.state = {
+      data: this.props.data,
+    };
   }
 
-  componentDidMount = () =>{
+  componentDidMount = () => {
     let tabData = this.state.data;
     let tabBody = "";
     for (let i in tabData) {
@@ -20,28 +20,29 @@ class Search extends Component {
         "</td><td>" +
         tabData[i].groupType +
         "</td><td>" +
-        tabData[i].groupDescription+
+        tabData[i].groupDescription +
         "</td><td>" +
         tabData[i].town.townName +
         "</td></tr>";
     }
-    document.getElementById('data').innerHTML = tabBody;
-  }
+    document.getElementById("data").innerHTML = tabBody;
+  };
 
   render() {
     return (
-      <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>Group Name</th>
-            <th>Group Type</th>
-            <th>Group Description</th>
-            <th>Town</th>
-          </tr>
-        </thead>
-        <tbody id="data">
-        </tbody>
-      </Table>
+      <div className="groupHasTool">
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>Group Name</th>
+              <th>Group Type</th>
+              <th>Group Description</th>
+              <th>Town</th>
+            </tr>
+          </thead>
+          <tbody id="data"></tbody>
+        </Table>
+      </div>
     );
   }
 }

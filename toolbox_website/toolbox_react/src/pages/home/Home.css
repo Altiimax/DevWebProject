@@ -7,6 +7,14 @@
   justify-content: space-around;
 }
 
+#homeContentWrapper {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 .Home .searchButtonContainer {
   text-align: center;
 }
@@ -20,10 +28,10 @@
   background-color: rgb(102, 99, 99);
   text-align: center;
 }
-/*
-.searchMap{
-  width: 100%;
-  height: 400px;
+
+.searchMap {
+  width: 52vmin;
+  height: 54vmin;
   background-color: grey;
+  display: flex;
 }
-*/
