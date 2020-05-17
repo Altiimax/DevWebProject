@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { apiRequest } from "../../api/apiRequest.js";
 import Tool from "../Tool/Tool.js";
@@ -6,17 +6,20 @@ import Tool from "../Tool/Tool.js";
 import "./GroupDetail.css";
 
 function GroupDetail(props) {
-  const [group] = useState(props.groupObj);
+  let group = useRef();
+  group.current = props.groupObj;
 
   useEffect(() => {
+    group.current = props.groupObj;
     document.getElementById("myGroupProfile").style.display="none";
     document.getElementById("GroupDetail").style.display="initial";
-    getAllTools();
     document.getElementById("profileSection").innerHTML = "My Groups - Detail";
+    ReactDOM.render("", document.getElementById("GroupDetailTools"));
+    getAllTools();
   });
 
   function getAllTools(){
-    let endpoint = "/api/groups/tools/?groupName=" + group.id_groupName;
+    let endpoint = "/api/groups/tools/?groupName=" + group.current.id_groupName;
 
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
@@ -54,11 +57,11 @@ function GroupDetail(props) {
     <div>
       <div id="GroupDetailComp">
         <div id="GroupDetailName">
-          <h1>{group.id_groupName}</h1>
-          <h4> Type: {group.groupType}</h4>
-          <h4> Location: {group.town.townName}</h4>
+          <h1>{group.current.id_groupName}</h1>
+          <h4> Type: {group.current.groupType}</h4>
+          <h4> Location: {group.current.town.townName}</h4>
         </div>
-        <div id="GroupDetailDescription">{group.groupDescription}</div>
+        <div id="GroupDetailDescription">{group.current.groupDescription}</div>
         <div id="GroupDetailTools"></div>
       </div>
       <div id="ToolDetail"></div>
