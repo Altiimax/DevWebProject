@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 import { apiRequest } from "../../api/apiRequest.js";
 import { userFromToken } from "../../utils";
 
-import "./ToolGroups.css";
+import "./ToolOptions.css";
 
 const initialStates = {
   displayed_groups: [],  
@@ -15,7 +15,7 @@ let user_groups = [];
 let tool_groups = [];
 let toChange = {};
 
-class ToolGroups extends Component {
+class ToolOptions extends Component {
   constructor(props) {
     super(props);
     this.state = initialStates;
@@ -192,7 +192,7 @@ class ToolGroups extends Component {
           }}
       >
       <Modal.Header closeButton>
-        <Modal.Title>Tools in groups</Modal.Title>
+        <Modal.Title>Tool Options</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -212,9 +212,9 @@ class ToolGroups extends Component {
   }
 }
 
-export default ToolGroups;
+export default ToolOptions;
 
-ToolGroups.propTypes = {
+ToolOptions.propTypes = {
   showPopUp: PropTypes.bool.isRequired,
   toolId: PropTypes.number.isRequired,
   toolName: PropTypes.string.isRequired,

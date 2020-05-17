@@ -45,7 +45,7 @@ function MyTools(props) {
                 price={resp[i].toolPrice}
                 desc={resp[i].toolDescription}
                 id={resp[i].id_tool}
-                popUp="groups"
+                popUp="options"
               />
             );
           }

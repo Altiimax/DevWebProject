@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import ToolDetail from "../ToolDetail/ToolDetail.js";
-import ToolGroups from "../ToolGroups/ToolGroups.js";
+import ToolOptions from "../ToolOptions/ToolOptions.js";
 
 import "./Tool.css";
 
@@ -41,7 +41,7 @@ function MyTools(props) {
   }
 
   function displayGroupsPopup(idT){
-    let tdl = <ToolGroups showPopUp={true} toolId={idT} toolName={name.current}/>;
+    let tdl = <ToolOptions showPopUp={true} toolId={idT} toolName={name.current}/>;
     ReactDOM.render(tdl, document.getElementById("toolPopup"));
   }
 
@@ -53,7 +53,7 @@ function MyTools(props) {
             if(PopUp.current === "detail"){
               displayDetailPopup(id.current);
             }
-            else if (PopUp.current === "groups"){
+            else if (PopUp.current === "options"){
               displayGroupsPopup(id.current);
             }
             else {
