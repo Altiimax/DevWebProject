@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5d62c560.chunk.css",
+    "main.js": "/static/js/main.02d26d56.chunk.js",
+    "main.js.map": "/static/js/main.02d26d56.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7e833a78.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7e833a78.js.map",
+    "static/css/2.69121389.chunk.css": "/static/css/2.69121389.chunk.css",
+    "static/js/2.319d1253.chunk.js": "/static/js/2.319d1253.chunk.js",
+    "static/js/2.319d1253.chunk.js.map": "/static/js/2.319d1253.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.a0037fb31bdaea048a4675cf29f64214.js": "/precache-manifest.a0037fb31bdaea048a4675cf29f64214.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.69121389.chunk.css.map": "/static/css/2.69121389.chunk.css.map",
+    "static/css/main.5d62c560.chunk.css.map": "/static/css/main.5d62c560.chunk.css.map",
+    "static/js/2.319d1253.chunk.js.LICENSE.txt": "/static/js/2.319d1253.chunk.js.LICENSE.txt",
+    "static/media/toolBox_logo.png": "/static/media/toolBox_logo.fbb6acf4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7e833a78.js",
+    "static/css/2.69121389.chunk.css",
+    "static/js/2.319d1253.chunk.js",
+    "static/css/main.5d62c560.chunk.css",
+    "static/js/main.02d26d56.chunk.js"
+  ]
+}
