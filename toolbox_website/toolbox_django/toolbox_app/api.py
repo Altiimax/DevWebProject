@@ -191,6 +191,13 @@ class toolsViewSet(viewsets.GenericViewSet):
         serializer = toolsDetailSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    # GET 127.0.0.1:8000/api/tools/1
+    def retrieve(self, request,pk=None, *args, **kwargs):
+        """" get a tool by it's id """
+        queryset = Tools.objects.filter(id_tool=pk)
+        serializer = toolsDetailWithOwnerSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     # GET,POST 127.0.0.1:8000/api/tools/1/images/
     @action(detail=True, methods=['get','post'])
     def images(self, request, pk=None, *args, **kwargs):

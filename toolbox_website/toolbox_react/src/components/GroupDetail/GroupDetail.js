@@ -36,6 +36,8 @@ function GroupDetail(props) {
                 name={tools[t].tool.toolName}
                 price={tools[t].tool.toolPrice}
                 desc={tools[t].tool.toolDescription}
+                id={tools[t].tool.id_tool}
+                popUp="detail"
               />
             );
           }
@@ -49,14 +51,17 @@ function GroupDetail(props) {
   }
 
   return (
-    <div id="GroupDetailComp">
-      <div id="GroupDetailName">
-        <h1>{group.id_groupName}</h1>
-        <h4> Type: {group.groupType}</h4>
-        <h4> Location: {group.town.townName}</h4>
+    <div>
+      <div id="GroupDetailComp">
+        <div id="GroupDetailName">
+          <h1>{group.id_groupName}</h1>
+          <h4> Type: {group.groupType}</h4>
+          <h4> Location: {group.town.townName}</h4>
+        </div>
+        <div id="GroupDetailDescription">{group.groupDescription}</div>
+        <div id="GroupDetailTools"></div>
       </div>
-      <div id="GroupDetailDescription">{group.groupDescription}</div>
-      <div id="GroupDetailTools"></div>
+      <div id="ToolDetail"></div>
     </div>
     );
 }
