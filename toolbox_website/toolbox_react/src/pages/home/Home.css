@@ -30,8 +30,7 @@
 }
 
 .searchMap {
-  width: 52vmin;
-  height: 54vmin;
+  width: 100%;
+  height: 100%;
   background-color: grey;
-  display: flex;
 }

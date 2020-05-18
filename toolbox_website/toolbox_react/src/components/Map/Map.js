@@ -9,7 +9,10 @@ const mapStyles = {
 };
 
 const mapcontainerStyle = {
+  position: "relative", //"absolute"
   width: "100%",
+  background_color: "red",
+  visible: "visible",
 };
 
 export class MapContainer extends Component {
@@ -37,32 +40,30 @@ export class MapContainer extends Component {
 
   render() {
     return (
-      <div id="mapContainer">
-        <Map
-          containerStyle={mapcontainerStyle}
-          google={this.props.google}
-          zoom={14}
-          style={mapStyles}
-          initialCenter={{
-            lat: 50.850346,
-            lng: 4.351721,
-          }}
+      <Map
+        containerStyle={mapcontainerStyle}
+        style={mapStyles}
+        google={this.props.google}
+        zoom={14}
+        initialCenter={{
+          lat: 50.850346,
+          lng: 4.351721,
+        }}
+      >
+        <Marker
+          onClick={this.onMarkerClick}
+          name={"Kenyatta International Convention Centre"}
+        />
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onClose}
         >
-          <Marker
-            onClick={this.onMarkerClick}
-            name={"Kenyatta International Convention Centre"}
-          />
-          <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}
-            onClose={this.onClose}
-          >
-            <div>
-              <h4>{this.state.selectedPlace.name}</h4>
-            </div>
-          </InfoWindow>
-        </Map>
-      </div>
+          <div>
+            <h4>{this.state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </Map>
     );
   }
 }

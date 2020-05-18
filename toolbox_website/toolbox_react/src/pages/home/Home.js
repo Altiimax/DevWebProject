@@ -14,7 +14,6 @@ export default function Home() {
         <div className="SearchFrom">
           <FindTools />
         </div>
-        <div className="QuickLook">Ceci est provisoire</div>
         <div className="searchList" id="list"></div>
         <div className="searchMap">
           <Map />
