@@ -35,7 +35,7 @@ function GroupDetail(props) {
             toolList.push(
               <Tool 
                 key={key_t}
-                picture={tools[t].tool.toolImages[0].image}
+                pictures={tools[t].tool.toolImages}
                 name={tools[t].tool.toolName}
                 price={tools[t].tool.toolPrice}
                 desc={tools[t].tool.toolDescription}

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import ToolDetail from "../ToolDetail/ToolDetail.js";
 import ToolOptions from "../ToolOptions/ToolOptions.js";
 
+import "./SlideShow.css";
 import "./Tool.css";
 
 let isInDev = require('../../prod.json').inDev;
@@ -15,8 +16,8 @@ function MyTools(props) {
   //pour les images il faudrait pouvoir les faire défiler onHover!!! Ici qu'une seule affichée..
   let id = useRef();
   id.current = props.id; 
-  let picture = useRef();
-  picture.current = props.picture;
+  let pictures = useRef();
+  pictures.current = props.pictures;
   let name = useRef();
   name.current = props.name;
   let description = useRef();
@@ -28,11 +29,12 @@ function MyTools(props) {
   
   useEffect(() => {
     id.current = props.id;
-    picture.current = props.picture;
+    pictures.current = props.pictures;
     name.current = props.name;
     description.current = props.desc;
     price.current = props.price;
     PopUp.current = props.popUp;
+    showSlides();
   });
 
   function displayDetailPopup(idT){
@@ -44,6 +46,30 @@ function MyTools(props) {
     let tdl = <ToolOptions showPopUp={true} toolId={idT} toolName={name.current}/>;
     ReactDOM.render(tdl, document.getElementById("toolPopup"));
   }
+
+  function displayImages(){
+    let imgHtml = [];
+    let key_i = 0;
+    for(let img of pictures.current){
+      imgHtml.push(<img key={key_i} className={`mySlides${id.current}  mySlides`} src={url + img.image} alt={`Tool pic ${img.id_toolImage}`}/>);
+      key_i ++;
+    }
+    return imgHtml;
+  }
+
+  let slideIndex = 0;
+  function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName(`mySlides${id.current}`);
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}
+    slides[slideIndex-1].style.display = "block";
+    setTimeout(showSlides, 3000); // Change image every 2 seconds
+  }
+
 
   return (
     <div>
@@ -62,12 +88,7 @@ function MyTools(props) {
           }
         } 
       >
-        <div className="imageTool">
-          <img
-            src={url + picture.current}
-            alt="--The tool pic is not found--"
-          />
-        </div>
+        <div id={`imageTool${id.current}`} className="imageTool">{displayImages()}</div>
         <div className="informTool">
           <h4>{name.current}</h4>
         </div>
@@ -82,3 +103,5 @@ function MyTools(props) {
 }
 
 export default MyTools;
+
+
