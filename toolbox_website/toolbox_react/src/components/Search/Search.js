@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { Table } from "react-bootstrap";
 import "./Search.css";
 
@@ -12,20 +13,22 @@ class Search extends Component {
 
   componentDidMount = () => {
     let tabData = this.state.data;
-    let tabBody = "";
+    let tabBody = [];
     for (let i in tabData) {
-      tabBody +=
-        "<tr><td>" +
-        tabData[i].id_groupName +
-        "</td><td>" +
-        tabData[i].groupType +
-        "</td><td>" +
-        tabData[i].groupDescription +
-        "</td><td>" +
-        tabData[i].town.townName +
-        "</td></tr>";
+      tabBody.push(
+        <tr><td>
+        {tabData[i].id_groupName}
+        </td><td>
+        {tabData[i].groupType}
+        </td><td>
+        {tabData[i].groupDescription}
+        </td><td>
+        {tabData[i].town.townName}
+        </td></tr>)
     }
-    document.getElementById("data").innerHTML = tabBody;
+    ReactDOM.render(tabBody,document.getElementById("dataaa"));
+    //document.getElementById("dataaa").innerHTML = tabBody;
+    
   };
 
   render() {
@@ -40,7 +43,7 @@ class Search extends Component {
               <th>Town</th>
             </tr>
           </thead>
-          <tbody id="data"></tbody>
+          <tbody id="dataaa"></tbody>
         </Table>
       </div>
     );
