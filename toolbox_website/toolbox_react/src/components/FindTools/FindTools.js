@@ -11,20 +11,7 @@ class FindTools extends Component {
     this.state = {
       toolName: "",
       townName: "",
-      data: [
-        {
-          id_groupName: "TestGroup1",
-          groupType: "public",
-          groupDescription: null,
-          groupRange: 50,
-          town: {
-            id_town: 1,
-            postCode: 1330,
-            townName: "Rixensart",
-            id_countryCode: "BE",
-          },
-        },
-      ],
+      validated: false,
     };
   }
 
@@ -44,12 +31,12 @@ class FindTools extends Component {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let rep = JSON.parse(this.responseText);
-          if (self.state.data.length === 0) {
-            alert("Tool not found");
+          console.log(rep);
+          if (rep.length === 0) {
+            console.log("Tool not found");
           } else {
-            console.log(self.state.data);
             ReactDOM.render(
-              <Search data={self.state.data} />,
+              <Search data={rep} />,
               document.getElementById("list")
             );
           }
@@ -70,6 +57,12 @@ class FindTools extends Component {
   };
 
   handleSubmit = (e) => {
+    const form = e.currentTarget;
+    if(form.checkValidity() === false){
+        e.preventDefault();
+        e.stopPropagation();
+    }
+this.setState({validated : true});
     e.preventDefault();
     this.apiFindTools();
   };
@@ -78,24 +71,30 @@ class FindTools extends Component {
     return (
       <div className="searchForm">
         <h1 className="formTitle">Find nearby tools</h1>
-        <Form className="baseForm">
+        <Form className="baseForm" noValidate validated={this.state.validated}>
           <Form.Group>
             <Form.Label>Which tool?</Form.Label>
             <Form.Control
+              required
               type="text"
               name="toolName"
               placeholder="Wrench, saw, screwdriver, ..."
               onChange={this.handleChange}
             />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group>
             <Form.Label>Where?</Form.Label>
             <Form.Control
+              required
               type="text"
               placeholder="Select a city by name"
               name="townName"
               onChange={this.handleChange}
             />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           {/* //TODO pour le moment on implémente pas cette fonctionalitée ;) 
           <Form.Row>
