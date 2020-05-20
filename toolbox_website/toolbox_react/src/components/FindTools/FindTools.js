@@ -62,10 +62,10 @@ class FindTools extends Component {
         e.preventDefault();
         e.stopPropagation();
     }
-this.setState({validated : true});
-    e.preventDefault();
-    this.apiFindTools();
-  };
+    this.setState({validated : true});
+        e.preventDefault();
+        this.apiFindTools();
+      };
 
   render() {
     return (
