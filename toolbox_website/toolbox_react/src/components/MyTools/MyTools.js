@@ -40,10 +40,12 @@ function MyTools(props) {
             toolList.push(
               <Tool 
                 key={key_y}
-                picture={resp[i].toolImages[0].image}
+                pictures={resp[i].toolImages}
                 name={resp[i].toolName}
                 price={resp[i].toolPrice}
                 desc={resp[i].toolDescription}
+                id={resp[i].id_tool}
+                popUp="options"
               />
             );
           }

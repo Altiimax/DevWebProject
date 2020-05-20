@@ -1,0 +1,56 @@
+#ToolDetailModal .modal-content{
+    width: 120%;
+}
+
+#ToolDetailInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#ToolDetailInfo div{
+    font-size: larger;
+    margin: 0 1em 1em 1em;
+}
+
+#ToolDetailInfo #ToolDetailBtn {
+    width: 8em;
+    height: 2em;
+    border-radius: 5px;
+    border: solid 2px rgb(155, 152, 152);
+    background-color: rgb(18, 204, 18);
+    outline: none;
+}
+
+#ToolDetailInfo #ToolDetailBtn:hover {
+    background-color: rgb(58, 245, 58);;
+}
+
+#ToolDetailDescription {
+    margin: 0em 1em 1em 1em;
+    padding: 1em;
+    color: black;
+    background-color: lightgray;
+    
+    border-radius: 5px;
+}
+
+#ToolDetailImages{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 1em;
+}
+
+#ToolDetailImg{
+    width: 35%;
+    object-fit: contain;
+    margin: 0em 1em 1em 1em;
+    transition: 0.2s linear;
+}
+
+#ToolDetailImg:hover {
+    transform: scale(3);
+    transition: 0.2s linear;
+}

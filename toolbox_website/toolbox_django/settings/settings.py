@@ -49,8 +49,7 @@ ROOT_URLCONF = 'settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'DIRS': [os.path.join(BASE_DIR, 'build')],  # ! UN-COMMENT THIS LINE IN PRODUCTION
-        'DIRS': [],                                # ! COMMENT THIS LINE IN PRODUCTION
+        'DIRS': [os.path.join(BASE_DIR, 'build')], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,6 +112,9 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'https://localhost:8000',
 )
 
 JWT_AUTH = {
@@ -141,12 +143,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #CSP_STYLE_SRC = ("'self'","'unsafe-inline'",'fonts.googleapis.com','maxcdn.bootstrapcdn.com')
 #CSP_SCRIPT_SRC = ("'self'","'unsafe-inline'")
 #CSP_FONT_SRC = ("'self'","'unsafe-inline'",'fonts.gstatic.com')
-#CSP_IMG_SRC = ("'self'","'unsafe-inline'",'data:')
+#CSP_IMG_SRC = ("'self'","'unsafe-inline'",'data:','blob:')
 
 
-
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'build/static'),
-#]
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

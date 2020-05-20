@@ -1,4 +1,9 @@
 .Help {
   width: 100%;
-  margin: 1em;
+}
+
+.HelpContentWrapper{
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
 }

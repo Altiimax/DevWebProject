@@ -49,6 +49,9 @@ class App extends Component {
       req.send();
       getUserProfileAPIRequest(userFromToken().id);
     }
+    else{
+      document.getElementById("userNameDisplay").innerHTML = "";
+    }
   }
 
   display_popUp = (type) => {

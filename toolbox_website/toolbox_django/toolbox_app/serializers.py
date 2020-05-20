@@ -53,6 +53,7 @@ class toolsDetailSerializer(serializers.ModelSerializer):
         fields =('id_tool','toolName','toolDescription','toolPrice','toolImages', 'reviews')
 
 
+
 ##################################
 ### PERSON RELATED SERIALIZERS ###
 
@@ -67,10 +68,20 @@ class personsSerializer(serializers.ModelSerializer):
         model = Persons
         fields = ('id_person', 'lastName', 'firstName', 'alias', 'birthDate', 'email', 'password')
 
+
 class personsLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = Persons
         fields = ('id_person', 'alias', 'email')
+
+class toolsDetailWithOwnerSerializer(serializers.ModelSerializer):
+    toolOwner = personsLoginSerializer(source='id_person', read_only=True )
+    toolImages = toolImagesSerializer(source='toolimages_set', many=True)
+    reviews = toolReviewsSerializer(source='toolreviews_set', many=True)
+
+    class Meta:
+        model = Tools
+        fields =('toolOwner', 'id_tool','toolName','toolDescription','toolPrice','toolImages', 'reviews')
 
 class personsLoginGetTokenSerializer(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()

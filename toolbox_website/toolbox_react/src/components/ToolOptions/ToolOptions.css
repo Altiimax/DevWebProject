@@ -1,0 +1,16 @@
+#toolGroupsInfo{
+  font-size: larger;
+  margin: 0.5em 0 1em 0;
+}
+
+#toolGroups{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  margin: 0.5em 0 1em 0;
+}
+
+#toolGroups label{
+  margin-right: 1em;
+}
