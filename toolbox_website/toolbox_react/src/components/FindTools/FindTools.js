@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form /*Col*/ } from "react-bootstrap";
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { apiRequest } from "../../api/apiRequest.js";
-import Search from "../Search/Search.js";
+import SearchResult from "../SearchResult/SearchResult.js";
 import ReactDOM from "react-dom";
 
 import "./FindTools.css";
@@ -35,7 +35,17 @@ class FindTools extends Component {
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 200) {
-          self.setState({townList: JSON.parse(this.responseText)});
+          let rep = JSON.parse(this.responseText);
+          let onlyOnce = [];
+          for(let e of rep){
+              if (!onlyOnce.includes(e.townName)){
+                  onlyOnce.push(e.townName);
+              }
+          }
+          onlyOnce.sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+          self.setState({townList: onlyOnce});
         }
       }
     });
@@ -53,7 +63,17 @@ class FindTools extends Component {
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 200) { 
-          self.setState({toolList: JSON.parse(this.responseText)});
+          let rep = JSON.parse(this.responseText);
+          let onlyOnce = [];
+          for(let e of rep){
+              if (!onlyOnce.includes(e.toolName)){
+                  onlyOnce.push(e.toolName);
+              }
+          }
+          onlyOnce.sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+          self.setState({toolList: onlyOnce});
         }
       }
     });
@@ -80,7 +100,7 @@ class FindTools extends Component {
           if (rep.length === 0) {
           } else {
             ReactDOM.render(
-              <Search data={rep} />,
+              <SearchResult data={rep} />,
               document.getElementById("list")
             );
           }
@@ -107,7 +127,7 @@ class FindTools extends Component {
             <Typeahead
               id="whatInput"
               onChange={selected => {
-                                      try{ this.setState({ toolName: selected[0].toolName })}
+                                      try{ this.setState({ toolName: selected[0] })}
                                       catch(e){}
                                     }
                         }
@@ -121,7 +141,7 @@ class FindTools extends Component {
             <Typeahead
               id="whereInput"
               onChange={selected => {
-                            try{ this.setState({ townName: selected[0].townName })}
+                            try{ this.setState({ townName: selected[0] })}
                             catch(e){}
                           }
               }

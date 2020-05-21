@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Table } from "react-bootstrap";
-import "./Search.css";
+import "./SearchResult.css";
 import GroupDetail from "../GroupDetail/GroupDetail.js";
 
-class Search extends Component {
+class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +14,7 @@ class Search extends Component {
 
   displayGroupDetail = (group)=>{
     let gpD = <GroupDetail groupObj={group} content={'searchResult'}/>;
-    ReactDOM.render(gpD, document.getElementById("GroupDetail"));
+    ReactDOM.render(gpD, document.getElementById("homeGroupDetail"));
   }
 
   componentDidMount = () => {
@@ -55,4 +55,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default SearchResult;

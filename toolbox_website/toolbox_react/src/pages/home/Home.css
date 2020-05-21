@@ -51,7 +51,11 @@
 }
 
 .searchList{
-  width:70%;
+  width:50%;
+}
+
+#homeGroupDetail{
+  margin-bottom: 1em;
 }
 
 #allTools{
