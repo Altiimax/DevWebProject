@@ -1,19 +1,66 @@
 import React, { Component } from "react";
 import { Form /*Col*/ } from "react-bootstrap";
-import "./FindTools.css";
+import { Typeahead } from 'react-bootstrap-typeahead';
 import { apiRequest } from "../../api/apiRequest.js";
 import Search from "../Search/Search.js";
 import ReactDOM from "react-dom";
+
+import "./FindTools.css";
+
+//https://github.com/ericgio/react-bootstrap-typeahead //TODO mettre dans refs
 
 class FindTools extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      townList: [],
+      toolList: [],
       toolName: "",
       townName: "",
-      validated: false,
     };
   }
+
+  componentDidMount(){
+    this.getAllTownsApiRequest();
+    this.getAllToolsApiRequest();
+  }
+
+  getAllTownsApiRequest(){
+    let endpoint = `/api/towns/`;
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
+
+    let self = this;
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          self.setState({townList: JSON.parse(this.responseText)});
+        }
+      }
+    });
+
+    req.send();
+  };
+
+  getAllToolsApiRequest(){
+    let endpoint = `/api/tools/`;
+    let req = new apiRequest();
+    req.open("GET", `${endpoint}`);
+
+    let self = this;
+
+    req.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) { 
+          self.setState({toolList: JSON.parse(this.responseText)});
+        }
+      }
+    });
+
+    req.send();
+  };
+
 
   apiFindTools = () => {
     let self = this;
@@ -23,7 +70,6 @@ class FindTools extends Component {
       "'&where='" +
       self.state.townName +
       "'";
-    console.log(endpoint);
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
 
@@ -31,7 +77,6 @@ class FindTools extends Component {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let rep = JSON.parse(this.responseText);
-          console.log(rep);
           if (rep.length === 0) {
           } else {
             ReactDOM.render(
@@ -46,28 +91,11 @@ class FindTools extends Component {
     req.send();
   };
 
-  handleChange = (e) => {
-    let target = e.target;
-    let value = target.value;
-    let name = target.name;
-    this.setState({ [name]: value });
-  };
-
   handleSubmit = (e) => {
-    const form = e.currentTarget;
-    ReactDOM.render(
-      " ",
-      document.getElementById("list")
-    );
+    ReactDOM.render(" ",document.getElementById("list"));
     e.preventDefault();
-    if(form.checkValidity() === false){
-        e.preventDefault();
-        e.stopPropagation();
-    }
-    this.setState({validated : true});
-        e.preventDefault();
-        this.apiFindTools();
-      };
+    this.apiFindTools();
+  };
 
   render() {
     return (
@@ -76,38 +104,33 @@ class FindTools extends Component {
         <Form className="baseForm" noValidate validated={this.state.validated}>
           <Form.Group>
             <Form.Label>Which tool?</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="toolName"
+            <Typeahead
+              id="whatInput"
+              onChange={selected => {
+                                      try{ this.setState({ toolName: selected[0].toolName })}
+                                      catch(e){}
+                                    }
+                        }
+              labelKey="toolName"
+              options={this.state.toolList}
               placeholder="Wrench, saw, screwdriver, ..."
-              onChange={this.handleChange}
             />
-            <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group>
             <Form.Label>Where?</Form.Label>
-            <Form.Control
-              required
-              type="text"
+            <Typeahead
+              id="whereInput"
+              onChange={selected => {
+                            try{ this.setState({ townName: selected[0].townName })}
+                            catch(e){}
+                          }
+              }
+              labelKey="townName"
+              options={this.state.townList}
               placeholder="Select a city by name"
-              name="townName"
-              onChange={this.handleChange}
             />
-            
-            <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
-          {/* //TODO pour le moment on implémente pas cette fonctionalitée ;) 
-          <Form.Row>
-            <Form.Group as={Col}>
-              <Form.Label>From</Form.Label>
-              <Form.Control type="date" />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>To</Form.Label>
-              <Form.Control type="date" />
-            </Form.Group>
-          </Form.Row>*/}
+
           <div className="searchButtonContainer">
             <button
               className="searchButton"

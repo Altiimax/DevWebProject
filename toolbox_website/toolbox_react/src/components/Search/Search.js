@@ -13,7 +13,7 @@ class Search extends Component {
   }
 
   displayGroupDetail = (group)=>{
-    let gpD = <GroupDetail groupObj={group}/>;
+    let gpD = <GroupDetail groupObj={group} content={'searchResult'}/>;
     ReactDOM.render(gpD, document.getElementById("GroupDetail"));
   }
 

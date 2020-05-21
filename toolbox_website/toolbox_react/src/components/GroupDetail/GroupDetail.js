@@ -9,15 +9,18 @@ function GroupDetail(props) {
   let group = useRef();
   group.current = props.groupObj;
   let content = props.content;
+  let toolPopup = useRef();
+  toolPopup.current = "none";
 
   useEffect(() => {
     group.current = props.groupObj;
     if(content ==="profile"){
       document.getElementById("myGroupProfile").style.display="none"; 
       document.getElementById("profileSection").innerHTML = "My Groups - Detail";
+      toolPopup.current = "detail";
     }
     else{
-      
+      toolPopup.current = "none";
     }
     document.getElementById("GroupDetail").style.display="initial";
     ReactDOM.render("", document.getElementById("GroupDetailTools"));
@@ -46,7 +49,7 @@ function GroupDetail(props) {
                 price={tools[t].tool.toolPrice}
                 desc={tools[t].tool.toolDescription}
                 id={tools[t].tool.id_tool}
-                popUp="detail"
+                popUp={toolPopup}
               />
             );
           }
