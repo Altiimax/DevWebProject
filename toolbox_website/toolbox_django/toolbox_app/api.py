@@ -188,7 +188,7 @@ class toolsViewSet(viewsets.GenericViewSet):
     def list(self, request, *args, **kwargs):
         """" list all tools """
         queryset = Tools.objects.all()
-        serializer = toolsDetailSerializer(queryset, many=True)
+        serializer = toolsBasicSerializer(queryset, many=True)
         return Response(serializer.data)
 
     # GET 127.0.0.1:8000/api/tools/1

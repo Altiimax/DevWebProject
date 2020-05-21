@@ -29,6 +29,11 @@ class personsTownsDetailSerializer(serializers.ModelSerializer):
 ##################################
 ###  TOOL RELATED SERIALIZERS  ###
 
+class toolsBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tools
+        fields =('id_tool', 'toolName')
+
 class toolsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tools

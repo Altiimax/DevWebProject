@@ -23,7 +23,7 @@ class FindTools extends Component {
       "'&where='" +
       self.state.townName +
       "'";
-
+    console.log(endpoint);
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
 
@@ -33,7 +33,6 @@ class FindTools extends Component {
           let rep = JSON.parse(this.responseText);
           console.log(rep);
           if (rep.length === 0) {
-            console.log("Tool not found");
           } else {
             ReactDOM.render(
               <Search data={rep} />,
@@ -45,8 +44,6 @@ class FindTools extends Component {
     });
 
     req.send();
-    console.log(this.state.toolName);
-    console.log(this.state.townName);
   };
 
   handleChange = (e) => {
@@ -58,6 +55,10 @@ class FindTools extends Component {
 
   handleSubmit = (e) => {
     const form = e.currentTarget;
+    ReactDOM.render(
+      " ",
+      document.getElementById("list")
+    );
     e.preventDefault();
     if(form.checkValidity() === false){
         e.preventDefault();
@@ -82,7 +83,6 @@ class FindTools extends Component {
               placeholder="Wrench, saw, screwdriver, ..."
               onChange={this.handleChange}
             />
-            <Form.Control.Feedback>Field not empty</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group>
@@ -94,7 +94,7 @@ class FindTools extends Component {
               name="townName"
               onChange={this.handleChange}
             />
-            <Form.Control.Feedback>Field not empty</Form.Control.Feedback>
+            
             <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           {/* //TODO pour le moment on implémente pas cette fonctionalitée ;) 
