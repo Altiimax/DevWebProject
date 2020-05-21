@@ -15,6 +15,11 @@
   margin-right: 2em;
 }
 
+.FormRow #priceInput{
+  display: flex;
+  flex-direction: row;
+}
+
 .FormImgsDrop {
   width: 100%;
   display: flex;

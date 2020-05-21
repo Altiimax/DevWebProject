@@ -156,7 +156,7 @@ class AddTools extends Component {
               <label className="FormField_Label" htmlFor="price">
                 Price
               </label>
-              <div>
+              <div id="priceInput">
                 <input
                   className="FormField_Input"
                   required
@@ -168,11 +168,11 @@ class AddTools extends Component {
                   placeholder="0.00"
                   onChange={this.handleChange}
                 />
-                €
+                <div>€/day</div>
               </div>
             </div>
 
-            <div>  
+            {/*<div>  
               <label className="FormField_Label" htmlFor="typeOfRent">
                 Type of renting
               </label>
@@ -182,7 +182,7 @@ class AddTools extends Component {
                 <option value="Per week">Per week</option>
                 <option value="Per month">Per month</option>
               </select>
-            </div>
+            </div>*/}
           </div>
           
           <label className="FormField_Label">Tool Images</label>
