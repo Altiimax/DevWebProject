@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect } from "react";
 import { apiRequest } from "../../api/apiRequest.js";
-import { userFromToken, getUserProfileAPIRequest } from "../../utils";
-import "./MyProfile.css"
+import { userFromToken } from "../../utils";
+import "./MyProfile.css";
+import nut from "../../nut.svg";
+
 function MyProfile(props){
-    const [user] = useState(props.user_id);
-    const [ProfilData, setProfilData] = useState();
-    
+    //const [user] = useState(props.user_id);
+        
     useEffect(() => {
         getProfile();
+        document.getElementById("profileSection").innerHTML = "My Profile";
     });
 
 
@@ -33,17 +34,28 @@ function MyProfile(props){
 
     function displayProfile(data_profile){
         document.getElementById("name").innerHTML = data_profile.firstName + " "+ data_profile.lastName;
-        document.getElementById("alias").innerHTML = data_profile.alias;
+        document.getElementById("alias").innerHTML = "Alias : "+data_profile.alias;
         document.getElementById("birthDate").innerHTML = data_profile.birthDate;
         document.getElementById("email").innerHTML = data_profile.email;
     }
 
     return(
-        <div className="myProfileContent">
-            <div id="name"></div>
-            <div id ="alias"></div>
-            <div id="birthDate"></div>
-            <div id="email"></div>
+        <div className="wrapper_myProfile">
+          <div className="container_myProfile">
+            <div className="img_myProfileContainer">
+              <img src={nut} alt="here" className="img_myProfile" />
+            </div>
+            <div className="content_myProfile">
+              <div className="subContent_myProfile">
+                <h1 id="name">Loading...</h1>
+                <span id="alias"></span>
+                <br/>
+                <span id="email"></span>
+                <div id="birthDate"></div>
+                <button className="button_myProfile">Change my profile informations</button>
+              </div>
+            </div>
+          </div>
         </div>
     );
 }

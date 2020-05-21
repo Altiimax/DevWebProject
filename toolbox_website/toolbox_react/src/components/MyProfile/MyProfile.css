@@ -1,4 +1,35 @@
-.myProfileContent{
- display: block;
- background-color: black;
+.container_myProfile{
+    background-color: white;
+    padding:5%;
+    padding-top: 10px;
+    color: black;
+    border-radius: 50px;
+    max-width: 50vmin;
+    max-height: 50vmin;
+}
+
+.img_myProfileContainer{
+    background-color: rgba(247, 220, 9, 1);
+    border-radius: 50%;
+    width:50%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content_myProfile{
+    text-align: center;
+    resize: both;
+}
+
+.content_myProfile .subContent_myProfile h1{
+    text-transform: uppercase;
+    font-size: 24px;
+    color: blue;
+}
+
+.button_myProfile{
+    border-radius: 7px;
+    background-color: black;
+    color:white;
 }
