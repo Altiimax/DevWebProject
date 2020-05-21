@@ -66,7 +66,10 @@ function Tool(props) {
     }
     slideIndex++;
     if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
+    try{
+      slides[slideIndex-1].style.display = "block";
+    }
+    catch(e){}
     setTimeout(showSlides, 3000); // Change image every 2 seconds
   }
 
@@ -92,7 +95,7 @@ function Tool(props) {
         <div className="informTool">
           <h4>{name.current}</h4>
         </div>
-        <div className="priceTool">Price : {price.current} €</div>  
+        <div className="priceTool">Price : {price.current} € / day</div>  
         <div className="toolTipText">{description.current}</div>
       </div> 
       <div id="toolPopup"></div>
