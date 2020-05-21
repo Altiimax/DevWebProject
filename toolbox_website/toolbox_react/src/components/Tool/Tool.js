@@ -12,7 +12,7 @@ if(!isInDev){
   url = "";
 }
 
-function MyTools(props) {
+function Tool(props) {
   //pour les images il faudrait pouvoir les faire défiler onHover!!! Ici qu'une seule affichée..
   let id = useRef();
   id.current = props.id; 
@@ -105,6 +105,6 @@ function MyTools(props) {
 
 }
 
-export default MyTools;
+export default Tool;
 
 
