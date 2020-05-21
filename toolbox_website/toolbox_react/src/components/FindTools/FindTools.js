@@ -81,7 +81,7 @@ class FindTools extends Component {
               placeholder="Wrench, saw, screwdriver, ..."
               onChange={this.handleChange}
             />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback>Field not empty</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group>
@@ -93,7 +93,7 @@ class FindTools extends Component {
               name="townName"
               onChange={this.handleChange}
             />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback>Field not empty</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
           </Form.Group>
           {/* //TODO pour le moment on implémente pas cette fonctionalitée ;) 

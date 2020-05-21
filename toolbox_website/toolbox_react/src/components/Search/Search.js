@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Table } from "react-bootstrap";
 import "./Search.css";
+import GroupDetail from "../GroupDetail/GroupDetail.js";
 
 class Search extends Component {
   constructor(props) {
@@ -11,12 +12,17 @@ class Search extends Component {
     };
   }
 
+  displayGroupDetail = (group)=>{
+    let gpD = <GroupDetail groupObj={group}/>;
+    ReactDOM.render(gpD, document.getElementById("GroupDetail"));
+  }
+
   componentDidMount = () => {
     let tabData = this.state.data;
     let tabBody = [];
     for (let i in tabData) {
       tabBody.push(
-        <tr><td>
+        <tr onClick={() => this.displayGroupDetail(tabData[i])}><td>
         {tabData[i].id_groupName}
         </td><td>
         {tabData[i].groupType}
@@ -26,9 +32,7 @@ class Search extends Component {
         {tabData[i].town.townName}
         </td></tr>)
     }
-    ReactDOM.render(tabBody,document.getElementById("dataaa"));
-    //document.getElementById("dataaa").innerHTML = tabBody;
-    
+    ReactDOM.render(tabBody,document.getElementById("data"));    
   };
 
   render() {
@@ -43,8 +47,9 @@ class Search extends Component {
               <th>Town</th>
             </tr>
           </thead>
-          <tbody id="dataaa"></tbody>
+          <tbody id="data"></tbody>
         </Table>
+        <div id="GroupDetail"></div>
       </div>
     );
   }

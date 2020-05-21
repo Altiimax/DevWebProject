@@ -29,3 +29,28 @@
   text-align: center;
 }
 
+.searchByTool{
+  margin: 1em;
+  background-color: white;
+  /*PROVISOIRE*/
+  width: 20em;
+  height: 15em;
+  text-align: center;
+  font-size: large;
+  border-radius: 10px;
+  border:none;
+}
+.searchByTool:hover{
+  background-color: rgb(196, 188, 188);
+}
+
+.searchList{
+  width:70%;
+}
+
+#allTools{
+  display:flex;
+  width:80%;
+}
+
+
