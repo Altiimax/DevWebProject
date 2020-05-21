@@ -3,6 +3,7 @@ import tokenIsValid, { userFromToken } from "../../utils";
 import history from "../../history";
 import MyGroups from "../../components/MyGroups/MyGroups.js";
 import MyTools from "../../components/MyTools/MyTools.js";
+import MyProfile from "../../components/MyProfile/MyProfile.js";
 
 import "./Profile.css";
 import ReactDOM from "react-dom";
@@ -38,8 +39,8 @@ class Profile extends Component {
 
   getMyGroupsApi(id_pers){
     if (tokenIsValid()) {
-      let toolList= <MyGroups/>
-      ReactDOM.render(toolList, document.getElementById("profileContentDisplay"));
+      let groupList= <MyGroups/>
+      ReactDOM.render(groupList, document.getElementById("profileContentDisplay"));
     } else {
       history.push("/");
     }
@@ -54,6 +55,15 @@ class Profile extends Component {
     }
   }
 
+  getMyProfileApi= (id_pers) =>{
+    if (tokenIsValid()) {
+      let profileInfos= <MyProfile user_id={id_pers}/>
+      ReactDOM.render(profileInfos, document.getElementById("profileContentDisplay"));
+    } else {
+      history.push("/");
+    }
+  }
+
   render() {
     return (
       <div className="Profile" id="main">
@@ -61,7 +71,7 @@ class Profile extends Component {
           <div id="navBar">
             <button onClick={() => this.displayMyTools(userFromToken().id)}>My Tools</button>
             <button onClick={() => this.getMyGroupsApi(userFromToken().id)}>My Groups</button>
-            <button onClick={this.getMyProfileApi}>My Profile</button>
+            <button onClick={() => this.getMyProfileApi(userFromToken().id)}>My Profile</button>
           </div>
           <div id="profileContent">
             <div id="profileTitle"> 

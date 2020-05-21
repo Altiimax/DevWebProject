@@ -35,7 +35,7 @@ function MyGroups() {
   }
 
   function displayGroupDetail(group){
-    let gpD = <GroupDetail groupObj={group}/>;
+    let gpD = <GroupDetail groupObj={group} content={'profile'}/>;
     ReactDOM.render(gpD, document.getElementById("GroupDetail"));
   }
 

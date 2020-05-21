@@ -8,12 +8,18 @@ import "./GroupDetail.css";
 function GroupDetail(props) {
   let group = useRef();
   group.current = props.groupObj;
+  let content = props.content;
 
   useEffect(() => {
     group.current = props.groupObj;
-    document.getElementById("myGroupProfile").style.display="none";
+    if(content ==="profile"){
+      document.getElementById("myGroupProfile").style.display="none"; 
+      document.getElementById("profileSection").innerHTML = "My Groups - Detail";
+    }
+    else{
+      
+    }
     document.getElementById("GroupDetail").style.display="initial";
-    document.getElementById("profileSection").innerHTML = "My Groups - Detail";
     ReactDOM.render("", document.getElementById("GroupDetailTools"));
     getAllTools();
   });
