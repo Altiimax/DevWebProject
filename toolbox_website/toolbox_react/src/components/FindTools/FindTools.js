@@ -58,6 +58,7 @@ class FindTools extends Component {
 
   handleSubmit = (e) => {
     const form = e.currentTarget;
+    e.preventDefault();
     if(form.checkValidity() === false){
         e.preventDefault();
         e.stopPropagation();

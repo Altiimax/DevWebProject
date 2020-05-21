@@ -26,7 +26,7 @@ export default function Home() {
         });
           let listTool = "<ul>";
           for(let f of onlyOnce){
-            listTool+= "<li><button onclick={getGroups(f)}>"+f+"</button></li>";
+            listTool+= "<li><button onClick={"+handleClick+"}>"+f+"</button></li>";
           }
           listTool +="</ul>"
           document.getElementById("allTools").innerHTML = listTool;
@@ -36,9 +36,13 @@ export default function Home() {
 
     req.send();
   }
+function handleClick(e){
+  e.preventDefault();
+  getGroups(1);
+}
 
-  function getGroups(tool_name){
-    let endpoint = "/api/tools/"+tool_name+"/groups/";
+  function getGroups(tool_id){
+    let endpoint = "/api/tools/"+tool_id+"/groups/";
     let req = new apiRequest();
     req.open("GET", `${endpoint}`);
 
