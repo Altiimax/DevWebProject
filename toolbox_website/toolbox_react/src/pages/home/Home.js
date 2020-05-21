@@ -9,10 +9,13 @@ export default function Home() {
   return (
     <div className="Home">
       <div id="homeContentWrapper">
-        <div className="SearchFrom">
-          <FindTools />
+        <div id="homeSearch">
+          <div className="SearchFrom">
+            <FindTools />
+          </div>
+          <div className="searchList" id="list"></div>
         </div>
-        <div className="searchList" id="list"></div>
+        <div id="homeGroupDetail"></div>
         <div className="searchMap">
           <Map />
         </div>
