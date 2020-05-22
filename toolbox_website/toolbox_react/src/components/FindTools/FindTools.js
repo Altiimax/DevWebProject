@@ -96,10 +96,22 @@ class FindTools extends Component {
       if (this.readyState === 4) {
         if (this.status === 200) {
           let rep = JSON.parse(this.responseText);
-          if (rep.length === 0) {
-          } else {
+          let onlyOnce = [];
+          for(let g of rep){
+            let isAlreadyIn = false;
+            for(let go of onlyOnce){
+              if(g.id_groupName === go.id_groupName){
+                isAlreadyIn = true;
+                break;
+              }
+            }
+            if(!isAlreadyIn){
+              onlyOnce.push(g);
+            }
+          }
+          if (rep.length !== 0) {
             ReactDOM.render(
-              <SearchResult data={rep} />,
+              <SearchResult data={onlyOnce} />,
               document.getElementById("list")
             );
           }
