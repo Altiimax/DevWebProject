@@ -45,7 +45,14 @@
   background-color: rgb(58, 245, 58);;
 }
 
-#cannotJoin{
-  margin: 0 0.2em;
+#joinStatus{
+  margin: 0 0.em;
+}
+
+.joinError{
   color: red;
+}
+
+.joinOk{
+  color: rgb(0, 243, 0);
 }

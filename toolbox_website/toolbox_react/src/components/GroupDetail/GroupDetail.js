@@ -106,19 +106,27 @@ function GroupDetail(props) {
   }
 
   function joinGroup () {
+    let joinStatus = document.getElementById("joinStatus")
     if (tokenIsValid()) {
       let addG = true;
       for(let i in groups){
         if(group.current.id_groupName === groups[i].group.id_groupName){
-          ReactDOM.render("You're already in that group", document.getElementById("cannotJoin"));
+          joinStatus.classList.remove('joinOk');
+          joinStatus.classList.add('joinError');
+          ReactDOM.render("You're already in that group", joinStatus);
           addG=false;
         }
       }
       if(addG){
         apiAddMember(userFromToken().id,group.current.id_groupName);
+        joinStatus.classList.remove('joinError');
+        joinStatus.classList.add('joinOk');
+        ReactDOM.render("Congratulations, you joined this group!",joinStatus);
       }
     } else {
-      ReactDOM.render("You must be connected to be able to join a group", document.getElementById("cannotJoin"));
+        joinStatus.classList.remove('joinOk');
+        joinStatus.classList.add('joinError');
+        ReactDOM.render("You must be connected to be able to join a group", joinStatus);
     }
   }
 
@@ -131,7 +139,7 @@ function GroupDetail(props) {
           <h4> Location: {group.current.town.townName}</h4>
           <div id="joinDivCont">
             <button id="groupDetailJoin" onClick={joinGroup}>Join group</button>
-            <span id="cannotJoin"></span>
+            <span id="joinStatus"></span>
           </div>
         </div>
         <div id="GroupDetailDescription">{group.current.groupDescription}</div>
