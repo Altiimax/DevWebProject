@@ -141,9 +141,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #CSP_DEFAULT_SRC = ("'none'")  
 #CSP_CONNECT_SRC = ("'self'",'109.128.245.26:5432')  # ! change this IP with the ip address or url of your database 
 #CSP_STYLE_SRC = ("'self'","'unsafe-inline'",'fonts.googleapis.com','maxcdn.bootstrapcdn.com')
-#CSP_SCRIPT_SRC = ("'self'","'unsafe-inline'")
+#CSP_SCRIPT_SRC = ("'self'","'unsafe-inline'",'maps.googleapis.com')
 #CSP_FONT_SRC = ("'self'","'unsafe-inline'",'fonts.gstatic.com')
-#CSP_IMG_SRC = ("'self'","'unsafe-inline'",'data:','blob:')
+#CSP_IMG_SRC = ("'self'","'unsafe-inline'",'data:','blob:','maps.googleapis.com','maps.gstatic.com')
 
 
 STATICFILES_DIRS = [
