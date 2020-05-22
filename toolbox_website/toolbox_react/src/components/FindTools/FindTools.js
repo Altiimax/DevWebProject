@@ -7,7 +7,6 @@ import ReactDOM from "react-dom";
 
 import "./FindTools.css";
 
-//https://github.com/ericgio/react-bootstrap-typeahead //TODO mettre dans refs
 
 class FindTools extends Component {
   constructor(props) {

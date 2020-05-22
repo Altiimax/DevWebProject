@@ -26,3 +26,26 @@
   justify-content: flex-start;
   align-content: space-around;
 }
+
+#joinDivCont{
+  display: flex;
+  flex-direction: column;
+}
+
+#groupDetailJoin {
+  width: 6em;
+  margin: 1em 0;
+  border-radius: 5px;
+  border: solid 2px rgb(155, 152, 152);
+  background-color: rgb(18, 204, 18);
+  outline: none;
+}
+
+#groupDetailJoin:hover {
+  background-color: rgb(58, 245, 58);;
+}
+
+#cannotJoin{
+  margin: 0 0.2em;
+  color: red;
+}

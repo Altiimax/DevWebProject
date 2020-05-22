@@ -23,7 +23,6 @@ function MyProfile(props){
       if (this.readyState === 4) {
         if (this.status === 200) {
           let resp = JSON.parse(this.responseText);
-          console.log(resp);
           displayProfile(resp[0]);
         }
       }

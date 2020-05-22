@@ -43,6 +43,10 @@ req.addEventListener("readystatechange", function () {
         document.getElementById("userNameDisplay").innerHTML =
         "Welcome " + profile.firstName + " " + profile.lastName;
     }
+    else{
+        localStorage.setItem('token',null);
+        window.location.reload();
+    }
     }
 });
 

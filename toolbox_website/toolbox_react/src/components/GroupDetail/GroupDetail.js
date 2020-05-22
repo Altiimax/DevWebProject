@@ -22,8 +22,11 @@ function GroupDetail(props) {
       document.getElementById("groupDetailJoin").style.display="none";
       toolPopup.current = "detail"; 
     }
-    else{
-      getMyGroupsApiRequest();
+    else{ //searchResult
+      if(tokenIsValid()){
+        //user is connected
+        getMyGroupsApiRequest();
+      }
       toolPopup.current = "none";
     }
     document.getElementById("GroupDetail").style.display="initial";
@@ -53,7 +56,7 @@ function GroupDetail(props) {
                 price={tools[t].tool.toolPrice}
                 desc={tools[t].tool.toolDescription}
                 id={tools[t].tool.id_tool}
-                popUp={toolPopup}
+                popUp={toolPopup.current}
               />
             );
           }
@@ -68,7 +71,6 @@ function GroupDetail(props) {
   
   function apiAddMember(user_id, group_id){
     let data = JSON.stringify({"id_person":user_id,"id_groupName":group_id,"groupAdmin":"False"})
-    console.log(data);
     let endpoint = "/api/groups/members/";
 
     let req = new apiRequest();
@@ -78,7 +80,6 @@ function GroupDetail(props) {
     req.addEventListener("readystatechange", function () {
       if (this.readyState === 4) {
         if (this.status === 201) {
-          console.log(this.responseText);
         }
       }
     });
@@ -104,9 +105,8 @@ function GroupDetail(props) {
     req.send();
   }
 
-  function addGroup () {
+  function joinGroup () {
     if (tokenIsValid()) {
-      console.log(groups);
       let addG = true;
       for(let i in groups){
         if(group.current.id_groupName === groups[i].group.id_groupName){
@@ -115,11 +115,10 @@ function GroupDetail(props) {
         }
       }
       if(addG){
-        console.log("ici");
         apiAddMember(userFromToken().id,group.current.id_groupName);
       }
     } else {
-      ReactDOM.render("You're not connected", document.getElementById("cannotJoin"));
+      ReactDOM.render("You must be connected to be able to join a group", document.getElementById("cannotJoin"));
     }
   }
 
@@ -130,8 +129,10 @@ function GroupDetail(props) {
           <h1>{group.current.id_groupName}</h1>
           <h4> Type: {group.current.groupType}</h4>
           <h4> Location: {group.current.town.townName}</h4>
-          <button id="groupDetailJoin" onClick={addGroup}>Join group</button>
-          <span id="cannotJoin"></span>
+          <div id="joinDivCont">
+            <button id="groupDetailJoin" onClick={joinGroup}>Join group</button>
+            <span id="cannotJoin"></span>
+          </div>
         </div>
         <div id="GroupDetailDescription">{group.current.groupDescription}</div>
         <div id="GroupDetailTools"></div>

@@ -22,7 +22,7 @@ class SearchResult extends Component {
     let tabBody = [];
     for (let i in tabData) {
       tabBody.push(
-        <tr onClick={() => this.displayGroupDetail(tabData[i])}><td>
+        <tr key={i} onClick={() => this.displayGroupDetail(tabData[i])}><td>
         {tabData[i].id_groupName}
         </td><td>
         {tabData[i].groupType}

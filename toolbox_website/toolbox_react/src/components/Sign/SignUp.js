@@ -65,7 +65,7 @@ class SignUp extends Component {
             document.getElementById("alias_error").innerHTML = error;
           } 
           else {
-            console.log(error);
+            //pass
           }
         }
       }

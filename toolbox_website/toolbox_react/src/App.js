@@ -39,15 +39,17 @@ class App extends Component {
               user_id: user.id_person,
               signed_in: true,
             });
+            getUserProfileAPIRequest(userFromToken().id);
           }
           if (this.status === 404) {
-            history.push('/');
+            document.getElementById("userNameDisplay").innerHTML = "";
+            //history.push('/');
           }
         }
       });
   
       req.send();
-      getUserProfileAPIRequest(userFromToken().id);
+      
     }
     else{
       document.getElementById("userNameDisplay").innerHTML = "";
@@ -83,6 +85,7 @@ class App extends Component {
       user_id: u_id,
       signed_in: true,
     });
+    window.location.reload();
   };
 
 
@@ -90,6 +93,7 @@ class App extends Component {
     localStorage.removeItem('token');
     document.getElementById("userNameDisplay").innerHTML = "";
     history.push('/');
+    window.location.reload();
     this.setState({
       user_id: 0,
       signed_in: false,
