@@ -483,7 +483,7 @@ class searchViewSet(viewsets.GenericViewSet):
                             WHERE LOWER("Towns"."townName") LIKE LOWER(%s) ;
                             ''' %(where)
         townSearchQuerySet = Towns.objects.raw(townSearchQuery)
-        townSearch = townsSerializer(townSearchQuerySet, many=True).data[0]
+        townSearch = townsSerializer(townSearchQuerySet, many=True).data
 
         allGroupsWToolQuery =   '''
                                 SELECT *
@@ -498,15 +498,14 @@ class searchViewSet(viewsets.GenericViewSet):
         allGroupsWTool = groupsDetailSerializer(allGroupsWToolQuerySet, many=True).data
         
         groups = []
-        for group in allGroupsWTool:
-            if(self.distCalc(townSearch,group)):
-                groups.append(group)
-            else:
-                pass
-
+        if(len(townSearch) != 0):
+            for group in allGroupsWTool:
+                if(self.distCalc(townSearch[0],group)):
+                    groups.append(group)
+                else:
+                    pass
+        
         return Response(groups)
-
-
 
     # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
     def list2(self, request, *args, **kwargs):

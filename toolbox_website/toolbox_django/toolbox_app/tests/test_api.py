@@ -43,6 +43,8 @@ class SetupClass(APITestCase):
         self.dummyTown_dict = {
             "postCode": 1300,
             "townName": "Wavre",
+            "lat": 50.123456,
+            "lng": 4.123456,
             "id_countryCode": self.dummyCountry_object
         }
         self.dummyTown_object = Towns.objects.create(**self.dummyTown_dict)
@@ -289,6 +291,8 @@ class TestTownsApi(SetupClass):
         data = {
             "postCode": 1300,
             "townName": "Wavre",
+            "lat": 50.123456,
+            "lng": 4.123456,
             "id_countryCode": "BE"
         }
         response = self.auth_client.post("/api/towns/", data, format='json')
