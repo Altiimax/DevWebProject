@@ -42,7 +42,7 @@ class personsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
         return token
 
     # GET 127.0.0.1:8000/api/persons/
-    @permission_classes([AllowAny])
+    @permission_classes([IsAuthenticated])
     def list(self, request, *args, **kwargs):
         """" list all users """
         queryset = Persons.objects.all().order_by('lastName')
