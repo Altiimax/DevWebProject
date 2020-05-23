@@ -10,9 +10,11 @@ export default function tokenIsValid() {
         if(decodedToken.exp < dateNow.getTime() - decodedToken.orig_iat){
             return true;
         }
+        localStorage.removeItem('token');
         return false;
     }
     catch(err) {
+        localStorage.removeItem('token');
         return false;
     }
     

@@ -149,6 +149,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #CSP_SCRIPT_SRC = ("'self'","'unsafe-inline'",'maps.googleapis.com')
 #CSP_FONT_SRC = ("'self'","'unsafe-inline'",'fonts.gstatic.com')
 #CSP_IMG_SRC = ("'self'","'unsafe-inline'",'data:','blob:','maps.googleapis.com','maps.gstatic.com')
+#CSP_MANIFEST_SRC = ("'self'","'unsafe-inline'",'toolbox-app.herokuapp.com')
 
 
 STATICFILES_DIRS = [
