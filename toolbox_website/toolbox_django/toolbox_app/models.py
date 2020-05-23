@@ -58,6 +58,9 @@ class Persons(models.Model):
     email = models.EmailField()
     password= models.CharField(max_length=254)
 
+    def get_by_natural_key(self, username):
+        return self.get(email=username)
+
     class Meta:
         managed = True
         constraints = [
@@ -65,7 +68,6 @@ class Persons(models.Model):
             models.UniqueConstraint(fields= ['email'],name='unique_email'),
         ]
         db_table = 'Persons'
-
 
 
 class PersonsTowns(models.Model):

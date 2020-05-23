@@ -1,5 +1,5 @@
-let user = "admin";
-let password = "devweb2";
+import { userFromToken } from "../utils";
+
 
 /*-----api request url information-----*/
 let uri = "http://127.0.0.1";
@@ -19,10 +19,12 @@ export class apiRequest {
     else{
       this.xhr.open(method, `${endpoint}`, true);
     }
-    this.xhr.setRequestHeader(
-      "Authorization",
-      "Basic " + btoa(user + ":" + password)
-    );
+    if(userFromToken().token != null){
+      this.xhr.setRequestHeader(
+        "Authorization",
+        "JWT " + userFromToken().token
+      );
+    }
   }
 
   /**

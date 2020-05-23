@@ -20,10 +20,19 @@ export default function tokenIsValid() {
 
 export function userFromToken() {
     let token =localStorage.getItem('token');
-    let decodedToken = jwt_decode(token);
-    let user = {
-        id : decodedToken.user_id,
-        email : decodedToken.email,
+    let user = null;
+    if(token != null){
+        let decodedToken = jwt_decode(token);
+        user = {
+            id : decodedToken.user_id,
+            email : decodedToken.email,
+            token : token,
+        }
+    }
+    else{
+        user = {
+            token : token,
+        }
     }
     return user;
 };

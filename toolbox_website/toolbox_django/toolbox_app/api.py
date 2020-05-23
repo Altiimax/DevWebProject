@@ -1,20 +1,21 @@
 import json
-import bcrypt
+from math import atan2, cos, radians, sin, sqrt
 from os.path import defpath
-from math import sin, cos, sqrt, atan2, radians
 
-from django.http import QueryDict
+import bcrypt
+from django.db import IntegrityError
 from django.db.models import CharField, Value
+from django.http import QueryDict
 from rest_framework import permissions, status, viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_jwt.settings import api_settings
 from rest_framework_jwt.utils import jwt_decode_handler
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import *
 from .serializers import *
-
-from django.db import IntegrityError
 
 #######################
 ###   PERSONS API   ###
@@ -31,6 +32,7 @@ class personsViewSet(viewsets.GenericViewSet):
         return token
 
     # GET 127.0.0.1:8000/api/persons/
+    @permission_classes([IsAuthenticated])
     def list(self, request, *args, **kwargs):
         """" list all users """
         queryset = Persons.objects.all().order_by('lastName')
@@ -70,6 +72,7 @@ class personsViewSet(viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/persons/aliases/
     @action(detail=False, methods=['get'])
+    @permission_classes([IsAuthenticated])
     def aliases(self, request, *args, **kwargs):
         """" get all used aliases"""
         queryset = Persons.objects.all()
@@ -119,6 +122,7 @@ class personsViewSet(viewsets.GenericViewSet):
 
     # GET,POST 127.0.0.1:8000/api/persons/1/towns/
     @action(detail=True, methods=['get','post'])
+    @permission_classes([IsAuthenticated])
     def towns(self, request, pk=None, *args, **kwargs):
         if request.method == 'GET':
             """" get all towns of a user"""
@@ -137,6 +141,7 @@ class personsViewSet(viewsets.GenericViewSet):
 
     # GET,POST 127.0.0.1:8000/api/persons/1/tools/
     @action(detail=True, methods=['get','post'])
+    @permission_classes([IsAuthenticated])
     def tools(self, request, pk=None, *args, **kwargs):
         if request.method == 'GET':
             """" get all tools belonging to a user"""
@@ -155,6 +160,7 @@ class personsViewSet(viewsets.GenericViewSet):
     
     # GET,POST 127.0.0.1:8000/api/persons/1/reviews/
     @action(detail=True, methods=['get','post'])
+    @permission_classes([IsAuthenticated])
     def reviews(self, request, pk=None, *args, **kwargs):
         if request.method == 'GET':
             """" get all reviews belonging to a user"""
@@ -173,6 +179,7 @@ class personsViewSet(viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/persons/1/groups/
     @action(detail=True, methods=['get'])
+    @permission_classes([IsAuthenticated])
     def groups(self, request, pk=None, *args, **kwargs):
         """" get all groups in which the user is """
         queryset = GroupsMembers.objects.filter(id_person=pk).order_by('id_groupName')
@@ -219,6 +226,7 @@ class toolsViewSet(viewsets.GenericViewSet):
     
     # GET,POST 127.0.0.1:8000/api/tools/1/reviews/
     @action(detail=True, methods=['get','post'])
+    @permission_classes([IsAuthenticated])
     def reviews(self, request, pk=None, *args, **kwargs):
         if request.method == 'GET':
             """" get all reviews made on a tool"""
@@ -258,6 +266,7 @@ class groupsViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
     
     # POST 127.0.0.1:8000/api/groups/
+    @permission_classes([IsAuthenticated])
     def create(self, request, *args, **kwargs):
         """" create a new group """
         serializer = groupsSerializer(data=request.data)
@@ -296,6 +305,7 @@ class groupsViewSet(viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/groups/private/
     @action(detail=False, methods=['get'])
+    @permission_classes([IsAuthenticated])
     def private(self, request, *args, **kwargs):
         country = request.query_params.get('countryCode')
         town = request.query_params.get('id_town')
@@ -325,6 +335,7 @@ class groupsViewSet(viewsets.GenericViewSet):
 
     # GET,POST,DELETE 127.0.0.1:8000/api/groups/members/
     @action(detail=False, methods=['get','post','delete'])
+    @permission_classes([IsAuthenticated])
     def members(self, request, *args, **kwargs):
         if request.method == 'GET':
             # GET 127.0.0.1:8000/api/groups/members/?groupName=TestGroup1
@@ -417,6 +428,7 @@ class townsViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
     
     # POST 127.0.0.1:8000/api/towns/
+    @permission_classes([IsAuthenticated])
     def create(self, request, *args, **kwargs):
         """" add a new town """
         serializer = townsSerializer(data=request.data)
@@ -439,6 +451,7 @@ class countriesViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
     
     # POST 127.0.0.1:8000/api/countries/
+    @permission_classes([IsAuthenticated])
     def create(self, request, *args, **kwargs):
         """" add a new country """
         serializer = countriesSerializer(data=request.data)
@@ -506,24 +519,3 @@ class searchViewSet(viewsets.GenericViewSet):
                     pass
         
         return Response(groups)
-
-    # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
-    def list2(self, request, *args, **kwargs):
-        """" list all users """
-        what = "'%%{}%%'".format(request.query_params.get('what').replace("'", ""))
-        where = request.query_params.get('where')
-        query = '''
-                SELECT *
-                FROM "Groups"
-                JOIN "Towns" ON ("Groups".id_town = "Towns".id_town)
-                JOIN "ToolsGroups" ON ("Groups"."id_groupName" = "ToolsGroups"."id_groupName")
-                JOIN "Tools" ON ("ToolsGroups".id_tool = "Tools".id_tool)
-                WHERE "Groups"."groupType" = 'public' 
-                  AND LOWER("Towns"."townName") LIKE LOWER(%s) 
-                  AND ( LOWER("Tools"."toolName") LIKE LOWER(%s) 
-                        OR LOWER("Tools"."toolName") LIKE LOWER(%s) 
-                       );
-                ''' %(where, what, what)
-        queryset = Groups.objects.raw(query)
-        serializer = groupsDetailSerializer(queryset, many=True)
-        return Response(serializer.data)

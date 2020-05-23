@@ -10,38 +10,6 @@ const mapStyles = {
   height: '100%',
 };
 
-let groupsMok = [
-  {
-    id_groupName: "TestGroup1",
-    groupType: "public",
-    groupDescription: "This is the description of testGroup1",
-    groupRange: 50,
-    town: {
-      id_town: 1,
-      postCode: 1330,
-      townName: "Rixensart",
-      lat:  50.7122504,
-      lng: 4.5216455,
-      id_countryCode: "BE",
-    },
-  },
-  {
-    id_groupName: "TestGroup2",
-    groupType: "public",
-    groupDescription: "This is the description of testGroup2",
-    groupRange: 50,
-    town: {
-      id_town: 1,
-      postCode: 1330,
-      townName: "Wavre",
-      lat:  50.7162425,
-      lng: 4.60845,
-      id_countryCode: "BE",
-    },
-  },
-];
-
-
 
 export class MapContainer extends Component {
 
