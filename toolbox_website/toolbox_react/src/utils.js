@@ -2,16 +2,16 @@ import jwt_decode from 'jwt-decode';
 import { apiRequest } from "./api/apiRequest.js";
 
 export default function tokenIsValid() {
-    let token =localStorage.getItem('token');
-    
     try {
+        let token =localStorage.getItem('token');
         let dateNow = new Date();
         let decodedToken = jwt_decode(token);
-        if(decodedToken.exp < dateNow.getTime() - decodedToken.orig_iat){
-            return true;
+        //if(decodedToken.exp < (dateNow.getTime()/1000 - decodedToken.orig_iat)){
+        if(decodedToken.exp < dateNow.getTime()/1000){
+            localStorage.removeItem('token');
+            return false;
         }
-        localStorage.removeItem('token');
-        return false;
+        return true;
     }
     catch(err) {
         localStorage.removeItem('token');
@@ -21,22 +21,18 @@ export default function tokenIsValid() {
 };
 
 export function userFromToken() {
-    let token =localStorage.getItem('token');
-    let user = null;
-    if(token != null){
+    
+    if(tokenIsValid()){
+        let token =localStorage.getItem('token');
         let decodedToken = jwt_decode(token);
-        user = {
+        let user = {
             id : decodedToken.user_id,
             email : decodedToken.email,
             token : token,
         }
+        return user;
     }
-    else{
-        user = {
-            token : token,
-        }
-    }
-    return user;
+    return null;
 };
 
 

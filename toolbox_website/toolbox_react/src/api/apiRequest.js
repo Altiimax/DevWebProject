@@ -1,4 +1,4 @@
-import { userFromToken } from "../utils";
+import tokenIsValid, { userFromToken } from "../utils";
 
 
 /*-----api request url information-----*/
@@ -19,7 +19,7 @@ export class apiRequest {
     else{
       this.xhr.open(method, `${endpoint}`, true);
     }
-    if(userFromToken().token != null){
+    if(tokenIsValid()){
       this.xhr.setRequestHeader(
         "Authorization",
         "JWT " + userFromToken().token

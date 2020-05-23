@@ -101,6 +101,7 @@ class App extends Component {
   };
 
   render() {
+    tokenIsValid();
     return (
       <div className="App">
         <div className="bg">
