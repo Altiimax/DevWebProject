@@ -8,20 +8,30 @@ from django.db.models import CharField, Value
 from django.http import QueryDict
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action, permission_classes
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_jwt.settings import api_settings
 from rest_framework_jwt.utils import jwt_decode_handler
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from .customIsAuth import AllowAny, IsAuthenticated
 
 from .models import *
 from .serializers import *
 
+class PermissionsPerMethodMixin(object):
+    def get_permissions(self):
+        """
+        Allows overriding default permissions with @permission_classes
+        """
+        view = getattr(self, self.action)
+        if hasattr(view, 'permission_classes'):
+            return [permission_class() for permission_class in view.permission_classes]
+        return super().get_permissions()
+
 #######################
 ###   PERSONS API   ###
 
-class personsViewSet(viewsets.GenericViewSet):
+class personsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
+    @permission_classes([AllowAny])
     def create_token(self,user):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
         jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -32,7 +42,7 @@ class personsViewSet(viewsets.GenericViewSet):
         return token
 
     # GET 127.0.0.1:8000/api/persons/
-    @permission_classes([IsAuthenticated])
+    @permission_classes([AllowAny])
     def list(self, request, *args, **kwargs):
         """" list all users """
         queryset = Persons.objects.all().order_by('lastName')
@@ -40,6 +50,7 @@ class personsViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
     
     # GET 127.0.0.1:8000/api/persons/1
+    @permission_classes([IsAuthenticated])
     def retrieve(self, request,pk=None, *args, **kwargs):
         """" get a user profile by it's id """
         queryset = Persons.objects.filter(id_person=pk)
@@ -47,6 +58,7 @@ class personsViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
 
     # POST 127.0.0.1:8000/api/persons/
+    @permission_classes([AllowAny])
     def create(self, request, *args, **kwargs):
         """" create a new user """
         data = request.data.copy()
@@ -81,6 +93,7 @@ class personsViewSet(viewsets.GenericViewSet):
     
     # GET 127.0.0.1:8000/api/persons/login/?email=john.doe@gmail.com&pwd=testpwd1
     @action(detail=False, methods=['get'])
+    @permission_classes([AllowAny])
     def login(self, request, *args, **kwargs):
         """" authenticate user w/o token"""
         email = request.query_params.get('email')
@@ -103,6 +116,7 @@ class personsViewSet(viewsets.GenericViewSet):
     
     # GET 127.0.0.1:8000/api/persons/login_token/?token=dghffgnndsklskjskff
     @action(detail=False, methods=['get'])
+    @permission_classes([AllowAny])
     def login_token(self, request, *args, **kwargs):
         """" authenticate user w/ token"""
         token = request.query_params.get('token')
@@ -190,9 +204,10 @@ class personsViewSet(viewsets.GenericViewSet):
 ######################
 ###   TOOLS  API   ###
 
-class toolsViewSet(viewsets.GenericViewSet):
+class toolsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/tools/
+    @permission_classes([AllowAny])
     def list(self, request, *args, **kwargs):
         """" list all tools """
         queryset = Tools.objects.all()
@@ -200,6 +215,7 @@ class toolsViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
 
     # GET 127.0.0.1:8000/api/tools/1
+    @permission_classes([AllowAny])
     def retrieve(self, request,pk=None, *args, **kwargs):
         """" get a tool by it's id """
         queryset = Tools.objects.filter(id_tool=pk)
@@ -208,6 +224,7 @@ class toolsViewSet(viewsets.GenericViewSet):
 
     # GET,POST 127.0.0.1:8000/api/tools/1/images/
     @action(detail=True, methods=['get','post'])
+    @permission_classes([AllowAny])
     def images(self, request, pk=None, *args, **kwargs):
         if request.method == 'GET':
             """" get all images belonging to a tool"""
@@ -244,6 +261,7 @@ class toolsViewSet(viewsets.GenericViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     # GET 127.0.0.1:8000/api/tools/1/groups/
+    @permission_classes([IsAuthenticated])
     @action(detail=True, methods=['get'])
     def groups(self, request, pk=None, *args, **kwargs):
         """" get all groups in which a tool is """
@@ -256,9 +274,10 @@ class toolsViewSet(viewsets.GenericViewSet):
 ######################
 ###   GROUPS API   ###
 
-class groupsViewSet(viewsets.GenericViewSet):
+class groupsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/groups/
+    @permission_classes([AllowAny])
     def list(self, request, *args, **kwargs):
         """" list all groups (public & private) """
         queryset = Groups.objects.all()
@@ -276,6 +295,7 @@ class groupsViewSet(viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/groups/public/
     @action(detail=False, methods=['get'])
+    @permission_classes([AllowAny])
     def public(self, request, *args, **kwargs):
         country = request.query_params.get('countryCode')
         town = request.query_params.get('id_town')
@@ -368,6 +388,7 @@ class groupsViewSet(viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/groups/admins/
     @action(detail=False, methods=['get'])
+    @permission_classes([AllowAny])
     def admins(self, request, *args, **kwargs):
         # GET 127.0.0.1:8000/api/groups/admins/?groupName=TestGroup1
         """" list all admins of a group """
@@ -378,6 +399,7 @@ class groupsViewSet(viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/groups/tools/
     @action(detail=False, methods=['get','post','delete'])
+    @permission_classes([AllowAny])
     def tools(self, request, *args, **kwargs):
         if request.method == 'GET':
             # GET 127.0.0.1:8000/api/groups/tools/?groupName=TestGroup1
@@ -411,9 +433,10 @@ class groupsViewSet(viewsets.GenericViewSet):
 ######################
 ###   TOWNS  API   ###
 
-class townsViewSet(viewsets.GenericViewSet):
+class townsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/towns/
+    @permission_classes([AllowAny])
     def list(self, request, *args, **kwargs):
         country = request.query_params.get('countryCode')
         if country:
@@ -441,9 +464,10 @@ class townsViewSet(viewsets.GenericViewSet):
 #######################
 ###  COUNTRIES API  ###
 
-class countriesViewSet(viewsets.GenericViewSet):
+class countriesViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/countries/
+    @permission_classes([AllowAny])
     def list(self, request, *args, **kwargs):
         """" list all countries """
         queryset = Countries.objects.all().order_by('countryName')
@@ -463,7 +487,7 @@ class countriesViewSet(viewsets.GenericViewSet):
 #######################
 ###   SEARCH  API   ###
 
-class searchViewSet(viewsets.GenericViewSet):
+class searchViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
     def distCalc(self,town_Search, group):
         R = 6373.0 # approximate radius of earth in km
@@ -486,6 +510,7 @@ class searchViewSet(viewsets.GenericViewSet):
         return False
 
     # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
+    @permission_classes([AllowAny])
     def list(self, request, *args, **kwargs):
         """" list all users """
         what = "'%%{}%%'".format(request.query_params.get('what').replace("'", ""))

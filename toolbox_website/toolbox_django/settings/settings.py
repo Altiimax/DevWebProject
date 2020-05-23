@@ -66,8 +66,7 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        #'toolbox_app.customIsAuth.IsAuthenticated',
-        'toolbox_app.customIsAuth.AllowAny',
+        'toolbox_app.customIsAuth.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'toolbox_app.customJWTAuth.JSONWebTokenAuthentication',

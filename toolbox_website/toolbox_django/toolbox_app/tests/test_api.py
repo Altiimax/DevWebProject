@@ -89,7 +89,8 @@ class TestPersonsApi(SetupClass):
     
     def test_personsViewSet_list_GET_noAuth(self):
         response = self.not_auth_client.get("/api/persons/", format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        print(response.status_code)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_personsViewSet_detail_GET(self):
         response = self.auth_client.get("/api/persons/1/", format='json')
