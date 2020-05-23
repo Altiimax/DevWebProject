@@ -7,14 +7,14 @@ values  ('BE', 'Belgium'),
         ('DE', 'Germany'),
         ('FR', 'France');
 
-insert into "Towns" ("postCode", "townName","id_countryCode")
-values  (1330, 'Rixensart','BE'),
-        (1000, 'Bruxelles','BE'),
-        (1300, 'Wavre','BE'),
-        (1340, 'Ottignies','BE'),
-        (3000, 'Leuven','BE'),
-        (2000, 'Antwerpen','BE'),
-        (75000, 'Paris','FR');
+insert into "Towns" ("postCode", "townName","lat","lng","id_countryCode")
+values  (1330, 'Rixensart',50.715626,4.531035,'BE'),
+        (1000, 'Bruxelles',50.850346,4.351721,'BE'),
+        (1300, 'Wavre',50.716881,4.61074,'BE'),
+        (1340, 'Ottignies',50.665901,4.5671,'BE'),
+        (3000, 'Leuven',50.879845,4.700518,'BE'),
+        (2000, 'Antwerpen',51.22111,4.399708,'BE'),
+        (75000, 'Paris',48.856506,2.352133,'FR');
 
 insert into "Persons" ("lastName", "firstName", "alias", "birthDate", "email", "password")
 values  ('Gordon','Harry E ','HEGy','1969-10-07','gorden.harry@hotmail.com','$2a$10$hgivPBtUFmqnNZmvHsMeW.WLn/qHwXgVw16WMpcQXGcx74TJbNlry'),  --mdp = testPwd1 (pour tous)
