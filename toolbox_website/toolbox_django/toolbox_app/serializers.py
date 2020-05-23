@@ -13,7 +13,7 @@ class countriesSerializer(serializers.ModelSerializer):
 class townsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Towns
-        fields = ('id_town','postCode','townName','id_countryCode')
+        fields = ('id_town','postCode','townName','lat','lng','id_countryCode')
 
 class personsTownsSerializer(serializers.ModelSerializer):
     class Meta:

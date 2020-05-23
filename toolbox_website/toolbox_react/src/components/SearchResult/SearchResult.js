@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Table } from "react-bootstrap";
-import "./SearchResult.css";
 import GroupDetail from "../GroupDetail/GroupDetail.js";
+
+import "./SearchResult.css";
 
 class SearchResult extends Component {
   constructor(props) {

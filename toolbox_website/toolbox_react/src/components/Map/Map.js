@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+import GroupDetail from "../GroupDetail/GroupDetail.js";
 
 import "./Map.css";
 
@@ -49,18 +51,14 @@ export class MapContainer extends Component {
       showingInfoWindow: false, //Hides or shows InfoWindows
       activeMarker: {},         // Show active marker on click
       selectedPlace: {},        //show infowindow of selected marker
-      groupsToShow: groupsMok,
     };
     this.showPopUp = true;
   }
 
-  componentDidMount(){
-   //pass 
+  displayGroupDetail = (group)=>{
+    let gpD = <GroupDetail groupObj={group} content={'searchResult'}/>;
+    ReactDOM.render(gpD, document.getElementById("homeGroupDetail"));
   }
-
-  componentDidUpdate(){
-    //pass 
-   }
 
   onMarkerClick = (props, marker, e) => {
     this.setState({
@@ -82,19 +80,34 @@ export class MapContainer extends Component {
   markers() {
     let markers = [];
     let key_m = 0;
-    for (let g of this.state.groupsToShow){
+    for (let g of this.props.data){
       key_m ++;
       markers.push(
         <Marker
           key={key_m}
-          onClick={this.onMarkerClick}
           title={g.id_groupName}
           description={g.groupDescription}
           position={{lat: g.town.lat, lng: g.town.lng}}
+          onClick={() => this.displayGroupDetail(g)}
+          //onHover={this.onMarkerClick}
         />
       );
     }
-    return markers;
+    if(markers[0] != null){return markers};
+    return null;
+  }
+
+  center(){
+    if(this.props.data[0] != null){
+      return{
+        lat: this.props.data[0].town.lat,
+        lng: this.props.data[0].town.lng,
+      }
+    }
+    return {
+      lat: 50.844041,
+      lng: 4.367202,
+    };
   }
 
   render() {
@@ -102,11 +115,9 @@ export class MapContainer extends Component {
       <Map
         style={mapStyles}
         google={this.props.google}
-        zoom={12}
-        initialCenter={{
-          lat: this.state.groupsToShow[0].town.lat,
-          lng: this.state.groupsToShow[0].town.lng,
-        }}
+        zoom={10}
+        initialCenter={this.center()}
+        center={this.center()}
       >
         {this.markers()}
         <InfoWindow

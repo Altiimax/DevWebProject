@@ -1,6 +1,7 @@
 import json
 import bcrypt
 from os.path import defpath
+from math import sin, cos, sqrt, atan2, radians
 
 from django.http import QueryDict
 from django.db.models import CharField, Value
@@ -451,8 +452,64 @@ class countriesViewSet(viewsets.GenericViewSet):
 
 class searchViewSet(viewsets.GenericViewSet):
 
+    def distCalc(self,town_Search, group):
+        R = 6373.0 # approximate radius of earth in km
+
+        lat1 = radians(abs(town_Search['lat']))
+        lon1 = radians(abs(town_Search['lng']))
+        lat2 = radians(abs(group['town']['lat']))
+        lon2 = radians(abs(group['town']['lng']))
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        distance = R * c 
+
+        if (distance <= group['groupRange']):
+            return True
+        return False
+
     # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
     def list(self, request, *args, **kwargs):
+        """" list all users """
+        what = "'%%{}%%'".format(request.query_params.get('what').replace("'", ""))
+        where = request.query_params.get('where')
+        townSearchQuery =   '''
+                            SELECT *
+                            FROM "Towns"
+                            WHERE LOWER("Towns"."townName") LIKE LOWER(%s) ;
+                            ''' %(where)
+        townSearchQuerySet = Towns.objects.raw(townSearchQuery)
+        townSearch = townsSerializer(townSearchQuerySet, many=True).data[0]
+
+        allGroupsWToolQuery =   '''
+                                SELECT *
+                                FROM "Groups"
+                                JOIN "Towns" ON ("Groups".id_town = "Towns".id_town)
+                                JOIN "ToolsGroups" ON ("Groups"."id_groupName" = "ToolsGroups"."id_groupName")
+                                JOIN "Tools" ON ("ToolsGroups".id_tool = "Tools".id_tool)
+                                WHERE "Groups"."groupType" = 'public' 
+                                AND LOWER("Tools"."toolName") LIKE LOWER(%s);
+                                ''' % (what)
+        allGroupsWToolQuerySet = Groups.objects.raw(allGroupsWToolQuery)
+        allGroupsWTool = groupsDetailSerializer(allGroupsWToolQuerySet, many=True).data
+        
+        groups = []
+        for group in allGroupsWTool:
+            if(self.distCalc(townSearch,group)):
+                groups.append(group)
+            else:
+                pass
+
+        return Response(groups)
+
+
+
+    # GET 127.0.0.1:8000/api/search/?what=xxxx&where=yyyyy
+    def list2(self, request, *args, **kwargs):
         """" list all users """
         what = "'%%{}%%'".format(request.query_params.get('what').replace("'", ""))
         where = request.query_params.get('where')

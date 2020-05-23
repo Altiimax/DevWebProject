@@ -132,6 +132,8 @@ class Towns(models.Model):
     id_town = models.AutoField(primary_key=True)
     postCode = models.IntegerField()
     townName = models.CharField(max_length=30)
+    lat = models.FloatField()
+    lng = models.FloatField()
     id_countryCode = models.ForeignKey(Countries, models.DO_NOTHING, db_column='id_countryCode')
 
     class Meta:

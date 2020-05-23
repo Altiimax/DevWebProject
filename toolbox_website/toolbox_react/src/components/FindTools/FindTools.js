@@ -3,6 +3,7 @@ import { Form /*Col*/ } from "react-bootstrap";
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { apiRequest } from "../../api/apiRequest.js";
 import SearchResult from "../SearchResult/SearchResult.js";
+import Map from "../Map/Map.js";
 import ReactDOM from "react-dom";
 
 import "./FindTools.css";
@@ -115,12 +116,20 @@ class FindTools extends Component {
               <SearchResult data={onlyOnce} />,
               document.getElementById("list")
             );
+            ReactDOM.render(
+              <Map data={onlyOnce} />,
+              document.getElementById("searchMap")
+            );
           }
           else{
             ReactDOM.unmountComponentAtNode(document.getElementById("homeGroupDetail"));
             ReactDOM.render(
               <div className="noResults">No Results</div>,
               document.getElementById("list")
+            );
+            ReactDOM.render(
+              <Map data={onlyOnce} />,
+              document.getElementById("searchMap")
             );
           }
         }

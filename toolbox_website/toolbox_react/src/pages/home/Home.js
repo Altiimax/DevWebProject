@@ -1,7 +1,7 @@
 import React from "react";
 import FindTools from "../../components/FindTools/FindTools.js";
 import "./Home.css";
-import Map from "../../components/Map/Map.js";
+
 
 export default function Home() {
 
@@ -15,9 +15,7 @@ export default function Home() {
           <div className="searchList" id="list"></div>
         </div>
         <div id="homeGroupDetail"></div>
-        <div className="searchMap">
-          <Map />
-        </div>
+        <div id="searchMap"></div>
       </div>
     </div>
   );
