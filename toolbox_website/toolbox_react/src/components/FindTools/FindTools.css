@@ -40,3 +40,8 @@
   box-shadow: 5px 5px 10px black;
   border: solid 1px red;
 }
+
+.noResults{
+  margin: 1em 1em;
+  font-size: larger;
+}

@@ -30,7 +30,8 @@ function GroupDetail(props) {
       toolPopup.current = "none";
     }
     document.getElementById("GroupDetail").style.display="initial";
-    ReactDOM.render("", document.getElementById("GroupDetailTools"));
+    try{ReactDOM.render("", document.getElementById("GroupDetailTools"));}
+    catch(e){}
     getAllTools();
   });
 

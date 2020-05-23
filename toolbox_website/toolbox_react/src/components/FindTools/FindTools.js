@@ -110,8 +110,16 @@ class FindTools extends Component {
             }
           }
           if (rep.length !== 0) {
+            ReactDOM.unmountComponentAtNode(document.getElementById("homeGroupDetail"));
             ReactDOM.render(
               <SearchResult data={onlyOnce} />,
+              document.getElementById("list")
+            );
+          }
+          else{
+            ReactDOM.unmountComponentAtNode(document.getElementById("homeGroupDetail"));
+            ReactDOM.render(
+              <div className="noResults">No Results</div>,
               document.getElementById("list")
             );
           }
