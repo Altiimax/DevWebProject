@@ -1,4 +1,5 @@
 #GroupDetailComp {
+  width: 100%;
   background-color: #454d55;
   display: flex;
   flex-direction: column;
