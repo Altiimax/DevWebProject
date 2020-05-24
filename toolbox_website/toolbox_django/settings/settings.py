@@ -138,7 +138,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #SECURE_SSL_REDIRECT = True
-#SECURE_HSTS_SECONDS = 30
+#SECURE_HSTS_SECONDS = 2592000    #STP -> 30days time period where website is not accessible over http conn. 
 #REFERRER_POLICY = 'no-referrer'
 #FEATURE_POLICY = {
 #    'geolocation': 'none',
