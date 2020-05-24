@@ -11,7 +11,7 @@ from rest_framework.decorators import action, permission_classes
 from rest_framework.response import Response
 from rest_framework_jwt.settings import api_settings
 from rest_framework_jwt.utils import jwt_decode_handler
-from .customIsAuth import AllowAny, IsAuthenticated
+from .customIsAuth import AllowAny, IsAuthenticated, IsAdminUser
 
 from .models import *
 from .serializers import *
@@ -42,7 +42,7 @@ class personsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
         return token
 
     # GET 127.0.0.1:8000/api/persons/
-    @permission_classes([IsAuthenticated])
+    @permission_classes([IsAdminUser])
     def list(self, request, *args, **kwargs):
         """" list all users """
         queryset = Persons.objects.all().order_by('lastName')
@@ -84,7 +84,7 @@ class personsViewSet(PermissionsPerMethodMixin, viewsets.GenericViewSet):
 
     # GET 127.0.0.1:8000/api/persons/aliases/
     @action(detail=False, methods=['get'])
-    @permission_classes([IsAuthenticated])
+    @permission_classes([IsAdminUser])
     def aliases(self, request, *args, **kwargs):
         """" get all used aliases"""
         queryset = Persons.objects.all()

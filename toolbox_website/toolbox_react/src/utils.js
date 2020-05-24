@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode';
+import history from "./history";
 import { apiRequest } from "./api/apiRequest.js";
 
 export default function tokenIsValid() {
@@ -32,6 +33,8 @@ export function userFromToken() {
         }
         return user;
     }
+    history.push('/');
+    window.location.reload();
     return null;
 };
 
