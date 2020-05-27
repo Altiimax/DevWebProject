@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ToolOptions from "./ToolOptions.js";
+import MyProfile from "./MyProfile.js";
 
 test("render without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<ToolOptions />, div);
+  ReactDOM.render(<MyProfile />, div);
 });
